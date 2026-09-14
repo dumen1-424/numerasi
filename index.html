@@ -21,22 +21,33 @@
 </head>
 <body class="bg-slate-100 min-h-screen flex flex-col text-slate-800">
 
-    <!-- Header Utama -->
+<!-- Header Utama -->
     <header class="bg-gradient-header text-white shadow-lg border-b border-blue-400/30">
         <div class="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
+            
+            <!-- 1. Deretan Gambar Logo di Atas Judul (Responsif Otomatis Mengecil di HP) -->
+            <div class="flex items-center justify-center md:justify-start gap-2 sm:gap-4 mb-4 pb-3 border-b border-white/15 w-full">
+                <img src="tutwuri.png" alt="Tut Wuri Handayani" class="h-7 sm:h-10 md:h-12 w-auto max-w-[22%] object-contain drop-shadow shrink">
+                <img src="dispendik.png" alt="Dinas Pendidikan" class="h-7 sm:h-10 md:h-12 w-auto max-w-[22%] object-contain drop-shadow shrink">
+                <img src="adiwiyata.png" alt="Adiwiyata" class="h-7 sm:h-10 md:h-12 w-auto max-w-[22%] object-contain drop-shadow shrink">
+                <img src="sra.png" alt="Sekolah Ramah Anak" class="h-7 sm:h-10 md:h-12 w-auto max-w-[22%] object-contain drop-shadow shrink">
+            </div>
+
+            <!-- 2. Section Judul dengan Gambar Dumen di Sebelahnya -->
             <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-                <div class="flex items-center gap-4 text-center md:text-left">
-                    <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center backdrop-blur-md border border-white/20 shadow-inner shrink-0">
-                        <i class="fa-solid fa-calculator text-3xl text-amber-300"></i>
+                <div class="flex items-center gap-3 sm:gap-4 text-center md:text-left">
+                    <!-- Logo Dumen (Juga ikut fleksibel di HP) -->
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 bg-white/10 rounded-2xl flex items-center justify-center backdrop-blur-md border border-white/20 shadow-inner shrink-0 p-1.5">
+                        <img src="dumen.png" alt="Logo SDN Dukuh Menanggal" class="w-full h-full object-contain drop-shadow">
                     </div>
                     <div>
-                        <h1 class="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight leading-tight uppercase">
+                        <h1 class="text-lg sm:text-2xl md:text-3xl font-extrabold tracking-tight leading-tight uppercase">
                             LIGA NUMERASI DIGITAL (LND)
                         </h1>
-                        <p class="text-sm sm:text-base font-medium text-blue-100">
+                        <p class="text-xs sm:text-base font-medium text-blue-100">
                             SDN DUKUH MENANGGAL I/424 SURABAYA
                         </p>
-                        <p class="text-xs text-blue-200 mt-0.5 flex items-center justify-center md:justify-start gap-1">
+                        <p class="text-[11px] sm:text-xs text-blue-200 mt-0.5 flex items-center justify-center md:justify-start gap-1">
                             <i class="fa-solid fa-location-dot text-amber-400"></i>
                             JL. Dukuh Menanggal No. 3 – 7, Surabaya
                         </p>
@@ -55,7 +66,7 @@
             </div>
         </div>
     </header>
-
+    
     <!-- Control Bar (Season & Filter) -->
     <div class="bg-white border-b border-slate-200 sticky top-0 z-20 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center justify-between gap-3">
