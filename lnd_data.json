@@ -1,12 +1,18 @@
 {
-  "updatedAt": "2026-09-14T06:43:29.748Z",
-  "activePublicSeasonId": "season_1789366557827",
+  "updatedAt": "2026-09-14T11:56:50.391Z",
+  "activePublicSeasonId": "season_1789386960871",
   "seasonsList": [
     {
       "id": "season_1789366557827",
       "name": "SEASON 1",
-      "isPublic": true,
+      "isPublic": false,
       "createdAt": 1789366557827
+    },
+    {
+      "id": "season_1789386960871",
+      "name": "SEASON 2",
+      "isPublic": true,
+      "createdAt": 1789386960871
     }
   ],
   "classesList": [
