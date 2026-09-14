@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-09-14T06:15:35.771Z",
-  "activePublicSeasonId": "season-1",
+  "updatedAt": "2026-09-14T06:16:37.485Z",
+  "activePublicSeasonId": "season_1789366557827",
   "seasonsList": [
     {
-      "id": "season-1",
-      "name": "Season 1 (Jan - Mar 2026)",
+      "id": "season_1789366557827",
+      "name": "SEASON 1",
       "isPublic": true,
-      "createdAt": 1789365334474
+      "createdAt": 1789366557827
     }
   ],
   "classesList": [
@@ -33,6 +33,24 @@
       "className": "Kelas 6A",
       "phase": "C",
       "createdAt": 1789365334474
+    },
+    {
+      "id": "cls_1789366577769",
+      "className": "Kelas 3B",
+      "phase": "B",
+      "createdAt": 1789366577769
+    },
+    {
+      "id": "cls_1789366584364",
+      "className": "Kelas 3C",
+      "phase": "B",
+      "createdAt": 1789366584364
+    },
+    {
+      "id": "cls_1789366591495",
+      "className": "Kelas 4B",
+      "phase": "B",
+      "createdAt": 1789366591495
     }
   ],
   "scoresList": [],
