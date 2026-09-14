@@ -125,7 +125,6 @@
                 </div>
                 
                 <div id="adminHeaderAction" class="mt-2 md:mt-0 flex items-center gap-3">
-                    <!-- Tombol Login Admin yang disamarkan (Subtle Icon Button) -->
                     <button onclick="openLoginModal()" id="loginBtn" class="p-2.5 text-white/30 hover:text-white bg-white/5 hover:bg-white/15 rounded-xl text-xs transition-all duration-200 border border-white/5 hover:border-white/20" title="Pengaturan Sistem">
                         <i class="fa-solid fa-lock text-sm"></i>
                     </button>
@@ -161,7 +160,6 @@
                         <i class="fa-solid fa-trophy text-amber-600 pl-2"></i>
                         <span class="font-semibold text-amber-900">Season:</span>
                         <select id="seasonFilter" onchange="changeSeasonFilter(this.value)" class="bg-white font-bold text-amber-900 rounded-lg px-3 py-1.5 border border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-500 text-xs sm:text-sm cursor-pointer shadow-sm">
-                            <!-- Populated dynamically -->
                         </select>
                         <button id="adminSetActiveSeasonBtn" onclick="setActiveSeasonByAdmin()" class="hidden bg-amber-600 hover:bg-amber-700 text-white px-2.5 py-1 rounded-lg text-xs font-bold transition shadow-xs" title="Set sebagai Season Aktif Publik">
                             <i class="fa-solid fa-star"></i> Set Aktif
@@ -248,7 +246,6 @@
 
             <!-- Leaderboard Cards / Table List -->
             <div id="leaderboardList" class="space-y-4">
-                <!-- Data populated dynamically by JS -->
             </div>
         </section>
 
@@ -268,7 +265,6 @@
             </div>
 
             <div id="seasonHistoryList" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Dynamic Content for Season History -->
             </div>
         </section>
     </main>
@@ -384,31 +380,43 @@
         </div>
     </div>
 
-    <!-- MODAL: INPUT SKOR PERTANDINGAN (2 MINGGUAN) -->
+    <!-- MODAL: INPUT SKOR PERTANDINGAN (DENGAN SKEMA HOTS & PENALTI) -->
     <div id="modalInputScore" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden overflow-y-auto">
-        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 shadow-2xl border border-slate-100 relative my-8">
-            <button onclick="closeModal('modalInputScore')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 text-xl font-bold">
+        <div class="bg-white rounded-3xl max-w-3xl w-full p-6 shadow-2xl border border-slate-100 relative my-6 max-h-[90vh] flex flex-col">
+            <button onclick="closeModal('modalInputScore')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 text-xl font-bold z-10">
                 <i class="fa-solid fa-xmark"></i>
             </button>
 
-            <div class="mb-5">
+            <div class="mb-4 shrink-0">
                 <div class="flex items-center gap-2">
                     <span id="editClassBadge" class="px-2.5 py-1 rounded-md bg-brand-50 text-brand-700 text-xs font-bold uppercase border border-brand-200">FASE B</span>
                     <span id="editSeasonBadge" class="px-2.5 py-1 rounded-md bg-amber-50 text-amber-800 text-xs font-bold border border-amber-200">Season 1</span>
                 </div>
                 <h3 id="editClassNameTitle" class="text-xl font-extrabold text-slate-900 mt-1">Input Skor Pertandingan Kelas</h3>
-                <p class="text-xs text-slate-500">Masukkan nilai 5 peserta perwakilan kelas untuk pekan pertandingan ini.</p>
+                <p class="text-xs text-slate-500">Pilih status jawaban 3 tingkat soal (Mudah, Sedang, HOTS) atau isi skor langsung.</p>
             </div>
 
-            <form onsubmit="saveClassScores(event)" class="space-y-4">
+            <!-- Scoring Rule Legend Banner -->
+            <div class="bg-slate-900 text-white p-3 rounded-2xl mb-4 text-xs shrink-0 flex flex-wrap items-center justify-between gap-2 shadow-inner">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-shield-halved text-amber-400 text-base"></i>
+                    <span class="font-bold">Aturan Penalti Soal:</span>
+                </div>
+                <div class="flex items-center gap-3 text-[11px]">
+                    <span class="bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 px-2 py-0.5 rounded-lg"><strong>Soal 1 (Mudah):</strong> +20 | -5</span>
+                    <span class="bg-indigo-950/80 border border-indigo-500/40 text-indigo-300 px-2 py-0.5 rounded-lg"><strong>Soal 2 (Sedang):</strong> +30 | -10</span>
+                    <span class="bg-purple-950/80 border border-purple-500/40 text-purple-300 px-2 py-0.5 rounded-lg"><strong>Soal 3 (HOTS):</strong> +50 | -15</span>
+                </div>
+            </div>
+
+            <form onsubmit="saveClassScores(event)" class="space-y-4 overflow-y-auto pr-1 flex-grow">
                 <input type="hidden" id="editClassId">
 
                 <!-- Matchday Selector -->
-                <div class="bg-indigo-50/70 p-4 rounded-2xl border border-indigo-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                <div class="bg-indigo-50/70 p-3.5 rounded-2xl border border-indigo-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                     <div class="flex-grow w-full sm:w-auto">
-                        <label class="block text-xs font-extrabold text-indigo-900 uppercase tracking-wider mb-1">Pilih Pekan Pertandingan (2 Mingguan)</label>
+                        <label class="block text-xs font-extrabold text-indigo-900 uppercase tracking-wider mb-1">Pilih Pekan Pertandingan</label>
                         <select id="matchdaySelect" onchange="loadMatchdayDataIntoForm()" class="w-full bg-white font-bold text-slate-800 rounded-xl px-3 py-2 border border-indigo-200 focus:ring-2 focus:ring-indigo-500 text-xs sm:text-sm">
-                            <!-- Populated dynamically -->
                         </select>
                     </div>
                     <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
@@ -430,38 +438,214 @@
                     <input type="checkbox" id="isHolidayCheckbox" onchange="toggleHolidayMode(this.checked)" class="w-4 h-4 text-amber-600 rounded focus:ring-amber-500 cursor-pointer">
                 </div>
 
-                <!-- 5 Scores Input Box -->
-                <div id="scoreInputsContainer" class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+                <!-- 5 Participants Input Container with Question Status Calculator -->
+                <div id="scoreInputsContainer" class="space-y-3">
                     <h4 class="text-xs font-extrabold text-slate-600 uppercase tracking-wider flex items-center justify-between">
-                        <span><i class="fa-solid fa-calculator text-brand-600 mr-1"></i> Input Nilai 5 Peserta Pekan Ini</span>
-                        <span class="text-[11px] font-normal text-slate-400">Nilai Max: 100 per peserta</span>
+                        <span><i class="fa-solid fa-calculator text-brand-600 mr-1"></i> Rincian Nilai 5 Peserta Pekan Ini</span>
+                        <span class="text-[11px] font-semibold text-brand-600 bg-brand-50 px-2 py-0.5 rounded-md border border-brand-100">Max 100 Pts / Peserta</span>
                     </h4>
 
-                    <div class="grid grid-cols-5 gap-2">
-                        <div>
-                            <label class="block text-[11px] font-bold text-slate-500 mb-1 text-center">Peserta 1</label>
-                            <input type="number" id="p1_score" placeholder="0" min="0" max="100" class="w-full px-2 py-2 text-xs sm:text-sm rounded-xl border border-slate-300 font-bold text-center text-brand-700 focus:ring-2 focus:ring-brand-500">
+                    <!-- Dynamic Render of 5 Participant Cards -->
+                    <div class="space-y-3">
+                        <!-- Student 1 -->
+                        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3 sm:p-4 transition hover:border-slate-300">
+                            <div class="flex items-center justify-between border-b border-slate-200/60 pb-2 mb-3">
+                                <span class="text-xs font-extrabold text-slate-800 flex items-center gap-1.5">
+                                    <span class="w-5 h-5 bg-brand-600 text-white text-[11px] rounded-full inline-flex items-center justify-center">1</span> Peserta 1
+                                </span>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-[11px] text-slate-400 font-semibold">Total Nilai:</span>
+                                    <input type="number" id="p1_score" min="0" max="100" placeholder="0" class="w-16 px-2 py-1 bg-white rounded-lg border border-slate-300 text-center font-black text-brand-700 text-xs focus:ring-2 focus:ring-brand-500">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-3 gap-2 text-xs">
+                                <div>
+                                    <label class="block text-[10px] font-extrabold text-emerald-700 mb-1">S1: Mudah (+20/-5)</label>
+                                    <select id="p1_q1" onchange="autoCalculateParticipantScore(1)" class="w-full bg-white border border-slate-300 rounded-lg p-1.5 text-xs font-semibold">
+                                        <option value="none">-- Kosong (0) --</option>
+                                        <option value="correct">✅ Benar (+20)</option>
+                                        <option value="wrong">❌ Salah (-5)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-extrabold text-indigo-700 mb-1">S2: Sedang (+30/-10)</label>
+                                    <select id="p1_q2" onchange="autoCalculateParticipantScore(1)" class="w-full bg-white border border-slate-300 rounded-lg p-1.5 text-xs font-semibold">
+                                        <option value="none">-- Kosong (0) --</option>
+                                        <option value="correct">✅ Benar (+30)</option>
+                                        <option value="wrong">❌ Salah (-10)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-extrabold text-purple-700 mb-1">S3: HOTS (+50/-15)</label>
+                                    <select id="p1_q3" onchange="autoCalculateParticipantScore(1)" class="w-full bg-white border border-slate-300 rounded-lg p-1.5 text-xs font-semibold">
+                                        <option value="none">-- Kosong (0) --</option>
+                                        <option value="correct">✅ Benar (+50)</option>
+                                        <option value="wrong">❌ Salah (-15)</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <label class="block text-[11px] font-bold text-slate-500 mb-1 text-center">Peserta 2</label>
-                            <input type="number" id="p2_score" placeholder="0" min="0" max="100" class="w-full px-2 py-2 text-xs sm:text-sm rounded-xl border border-slate-300 font-bold text-center text-brand-700 focus:ring-2 focus:ring-brand-500">
+
+                        <!-- Student 2 -->
+                        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3 sm:p-4 transition hover:border-slate-300">
+                            <div class="flex items-center justify-between border-b border-slate-200/60 pb-2 mb-3">
+                                <span class="text-xs font-extrabold text-slate-800 flex items-center gap-1.5">
+                                    <span class="w-5 h-5 bg-brand-600 text-white text-[11px] rounded-full inline-flex items-center justify-center">2</span> Peserta 2
+                                </span>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-[11px] text-slate-400 font-semibold">Total Nilai:</span>
+                                    <input type="number" id="p2_score" min="0" max="100" placeholder="0" class="w-16 px-2 py-1 bg-white rounded-lg border border-slate-300 text-center font-black text-brand-700 text-xs focus:ring-2 focus:ring-brand-500">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-3 gap-2 text-xs">
+                                <div>
+                                    <label class="block text-[10px] font-extrabold text-emerald-700 mb-1">S1: Mudah (+20/-5)</label>
+                                    <select id="p2_q1" onchange="autoCalculateParticipantScore(2)" class="w-full bg-white border border-slate-300 rounded-lg p-1.5 text-xs font-semibold">
+                                        <option value="none">-- Kosong (0) --</option>
+                                        <option value="correct">✅ Benar (+20)</option>
+                                        <option value="wrong">❌ Salah (-5)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-extrabold text-indigo-700 mb-1">S2: Sedang (+30/-10)</label>
+                                    <select id="p2_q2" onchange="autoCalculateParticipantScore(2)" class="w-full bg-white border border-slate-300 rounded-lg p-1.5 text-xs font-semibold">
+                                        <option value="none">-- Kosong (0) --</option>
+                                        <option value="correct">✅ Benar (+30)</option>
+                                        <option value="wrong">❌ Salah (-10)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-extrabold text-purple-700 mb-1">S3: HOTS (+50/-15)</label>
+                                    <select id="p2_q3" onchange="autoCalculateParticipantScore(2)" class="w-full bg-white border border-slate-300 rounded-lg p-1.5 text-xs font-semibold">
+                                        <option value="none">-- Kosong (0) --</option>
+                                        <option value="correct">✅ Benar (+50)</option>
+                                        <option value="wrong">❌ Salah (-15)</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <label class="block text-[11px] font-bold text-slate-500 mb-1 text-center">Peserta 3</label>
-                            <input type="number" id="p3_score" placeholder="0" min="0" max="100" class="w-full px-2 py-2 text-xs sm:text-sm rounded-xl border border-slate-300 font-bold text-center text-brand-700 focus:ring-2 focus:ring-brand-500">
+
+                        <!-- Student 3 -->
+                        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3 sm:p-4 transition hover:border-slate-300">
+                            <div class="flex items-center justify-between border-b border-slate-200/60 pb-2 mb-3">
+                                <span class="text-xs font-extrabold text-slate-800 flex items-center gap-1.5">
+                                    <span class="w-5 h-5 bg-brand-600 text-white text-[11px] rounded-full inline-flex items-center justify-center">3</span> Peserta 3
+                                </span>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-[11px] text-slate-400 font-semibold">Total Nilai:</span>
+                                    <input type="number" id="p3_score" min="0" max="100" placeholder="0" class="w-16 px-2 py-1 bg-white rounded-lg border border-slate-300 text-center font-black text-brand-700 text-xs focus:ring-2 focus:ring-brand-500">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-3 gap-2 text-xs">
+                                <div>
+                                    <label class="block text-[10px] font-extrabold text-emerald-700 mb-1">S1: Mudah (+20/-5)</label>
+                                    <select id="p3_q1" onchange="autoCalculateParticipantScore(3)" class="w-full bg-white border border-slate-300 rounded-lg p-1.5 text-xs font-semibold">
+                                        <option value="none">-- Kosong (0) --</option>
+                                        <option value="correct">✅ Benar (+20)</option>
+                                        <option value="wrong">❌ Salah (-5)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-extrabold text-indigo-700 mb-1">S2: Sedang (+30/-10)</label>
+                                    <select id="p3_q2" onchange="autoCalculateParticipantScore(3)" class="w-full bg-white border border-slate-300 rounded-lg p-1.5 text-xs font-semibold">
+                                        <option value="none">-- Kosong (0) --</option>
+                                        <option value="correct">✅ Benar (+30)</option>
+                                        <option value="wrong">❌ Salah (-10)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-extrabold text-purple-700 mb-1">S3: HOTS (+50/-15)</label>
+                                    <select id="p3_q3" onchange="autoCalculateParticipantScore(3)" class="w-full bg-white border border-slate-300 rounded-lg p-1.5 text-xs font-semibold">
+                                        <option value="none">-- Kosong (0) --</option>
+                                        <option value="correct">✅ Benar (+50)</option>
+                                        <option value="wrong">❌ Salah (-15)</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <label class="block text-[11px] font-bold text-slate-500 mb-1 text-center">Peserta 4</label>
-                            <input type="number" id="p4_score" placeholder="0" min="0" max="100" class="w-full px-2 py-2 text-xs sm:text-sm rounded-xl border border-slate-300 font-bold text-center text-brand-700 focus:ring-2 focus:ring-brand-500">
+
+                        <!-- Student 4 -->
+                        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3 sm:p-4 transition hover:border-slate-300">
+                            <div class="flex items-center justify-between border-b border-slate-200/60 pb-2 mb-3">
+                                <span class="text-xs font-extrabold text-slate-800 flex items-center gap-1.5">
+                                    <span class="w-5 h-5 bg-brand-600 text-white text-[11px] rounded-full inline-flex items-center justify-center">4</span> Peserta 4
+                                </span>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-[11px] text-slate-400 font-semibold">Total Nilai:</span>
+                                    <input type="number" id="p4_score" min="0" max="100" placeholder="0" class="w-16 px-2 py-1 bg-white rounded-lg border border-slate-300 text-center font-black text-brand-700 text-xs focus:ring-2 focus:ring-brand-500">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-3 gap-2 text-xs">
+                                <div>
+                                    <label class="block text-[10px] font-extrabold text-emerald-700 mb-1">S1: Mudah (+20/-5)</label>
+                                    <select id="p4_q1" onchange="autoCalculateParticipantScore(4)" class="w-full bg-white border border-slate-300 rounded-lg p-1.5 text-xs font-semibold">
+                                        <option value="none">-- Kosong (0) --</option>
+                                        <option value="correct">✅ Benar (+20)</option>
+                                        <option value="wrong">❌ Salah (-5)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-extrabold text-indigo-700 mb-1">S2: Sedang (+30/-10)</label>
+                                    <select id="p4_q2" onchange="autoCalculateParticipantScore(4)" class="w-full bg-white border border-slate-300 rounded-lg p-1.5 text-xs font-semibold">
+                                        <option value="none">-- Kosong (0) --</option>
+                                        <option value="correct">✅ Benar (+30)</option>
+                                        <option value="wrong">❌ Salah (-10)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-extrabold text-purple-700 mb-1">S3: HOTS (+50/-15)</label>
+                                    <select id="p4_q3" onchange="autoCalculateParticipantScore(4)" class="w-full bg-white border border-slate-300 rounded-lg p-1.5 text-xs font-semibold">
+                                        <option value="none">-- Kosong (0) --</option>
+                                        <option value="correct">✅ Benar (+50)</option>
+                                        <option value="wrong">❌ Salah (-15)</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <label class="block text-[11px] font-bold text-slate-500 mb-1 text-center">Peserta 5</label>
-                            <input type="number" id="p5_score" placeholder="0" min="0" max="100" class="w-full px-2 py-2 text-xs sm:text-sm rounded-xl border border-slate-300 font-bold text-center text-brand-700 focus:ring-2 focus:ring-brand-500">
+
+                        <!-- Student 5 -->
+                        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3 sm:p-4 transition hover:border-slate-300">
+                            <div class="flex items-center justify-between border-b border-slate-200/60 pb-2 mb-3">
+                                <span class="text-xs font-extrabold text-slate-800 flex items-center gap-1.5">
+                                    <span class="w-5 h-5 bg-brand-600 text-white text-[11px] rounded-full inline-flex items-center justify-center">5</span> Peserta 5
+                                </span>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-[11px] text-slate-400 font-semibold">Total Nilai:</span>
+                                    <input type="number" id="p5_score" min="0" max="100" placeholder="0" class="w-16 px-2 py-1 bg-white rounded-lg border border-slate-300 text-center font-black text-brand-700 text-xs focus:ring-2 focus:ring-brand-500">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-3 gap-2 text-xs">
+                                <div>
+                                    <label class="block text-[10px] font-extrabold text-emerald-700 mb-1">S1: Mudah (+20/-5)</label>
+                                    <select id="p5_q1" onchange="autoCalculateParticipantScore(5)" class="w-full bg-white border border-slate-300 rounded-lg p-1.5 text-xs font-semibold">
+                                        <option value="none">-- Kosong (0) --</option>
+                                        <option value="correct">✅ Benar (+20)</option>
+                                        <option value="wrong">❌ Salah (-5)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-extrabold text-indigo-700 mb-1">S2: Sedang (+30/-10)</label>
+                                    <select id="p5_q2" onchange="autoCalculateParticipantScore(5)" class="w-full bg-white border border-slate-300 rounded-lg p-1.5 text-xs font-semibold">
+                                        <option value="none">-- Kosong (0) --</option>
+                                        <option value="correct">✅ Benar (+30)</option>
+                                        <option value="wrong">❌ Salah (-10)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-extrabold text-purple-700 mb-1">S3: HOTS (+50/-15)</label>
+                                    <select id="p5_q3" onchange="autoCalculateParticipantScore(5)" class="w-full bg-white border border-slate-300 rounded-lg p-1.5 text-xs font-semibold">
+                                        <option value="none">-- Kosong (0) --</option>
+                                        <option value="correct">✅ Benar (+50)</option>
+                                        <option value="wrong">❌ Salah (-15)</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
                 </div>
 
-                <div class="pt-2 flex gap-3">
+                <div class="pt-3 flex gap-3 shrink-0">
                     <button type="button" onclick="closeModal('modalInputScore')" class="w-1/2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2.5 rounded-xl transition">Batal</button>
                     <button type="submit" class="w-1/2 bg-brand-600 hover:bg-brand-700 text-white font-bold py-2.5 rounded-xl transition shadow-md shadow-brand-500/20">Simpan Skor Pekan Ini</button>
                 </div>
@@ -578,13 +762,13 @@
                         matchday: 'Pekan 1',
                         month: 'Bulan 1',
                         isHoliday: false,
-                        participants: [{score: 95}, {score: 90}, {score: 88}, {score: 92}, {score: 85}]
-                    },
-                    {
-                        matchday: 'Pekan 2',
-                        month: 'Bulan 1',
-                        isHoliday: false,
-                        participants: [{score: 90}, {score: 94}, {score: 86}, {score: 88}, {score: 91}]
+                        participants: [
+                            { score: 100, q1: 'correct', q2: 'correct', q3: 'correct' },
+                            { score: 80, q1: 'correct', q2: 'correct', q3: 'wrong' },
+                            { score: 70, q1: 'correct', q2: 'wrong', q3: 'correct' },
+                            { score: 90, q1: 'wrong', q2: 'correct', q3: 'correct' },
+                            { score: 85, q1: 'correct', q2: 'correct', q3: 'wrong' }
+                        ]
                     }
                 ]
             },
@@ -599,7 +783,13 @@
                         matchday: 'Pekan 1',
                         month: 'Bulan 1',
                         isHoliday: false,
-                        participants: [{score: 85}, {score: 88}, {score: 82}, {score: 90}, {score: 87}]
+                        participants: [
+                            { score: 85, q1: 'correct', q2: 'correct', q3: 'wrong' },
+                            { score: 50, q1: 'correct', q2: 'correct', q3: 'none' },
+                            { score: 70, q1: 'correct', q2: 'wrong', q3: 'correct' },
+                            { score: 90, q1: 'correct', q2: 'correct', q3: 'correct' },
+                            { score: 60, q1: 'correct', q2: 'none', q3: 'correct' }
+                        ]
                     }
                 ]
             },
@@ -614,7 +804,13 @@
                         matchday: 'Pekan 1',
                         month: 'Bulan 1',
                         isHoliday: false,
-                        participants: [{score: 98}, {score: 95}, {score: 92}, {score: 96}, {score: 90}]
+                        participants: [
+                            { score: 100, q1: 'correct', q2: 'correct', q3: 'correct' },
+                            { score: 95, q1: 'correct', q2: 'correct', q3: 'correct' },
+                            { score: 85, q1: 'correct', q2: 'correct', q3: 'wrong' },
+                            { score: 90, q1: 'correct', q2: 'correct', q3: 'correct' },
+                            { score: 80, q1: 'correct', q2: 'correct', q3: 'wrong' }
+                        ]
                     }
                 ]
             }
@@ -625,9 +821,9 @@
                 id: 'season_hist_1',
                 title: 'Season 1 (Jan-Mar 2026)',
                 phase: 'Fase B (Kelas 3-4)',
-                j1: 'Kelas 3A (Total 890 Pts)',
-                j2: 'Kelas 4B (Total 860 Pts)',
-                j3: 'Kelas 3B (Total 830 Pts)'
+                j1: 'Kelas 3A (Total 425 Pts)',
+                j2: 'Kelas 3B (Total 355 Pts)',
+                j3: 'Kelas 4A (Total 310 Pts)'
             }
         ];
 
@@ -688,7 +884,7 @@
         window.openCreateSeasonModal = () => window.openModal('modalCreateSeason');
         window.openAddSeasonModal = () => window.openModal('modalAddSeason');
 
-        // Fitur Rahasia: Ketuk 3 kali teks copyright footer untuk membuka modal login
+        // Secret Shortcut Login
         let logoClickCount = 0;
         let logoClickTimer = null;
         window.handleSecretLogoClick = () => {
@@ -703,7 +899,6 @@
             }
         };
 
-        // Fitur Rahasia: Keyboard Shortcut Ctrl + Shift + A atau Alt + Shift + A
         window.addEventListener('keydown', (e) => {
             if ((e.ctrlKey || e.altKey) && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
                 e.preventDefault();
@@ -824,6 +1019,33 @@
             }
         };
 
+        // Automatic Calculation for 3 Question Rules (+20/-5, +30/-10, +50/-15)
+        window.autoCalculateParticipantScore = (pIndex) => {
+            const q1 = document.getElementById(`p${pIndex}_q1`).value;
+            const q2 = document.getElementById(`p${pIndex}_q2`).value;
+            const q3 = document.getElementById(`p${pIndex}_q3`).value;
+
+            let score = 0;
+
+            // Soal 1 (Mudah): Benar +20, Salah -5, Kosong 0
+            if (q1 === 'correct') score += 20;
+            else if (q1 === 'wrong') score -= 5;
+
+            // Soal 2 (Sedang): Benar +30, Salah -10, Kosong 0
+            if (q2 === 'correct') score += 30;
+            else if (q2 === 'wrong') score -= 10;
+
+            // Soal 3 (HOTS/Sulit): Benar +50, Salah -15, Kosong 0
+            if (q3 === 'correct') score += 50;
+            else if (q3 === 'wrong') score -= 15;
+
+            // Batas bawah minimum 0 agar tidak minus secara total per peserta
+            if (score < 0) score = 0;
+
+            const scoreInput = document.getElementById(`p${pIndex}_score`);
+            if (scoreInput) scoreInput.value = score;
+        };
+
         window.renderApp = () => {
             updateSeasonDropdownOptions();
 
@@ -834,10 +1056,8 @@
                 displayMonthLabel.innerText = `${currentSeason} - ${selectedMonth}`;
             }
 
-            // Filter classes by Season & Phase
             const filtered = classesData.filter(c => c.phase === activePhase && (c.season === currentSeason || (!c.season && currentSeason === 'Season 1 (Jan-Mar 2026)')));
 
-            // Process scores per class
             const computed = filtered.map(cls => {
                 let classMatches = cls.matches || [];
                 if (selectedMonth !== 'Semua Bulan') {
@@ -867,10 +1087,8 @@
                 };
             });
 
-            // Sort descending by total score
             computed.sort((a, b) => b.totalScore - a.totalScore);
 
-            // Update Stats
             const totalClassesCount = document.getElementById('totalClassesCount');
             if (totalClassesCount) totalClassesCount.innerText = `${computed.length} Kelas`;
             
@@ -894,7 +1112,6 @@
                 if (avgPhaseScore) avgPhaseScore.innerText = `0 Pts`;
             }
 
-            // Render Leaderboard Container
             const listContainer = document.getElementById('leaderboardList');
             if (!listContainer) return;
 
@@ -927,7 +1144,6 @@
                     badgeRankHtml = `<span class="bg-slate-100 text-slate-600 text-xs font-bold px-2.5 py-1 rounded-full">Peringkat ${rank}</span>`;
                 }
 
-                // Match History HTML
                 const matchesHtml = (cls.filteredMatches || []).map(m => {
                     if (m.isHoliday) {
                         return `
@@ -951,7 +1167,7 @@
                     }
 
                     const matchSum = (m.participants || []).reduce((acc, p) => acc + (Number(p.score) || 0), 0);
-                    const scoresArray = (m.participants || []).map(p => p.score || 0).join(' + ');
+                    const scoresArray = (m.participants || []).map(p => `${p.score || 0} Pts`).join(' • ');
                     return `
                         <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                             <div class="flex items-center gap-2">
@@ -960,7 +1176,7 @@
                                 </span>
                                 <div>
                                     <h5 class="font-extrabold text-slate-800 text-xs">${m.matchday} <span class="text-slate-400 font-normal">(${m.month})</span></h5>
-                                    <p class="text-[11px] text-slate-500 font-medium">Rincian 5 Skor: ${scoresArray || '-'}</p>
+                                    <p class="text-[11px] text-slate-500 font-medium">Nilai 5 Siswa: [${scoresArray || '-'}]</p>
                                 </div>
                             </div>
                             <div class="text-right">
@@ -1102,7 +1318,7 @@
         };
 
         window.addNewMatchdayPrompt = () => {
-            const name = prompt('Masukkan Nama Pekan Pertandingan (Contoh: Pekan 3):', `Pekan ${(document.getElementById('matchdaySelect').options.length)}`);
+            const name = prompt('Masukkan Nama Pekan Pertandingan (Contoh: Pekan 2):', `Pekan ${(document.getElementById('matchdaySelect').options.length)}`);
             if (!name) return;
             const month = prompt('Masukkan Bulan Pertandingan (Contoh: Bulan 1 / Bulan 2 / Bulan 3):', 'Bulan 1');
             if (!month) return;
@@ -1146,6 +1362,9 @@
                 for (let i = 1; i <= 5; i++) {
                     const scoreElem = document.getElementById(`p${i}_score`);
                     if (scoreElem) scoreElem.value = 0;
+                    document.getElementById(`p${i}_q1`).value = 'none';
+                    document.getElementById(`p${i}_q2`).value = 'none';
+                    document.getElementById(`p${i}_q3`).value = 'none';
                 }
             } else {
                 if (deleteBtn) deleteBtn.classList.remove('hidden');
@@ -1156,16 +1375,18 @@
 
                     if (match.participants) {
                         for (let i = 1; i <= 5; i++) {
-                            const p = match.participants[i - 1] || { score: 0 };
+                            const p = match.participants[i - 1] || { score: 0, q1: 'none', q2: 'none', q3: 'none' };
                             const scoreElem = document.getElementById(`p${i}_score`);
                             if (scoreElem) scoreElem.value = p.score || 0;
+                            document.getElementById(`p${i}_q1`).value = p.q1 || 'none';
+                            document.getElementById(`p${i}_q2`).value = p.q2 || 'none';
+                            document.getElementById(`p${i}_q3`).value = p.q3 || 'none';
                         }
                     }
                 }
             }
         };
 
-        // Custom Modal Confirm Delete Helpers (Replaces alert/confirm)
         let pendingDeleteAction = null;
 
         window.openDeleteConfirm = (title, message, onConfirm) => {
@@ -1234,7 +1455,10 @@
             const newParticipants = [];
             for (let i = 1; i <= 5; i++) {
                 newParticipants.push({
-                    score: isHoliday ? 0 : (Number(document.getElementById(`p${i}_score`).value) || 0)
+                    score: isHoliday ? 0 : (Number(document.getElementById(`p${i}_score`).value) || 0),
+                    q1: document.getElementById(`p${i}_q1`).value,
+                    q2: document.getElementById(`p${i}_q2`).value,
+                    q3: document.getElementById(`p${i}_q3`).value
                 });
             }
 
@@ -1477,7 +1701,6 @@
 
             if (db) {
                 try {
-                    // Real-time listener for Classes
                     const classesColRef = collection(db, 'artifacts', appId, 'public', 'data', 'lnd_classes');
                     onSnapshot(classesColRef, (snapshot) => {
                         if (!snapshot.empty) {
@@ -1490,7 +1713,6 @@
                         renderApp();
                     });
 
-                    // Real-time listener for Seasons
                     const seasonsColRef = collection(db, 'artifacts', appId, 'public', 'data', 'lnd_seasons');
                     onSnapshot(seasonsColRef, (snapshot) => {
                         if (!snapshot.empty) {
