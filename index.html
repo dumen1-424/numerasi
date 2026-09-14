@@ -25,17 +25,17 @@
     <header class="bg-gradient-header text-white shadow-lg border-b border-blue-400/30">
         <div class="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
             
-            <!-- 1. Deretan Gambar Logo di Atas Judul (Tengah & Lebih Besar di Laptop) -->
-<div class="flex items-center justify-center gap-3 sm:gap-6 md:gap-8 mb-4 pb-3 border-b border-white/15 w-full">
-    <img src="tutwuri.png" alt="Tut Wuri Handayani" class="h-8 sm:h-12 md:h-16 lg:h-20 w-auto max-w-[20%] object-contain drop-shadow shrink-0">
-    <img src="dispendik.png" alt="Dinas Pendidikan" class="h-8 sm:h-12 md:h-16 lg:h-20 w-auto max-w-[20%] object-contain drop-shadow shrink-0">
-    <img src="adiwiyata.png" alt="Adiwiyata" class="h-8 sm:h-12 md:h-16 lg:h-20 w-auto max-w-[20%] object-contain drop-shadow shrink-0">
-    <img src="sra.png" alt="Sekolah Ramah Anak" class="h-8 sm:h-12 md:h-16 lg:h-20 w-auto max-w-[20%] object-contain drop-shadow shrink-0">
-</div>
-            <!-- 2. Section Judul dengan Gambar Dumen di Sebelahnya -->
+            <!-- 1. Deretan Gambar Logo di Atas Judul -->
+            <div class="flex items-center justify-center gap-3 sm:gap-6 md:gap-8 mb-4 pb-3 border-b border-white/15 w-full">
+                <img src="tutwuri.png" alt="Tut Wuri Handayani" class="h-8 sm:h-12 md:h-16 lg:h-20 w-auto max-w-[20%] object-contain drop-shadow shrink-0">
+                <img src="dispendik.png" alt="Dinas Pendidikan" class="h-8 sm:h-12 md:h-16 lg:h-20 w-auto max-w-[20%] object-contain drop-shadow shrink-0">
+                <img src="adiwiyata.png" alt="Adiwiyata" class="h-8 sm:h-12 md:h-16 lg:h-20 w-auto max-w-[20%] object-contain drop-shadow shrink-0">
+                <img src="sra.png" alt="Sekolah Ramah Anak" class="h-8 sm:h-12 md:h-16 lg:h-20 w-auto max-w-[20%] object-contain drop-shadow shrink-0">
+            </div>
+
+            <!-- 2. Section Judul dengan Gambar Dumen -->
             <div class="flex flex-col md:flex-row justify-between items-center gap-4">
                 <div class="flex items-center gap-3 sm:gap-4 text-center md:text-left">
-                    <!-- Logo Dumen (Juga ikut fleksibel di HP) -->
                     <div class="w-12 h-12 sm:w-16 sm:h-16 bg-white/10 rounded-2xl flex items-center justify-center backdrop-blur-md border border-white/20 shadow-inner shrink-0 p-1.5">
                         <img src="dumen.png" alt="Logo SDN Dukuh Menanggal" class="w-full h-full object-contain drop-shadow">
                     </div>
@@ -78,24 +78,12 @@
                 </select>
             </div>
 
-            <!-- Month Filter -->
+            <!-- Month & Year Real Filter -->
             <div class="flex items-center gap-2">
                 <i class="fa-regular fa-calendar-days text-slate-400"></i>
                 <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Filter Bulan:</span>
                 <select id="monthFilterSelect" onchange="applyMonthFilter(this.value)" class="bg-slate-50 border border-slate-300 text-slate-700 text-sm rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option value="ALL">Semua Bulan (Total Season)</option>
-                    <option value="Januari">Januari</option>
-                    <option value="Februari">Februari</option>
-                    <option value="Maret">Maret</option>
-                    <option value="April">April</option>
-                    <option value="Mei">Mei</option>
-                    <option value="Juni">Juni</option>
-                    <option value="Juli">Juli</option>
-                    <option value="Agustus">Agustus</option>
-                    <option value="September">September</option>
-                    <option value="Oktober">Oktober</option>
-                    <option value="November">November</option>
-                    <option value="Desember">Desember</option>
                 </select>
                 <button onclick="loadCentralData(true)" title="Muat Ulang Data Terbaru dari GitHub" class="bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 px-3 py-1.5 rounded-lg text-xs font-semibold transition flex items-center gap-1">
                     <i class="fa-solid fa-rotate text-blue-600"></i> <span class="hidden sm:inline">Refresh Data</span>
@@ -107,19 +95,19 @@
     <!-- Main Content Area -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
 
-        <!-- Tab Menu Bar -->
-        <div class="flex border-b border-slate-200 mb-6 space-x-2 sm:space-x-4 overflow-x-auto pb-1">
-            <button id="tabFaseB" onclick="switchTab('faseB')" class="px-5 py-2.5 rounded-t-xl font-bold text-sm border-b-2 border-blue-600 text-blue-600 bg-white shadow-sm flex items-center gap-2 whitespace-nowrap transition-all">
-                <i class="fa-solid fa-shapes"></i> Klasemen Fase B (Kls 3 & 4)
+        <!-- Tab Menu Bar (Responsif untuk HP tanpa scroll horizontal) -->
+        <div class="grid grid-cols-3 sm:flex border-b border-slate-200 mb-6 gap-1 sm:space-x-2 pb-1">
+            <button id="tabFaseB" onclick="switchTab('faseB')" class="px-2 sm:px-5 py-2.5 rounded-t-xl font-bold text-xs sm:text-sm border-b-2 border-blue-600 text-blue-600 bg-white shadow-sm flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 transition-all">
+                <i class="fa-solid fa-shapes"></i> <span>Klasemen Fase B</span>
             </button>
-            <button id="tabFaseC" onclick="switchTab('faseC')" class="px-5 py-2.5 rounded-t-xl font-bold text-sm text-slate-500 hover:text-slate-700 hover:bg-white/50 border-b-2 border-transparent flex items-center gap-2 whitespace-nowrap transition-all">
-                <i class="fa-solid fa-cubes"></i> Klasemen Fase C (Kls 5 & 6)
+            <button id="tabFaseC" onclick="switchTab('faseC')" class="px-2 sm:px-5 py-2.5 rounded-t-xl font-bold text-xs sm:text-sm text-slate-500 hover:text-slate-700 hover:bg-white/50 border-b-2 border-transparent flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 transition-all">
+                <i class="fa-solid fa-cubes"></i> <span>Klasemen Fase C</span>
             </button>
-            <button id="tabJuara" onclick="switchTab('juara')" class="px-5 py-2.5 rounded-t-xl font-bold text-sm text-slate-500 hover:text-slate-700 hover:bg-white/50 border-b-2 border-transparent flex items-center gap-2 whitespace-nowrap transition-all">
-                <i class="fa-solid fa-trophy text-amber-500"></i> Riwayat Juara Season
+            <button id="tabJuara" onclick="switchTab('juara')" class="px-2 sm:px-5 py-2.5 rounded-t-xl font-bold text-xs sm:text-sm text-slate-500 hover:text-slate-700 hover:bg-white/50 border-b-2 border-transparent flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 transition-all">
+                <i class="fa-solid fa-trophy text-amber-500"></i> <span>Riwayat Juara</span>
             </button>
-            <button id="tabAdmin" onclick="switchTab('admin')" class="hidden px-5 py-2.5 rounded-t-xl font-bold text-sm text-purple-600 bg-purple-50 hover:bg-purple-100 border-b-2 border-purple-600 flex items-center gap-2 whitespace-nowrap transition-all ml-auto">
-                <i class="fa-solid fa-sliders"></i> Dashboard Admin
+            <button id="tabAdmin" onclick="switchTab('admin')" class="hidden px-2 sm:px-5 py-2.5 rounded-t-xl font-bold text-xs sm:text-sm text-purple-600 bg-purple-50 hover:bg-purple-100 border-b-2 border-purple-600 flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 transition-all ml-auto">
+                <i class="fa-solid fa-sliders"></i> <span>Admin</span>
             </button>
         </div>
 
@@ -134,9 +122,6 @@
                         <p class="text-xs text-slate-500 mt-1">
                             Diperbarui secara otomatis setiap pertandingan (2 Minggu Sekali)
                         </p>
-                    </div>
-                    <div class="text-xs bg-slate-100 text-slate-600 px-3 py-1.5 rounded-lg font-medium flex items-center gap-1">
-                        <i class="fa-solid fa-sync text-blue-500 animate-spin"></i> Live Real-time Sync
                     </div>
                 </div>
 
@@ -156,7 +141,7 @@
                             <tr>
                                 <td colspan="4" class="text-center p-8 text-slate-400">
                                     <i class="fa-solid fa-spinner fa-spin text-2xl mb-2"></i>
-                                    <p>Memuat data klasemen real-time...</p>
+                                    <p>Memuat data klasemen...</p>
                                 </td>
                             </tr>
                         </tbody>
@@ -186,7 +171,7 @@
             </div>
         </div>
 
-        <!-- VIEW 3: Dashboard Admin (Perbaikan Tag Kontainer Admin) -->
+        <!-- VIEW 3: Dashboard Admin (Hanya Muncul Saat Mode Admin Aktif) -->
         <div id="viewAdmin" class="hidden space-y-6">
             <!-- Admin Header -->
             <div class="bg-gradient-to-r from-purple-900 to-indigo-900 text-white rounded-2xl p-6 shadow-md">
@@ -340,7 +325,7 @@
             <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
                 <h3 class="font-bold text-slate-800 text-base mb-4 flex items-center gap-2 border-b pb-3">
                     <i class="fa-solid fa-gamepad text-indigo-600"></i>
-                    Input & Kelola Skor Pertandingan (Per 2 Minggu)
+                    Input & Kelola Skor Pertandingan Real (Multi-Tahun)
                 </h3>
 
                 <form id="formAddScore" onsubmit="handleAddScore(event)" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 mb-6 bg-slate-50 p-4 rounded-xl border border-slate-200">
@@ -352,21 +337,8 @@
                     </div>
 
                     <div>
-                        <label class="text-xs font-semibold text-slate-600">Bulan Pertandingan</label>
-                        <select id="scoreMonthSelect" required class="w-full text-sm border border-slate-300 rounded-lg p-2 bg-white focus:ring-2 focus:ring-indigo-500 outline-none">
-                            <option value="Januari">Januari</option>
-                            <option value="Februari">Februari</option>
-                            <option value="Maret">Maret</option>
-                            <option value="April">April</option>
-                            <option value="Mei">Mei</option>
-                            <option value="Juni">Juni</option>
-                            <option value="Juli">Juli</option>
-                            <option value="Agustus">Agustus</option>
-                            <option value="September">September</option>
-                            <option value="Oktober">Oktober</option>
-                            <option value="November">November</option>
-                            <option value="Desember">Desember</option>
-                        </select>
+                        <label class="text-xs font-semibold text-slate-600">Tanggal Pertandingan Real</label>
+                        <input type="date" id="scoreDateInput" required class="w-full text-sm border border-slate-300 rounded-lg p-2 bg-white focus:ring-2 focus:ring-indigo-500 outline-none">
                     </div>
 
                     <div>
@@ -397,10 +369,10 @@
                     <table class="w-full text-left border-collapse text-xs">
                         <thead>
                             <tr class="bg-slate-100 text-slate-600 font-bold border-b border-slate-200">
-                                <th class="p-3">Tanggal Input</th>
+                                <th class="p-3">Tanggal Pertandingan</th>
                                 <th class="p-3">Kelas</th>
                                 <th class="p-3">Fase</th>
-                                <th class="p-3">Bulan</th>
+                                <th class="p-3">Bulan & Tahun</th>
                                 <th class="p-3">Pekan</th>
                                 <th class="p-3 text-right">Skor</th>
                                 <th class="p-3 text-center">Aksi (Edit / Hapus)</th>
@@ -542,6 +514,26 @@
         import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, setDoc, getDoc, updateDoc, deleteDoc, onSnapshot, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
+        // Constants
+        const INDO_MONTHS = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+
+        function formatMonthYear(dateStr) {
+            if (!dateStr) return '';
+            const parts = dateStr.split('-');
+            if (parts.length === 3) {
+                const year = parts[0];
+                const monthIdx = parseInt(parts[1], 10) - 1;
+                if (monthIdx >= 0 && monthIdx < 12) {
+                    return `${INDO_MONTHS[monthIdx]} ${year}`;
+                }
+            }
+            const d = new Date(dateStr);
+            if (!isNaN(d.getTime())) {
+                return `${INDO_MONTHS[d.getMonth()]} ${d.getFullYear()}`;
+            }
+            return dateStr;
+        }
+
         // Global Variables
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'lnd-dukuh-menanggal';
         const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
@@ -573,7 +565,7 @@
         let scoresList = [];
         let juaraList = [];
 
-        // Default initial data for fresh setup on GitHub Pages
+        // Default initial data
         const DEFAULT_SEASONS = [
             { id: 'season-1', name: 'Season 1 (Jan - Mar 2026)', isPublic: true, createdAt: Date.now() }
         ];
@@ -662,7 +654,6 @@
             const apiUrl = `https://api.github.com/repos/${repoInfo}/contents/lnd_data.json`;
 
             try {
-                // Step 1: Fetch existing SHA if file exists
                 let sha = null;
                 const getRes = await fetch(apiUrl, {
                     headers: {
@@ -676,7 +667,6 @@
                     sha = fileInfo.sha;
                 }
 
-                // Step 2: Commit lnd_data.json directly to GitHub Repository
                 const putBody = {
                     message: "Update data Liga Numerasi Digital via Dashboard Admin",
                     content: contentEncoded
@@ -707,7 +697,6 @@
         };
 
         async function initAuth() {
-            // Restore stored GitHub repo & token settings if available
             const savedRepo = localStorage.getItem('lnd_github_repo');
             const savedToken = localStorage.getItem('lnd_github_token');
             if (savedRepo && document.getElementById('githubRepoInput')) {
@@ -717,10 +706,8 @@
                 document.getElementById('githubTokenInput').value = savedToken;
             }
 
-            // Attempt to load central data file from GitHub repository
             await loadCentralData();
 
-            // If dummy firebase config (e.g. hosted standalone on GitHub Pages), use LocalStorage engine
             if (!firebaseConfig.apiKey || firebaseConfig.apiKey.includes('dummy')) {
                 console.log("GitHub Pages Standalone Mode detected. Using LocalStorage Storage Engine.");
                 isFirebaseActive = false;
@@ -759,7 +746,6 @@
             }
         }
 
-        // LocalStorage Engine Handlers
         function loadFromLocalStorage() {
             try {
                 const storedSeasons = localStorage.getItem('lnd_seasons');
@@ -857,6 +843,7 @@
 
         function refreshAllViews() {
             renderPublicSeasonSelect();
+            renderMonthFilterSelect();
             renderAdminSeasonList();
             renderAdminClassList();
             renderScoreClassSelect();
@@ -864,6 +851,27 @@
             renderAdminScoresTable();
             renderJuaraView();
             updateUI();
+        }
+
+        function renderMonthFilterSelect() {
+            const select = document.getElementById('monthFilterSelect');
+            if (!select) return;
+            const currentVal = currentSelectedMonth || 'ALL';
+
+            const uniqueMonths = Array.from(new Set(scoresList.map(s => s.month).filter(Boolean)));
+            
+            if (uniqueMonths.length === 0) {
+                const now = new Date();
+                const curMonthYear = `${INDO_MONTHS[now.getMonth()]} ${now.getFullYear()}`;
+                uniqueMonths.push(curMonthYear);
+            }
+
+            let optionsHtml = `<option value="ALL" ${currentVal === 'ALL' ? 'selected' : ''}>Semua Bulan (Total Season)</option>`;
+            uniqueMonths.forEach(m => {
+                optionsHtml += `<option value="${escapeHtml(m)}" ${m === currentVal ? 'selected' : ''}>${escapeHtml(m)}</option>`;
+            });
+
+            select.innerHTML = optionsHtml;
         }
 
         function updateUI() {
@@ -1101,14 +1109,14 @@
                 const cls = classesList.find(c => c.id === s.classId);
                 const className = cls ? cls.className : 'Kelas Terhapus';
                 const classPhase = cls ? cls.phase : '-';
-                const dateStr = s.timestamp ? new Date(s.timestamp).toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }) : '-';
+                const dateStr = s.matchDate ? new Date(s.matchDate).toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }) : (s.timestamp ? new Date(s.timestamp).toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }) : '-');
 
                 return `
                     <tr class="hover:bg-slate-50">
-                        <td class="p-3 font-mono text-slate-500">${dateStr}</td>
+                        <td class="p-3 font-mono text-slate-600 font-semibold">${dateStr}</td>
                         <td class="p-3 font-bold text-slate-800">${escapeHtml(className)}</td>
                         <td class="p-3"><span class="bg-slate-200 px-1.5 py-0.5 rounded text-[10px]">Fase ${classPhase}</span></td>
-                        <td class="p-3">${escapeHtml(s.month)}</td>
+                        <td class="p-3 font-semibold text-slate-700">${escapeHtml(s.month || '-')}</td>
                         <td class="p-3">Pekan ${s.matchWeek}</td>
                         <td class="p-3 text-right font-black text-indigo-700">${s.score}</td>
                         <td class="p-3 text-center space-x-2">
@@ -1228,24 +1236,26 @@
             if (!isAdminLoggedIn) return;
 
             const classId = document.getElementById('scoreClassSelect').value;
-            const month = document.getElementById('scoreMonthSelect').value;
+            const matchDate = document.getElementById('scoreDateInput').value;
             const matchWeek = document.getElementById('scoreWeekSelect').value;
             const scoreVal = document.getElementById('scoreValueInput').value;
 
-            if (!classId || !activePublicSeasonId || scoreVal === '') {
-                showToast("Pilih kelas dan pastikan season aktif tersedia!", true);
+            if (!classId || !activePublicSeasonId || !matchDate || scoreVal === '') {
+                showToast("Pilih kelas, tanggal, dan pastikan season aktif tersedia!", true);
                 return;
             }
 
+            const month = formatMonthYear(matchDate);
             const scoreId = 'score_' + Date.now();
             const newScore = {
                 id: scoreId,
                 classId,
                 seasonId: activePublicSeasonId,
+                matchDate,
                 month,
                 matchWeek: Number(matchWeek),
                 score: Number(scoreVal),
-                timestamp: Date.now()
+                timestamp: new Date(matchDate).getTime() || Date.now()
             };
 
             if (isFirebaseActive) {
@@ -1253,10 +1263,11 @@
                     await addDoc(getPublicCollection('scores'), {
                         classId,
                         seasonId: activePublicSeasonId,
+                        matchDate,
                         month,
                         matchWeek: Number(matchWeek),
                         score: Number(scoreVal),
-                        timestamp: Date.now()
+                        timestamp: new Date(matchDate).getTime() || Date.now()
                     });
                 } catch (err) {
                     console.error("Firebase addScore error, using local:", err);
@@ -1271,6 +1282,7 @@
             }
 
             document.getElementById('scoreValueInput').value = '';
+            document.getElementById('scoreDateInput').value = '';
             showToast("Skor pertandingan berhasil dimasukkan!");
         };
 
@@ -1299,81 +1311,13 @@
             showToast("Season aktif publik diperbarui!");
         };
 
-        // Edit Score Modal Handlers
-        window.openEditScoreModal = function(id, currentScore) {
-            document.getElementById('editScoreId').value = id;
-            document.getElementById('editScoreValueInput').value = currentScore;
-            document.getElementById('modalEditScore').classList.remove('hidden');
-        };
-
-        window.closeEditScoreModal = function() {
-            document.getElementById('modalEditScore').classList.add('hidden');
-        };
-
-        window.handleEditScoreSubmit = async function(e) {
-            e.preventDefault();
-            if (!isAdminLoggedIn) return;
-
-            const id = document.getElementById('editScoreId').value;
-            const newScore = Number(document.getElementById('editScoreValueInput').value);
-
-            if (isFirebaseActive) {
-                try {
-                    await updateDoc(getPublicDoc('scores', id), { score: newScore });
-                } catch (err) {
-                    console.error("Firebase editScore error, using local:", err);
-                    const item = scoresList.find(s => s.id === id);
-                    if (item) item.score = newScore;
-                    saveAndSyncLocalStorage();
-                    refreshAllViews();
-                }
-            } else {
-                const item = scoresList.find(s => s.id === id);
-                if (item) item.score = newScore;
-                saveAndSyncLocalStorage();
-                refreshAllViews();
-            }
-
-            closeEditScoreModal();
-            showToast("Skor pertandingan berhasil diperbarui!");
-        };
-
-        window.confirmDelete = function(collectionName, docId) {
-            onConfirmAction = async () => {
-                if (isFirebaseActive) {
-                    try {
-                        await deleteDoc(getPublicDoc(collectionName, docId));
-                    } catch (err) {
-                        console.error("Firebase delete error, using local:", err);
-                        deleteLocalItem(collectionName, docId);
-                    }
-                } else {
-                    deleteLocalItem(collectionName, docId);
-                }
-                showToast("Data berhasil dihapus!");
-            };
-            document.getElementById('modalConfirm').classList.remove('hidden');
-        };
-
-        function deleteLocalItem(colName, id) {
-            if (colName === 'seasons') seasonsList = seasonsList.filter(item => item.id !== id);
-            if (colName === 'classes') classesList = classesList.filter(item => item.id !== id);
-            if (colName === 'scores') scoresList = scoresList.filter(item => item.id !== id);
-            if (colName === 'juara') juaraList = juaraList.filter(item => item.id !== id);
-            saveAndSyncLocalStorage();
-            refreshAllViews();
-        }
-
-        window.closeConfirmModal = function(isConfirmed) {
-            document.getElementById('modalConfirm').classList.add('hidden');
-            if (isConfirmed && typeof onConfirmAction === 'function') {
-                onConfirmAction();
-            }
-            onConfirmAction = null;
-        };
-
-        // Tab Navigation
+        // Tab Navigation dengan Proteksi Akses Admin
         window.switchTab = function(tabName) {
+            if (tabName === 'admin' && !isAdminLoggedIn) {
+                toggleAuthModal();
+                return;
+            }
+
             activeTab = tabName;
             
             const btnB = document.getElementById('tabFaseB');
@@ -1381,8 +1325,8 @@
             const btnJuara = document.getElementById('tabJuara');
             const btnAdmin = document.getElementById('tabAdmin');
 
-            const activeClass = "px-5 py-2.5 rounded-t-xl font-bold text-sm border-b-2 border-blue-600 text-blue-600 bg-white shadow-sm flex items-center gap-2 whitespace-nowrap transition-all";
-            const inactiveClass = "px-5 py-2.5 rounded-t-xl font-bold text-sm text-slate-500 hover:text-slate-700 hover:bg-white/50 border-b-2 border-transparent flex items-center gap-2 whitespace-nowrap transition-all";
+            const activeClass = "px-2 sm:px-5 py-2.5 rounded-t-xl font-bold text-xs sm:text-sm border-b-2 border-blue-600 text-blue-600 bg-white shadow-sm flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 transition-all";
+            const inactiveClass = "px-2 sm:px-5 py-2.5 rounded-t-xl font-bold text-xs sm:text-sm text-slate-500 hover:text-slate-700 hover:bg-white/50 border-b-2 border-transparent flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 transition-all";
 
             if (btnB) btnB.className = tabName === 'faseB' ? activeClass : inactiveClass;
             if (btnC) btnC.className = tabName === 'faseC' ? activeClass : inactiveClass;
@@ -1418,59 +1362,6 @@
                 const modal = document.getElementById('modalLogin');
                 if (modal) modal.classList.toggle('hidden');
             }
-        };
-
-        window.openForgotPasswordModal = function() {
-            const loginModal = document.getElementById('modalLogin');
-            const forgotModal = document.getElementById('modalForgotPassword');
-            if (loginModal) loginModal.classList.add('hidden');
-            if (forgotModal) forgotModal.classList.remove('hidden');
-        };
-
-        window.closeForgotPasswordModal = function() {
-            const forgotModal = document.getElementById('modalForgotPassword');
-            if (forgotModal) forgotModal.classList.add('hidden');
-        };
-
-        window.openEditScoreModal = function(id, currentScore) {
-            const idInput = document.getElementById('editScoreId');
-            const scoreInput = document.getElementById('editScoreValueInput');
-            const modal = document.getElementById('modalEditScore');
-            if (idInput) idInput.value = id;
-            if (scoreInput) scoreInput.value = currentScore;
-            if (modal) modal.classList.remove('hidden');
-        };
-
-        window.closeEditScoreModal = function() {
-            const modal = document.getElementById('modalEditScore');
-            if (modal) modal.classList.add('hidden');
-        };
-
-        window.confirmDelete = function(collectionName, docId) {
-            onConfirmAction = async () => {
-                if (isFirebaseActive) {
-                    try {
-                        await deleteDoc(getPublicDoc(collectionName, docId));
-                    } catch (err) {
-                        console.error("Firebase delete error, using local:", err);
-                        deleteLocalItem(collectionName, docId);
-                    }
-                } else {
-                    deleteLocalItem(collectionName, docId);
-                }
-                showToast("Data berhasil dihapus!");
-            };
-            const modal = document.getElementById('modalConfirm');
-            if (modal) modal.classList.remove('hidden');
-        };
-
-        window.closeConfirmModal = function(isConfirmed) {
-            const modal = document.getElementById('modalConfirm');
-            if (modal) modal.classList.add('hidden');
-            if (isConfirmed && typeof onConfirmAction === 'function') {
-                onConfirmAction();
-            }
-            onConfirmAction = null;
         };
 
         window.openForgotPasswordModal = function() {
@@ -1532,6 +1423,85 @@
             document.getElementById('tabAdmin').classList.add('hidden');
             switchTab('faseB');
             showToast("Anda telah keluar dari mode Admin");
+        };
+
+        // Edit Score Modal Handlers
+        window.openEditScoreModal = function(id, currentScore) {
+            const idInput = document.getElementById('editScoreId');
+            const scoreInput = document.getElementById('editScoreValueInput');
+            const modal = document.getElementById('modalEditScore');
+            if (idInput) idInput.value = id;
+            if (scoreInput) scoreInput.value = currentScore;
+            if (modal) modal.classList.remove('hidden');
+        };
+
+        window.closeEditScoreModal = function() {
+            const modal = document.getElementById('modalEditScore');
+            if (modal) modal.classList.add('hidden');
+        };
+
+        window.handleEditScoreSubmit = async function(e) {
+            e.preventDefault();
+            if (!isAdminLoggedIn) return;
+
+            const id = document.getElementById('editScoreId').value;
+            const newScore = Number(document.getElementById('editScoreValueInput').value);
+
+            if (isFirebaseActive) {
+                try {
+                    await updateDoc(getPublicDoc('scores', id), { score: newScore });
+                } catch (err) {
+                    console.error("Firebase editScore error, using local:", err);
+                    const item = scoresList.find(s => s.id === id);
+                    if (item) item.score = newScore;
+                    saveAndSyncLocalStorage();
+                    refreshAllViews();
+                }
+            } else {
+                const item = scoresList.find(s => s.id === id);
+                if (item) item.score = newScore;
+                saveAndSyncLocalStorage();
+                refreshAllViews();
+            }
+
+            closeEditScoreModal();
+            showToast("Skor pertandingan berhasil diperbarui!");
+        };
+
+        window.confirmDelete = function(collectionName, docId) {
+            onConfirmAction = async () => {
+                if (isFirebaseActive) {
+                    try {
+                        await deleteDoc(getPublicDoc(collectionName, docId));
+                    } catch (err) {
+                        console.error("Firebase delete error, using local:", err);
+                        deleteLocalItem(collectionName, docId);
+                    }
+                } else {
+                    deleteLocalItem(collectionName, docId);
+                }
+                showToast("Data berhasil dihapus!");
+            };
+            const modal = document.getElementById('modalConfirm');
+            if (modal) modal.classList.remove('hidden');
+        };
+
+        function deleteLocalItem(colName, id) {
+            if (colName === 'seasons') seasonsList = seasonsList.filter(item => item.id !== id);
+            if (colName === 'classes') classesList = classesList.filter(item => item.id !== id);
+            if (colName === 'scores') scoresList = scoresList.filter(item => item.id !== id);
+            if (colName === 'juara') juaraList = juaraList.filter(item => item.id !== id);
+            saveAndSyncLocalStorage();
+            refreshAllViews();
+        }
+
+        window.closeConfirmModal = function(isConfirmed) {
+            const modal = document.getElementById('modalConfirm');
+            if (modal) modal.classList.add('hidden');
+            if (isConfirmed && typeof onConfirmAction === 'function') {
+                onConfirmAction();
+            }
+            onConfirmAction = null;
         };
 
         // Utilities
