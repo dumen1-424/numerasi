@@ -9,7 +9,8 @@
     <!-- Font Awesome Icons CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts Inter / Plus Jakarta Sans -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
     <script>
         tailwind.config = {
             theme: {
@@ -45,7 +46,7 @@
         <div class="absolute top-0 left-1/4 w-32 h-32 bg-indigo-500/10 rounded-full blur-xl pointer-events-none"></div>
         
         <!-- Official Logo Strip Header (Responsive Compact Bar) -->
-        <div class="bg-black/25 backdrop-blur-md border-b border-white/10 py-2 px-3 sm:px-4">
+        <div class="bg-black/30 backdrop-blur-md border-b border-white/10 py-2 px-3 sm:px-4">
             <div class="max-w-7xl mx-auto flex items-center justify-around sm:justify-center gap-2 sm:gap-4 md:gap-5 py-0.5">
                 
                 <!-- 1. Tut Wuri Handayani -->
@@ -68,13 +69,26 @@
                     <span class="hidden sm:inline text-[10px] sm:text-[11px] font-extrabold text-amber-300 tracking-wider">SURABAYA</span>
                 </div>
 
-                <!-- 3. Logo SDN Dukuh Menanggal I/424 -->
-                <div class="flex items-center gap-1.5 bg-amber-400/20 hover:bg-amber-400/30 p-1.5 sm:px-2.5 sm:py-1 rounded-lg border border-amber-400/40 transition shrink-0" title="SDN Dukuh Menanggal I/424 Surabaya">
-                    <svg class="w-6 h-6 sm:w-5 sm:h-5" viewBox="0 0 100 100" fill="none">
-                        <polygon points="50,5 95,38 78,92 22,92 5,38" fill="#84cc16" stroke="#ffffff" stroke-width="3"/>
-                        <circle cx="50" cy="50" r="22" fill="#0284c7" stroke="#ffffff" stroke-width="2"/>
-                        <polygon points="50,15 54,25 65,25 56,32 59,42 50,36 41,42 44,32 35,25 46,25" fill="#f59e0b"/>
-                        <path d="M35,78 Q50,68 65,78" stroke="#ffffff" stroke-width="4" fill="none"/>
+                <!-- 3. Logo Resmi SDN Dukuh Menanggal I/424 (Diperbarui) -->
+                <div class="flex items-center gap-2 bg-amber-400/25 hover:bg-amber-400/35 p-1.5 sm:px-3 sm:py-1 rounded-xl border border-amber-400/50 transition shrink-0 shadow-sm" title="SDN Dukuh Menanggal I/424 Surabaya">
+                    <!-- High-Resolution Official Pentagon Logo Vector -->
+                    <svg class="w-7 h-7 sm:w-6 sm:h-6 drop-shadow" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Outer Golden Chain Border (Rantai Emas) -->
+                        <polygon points="50,3 96,36 78,95 22,95 4,36" fill="#f59e0b" stroke="#ffffff" stroke-width="2"/>
+                        <!-- Inner Pentagon (Pelajar Pancasila) -->
+                        <polygon points="50,7 91,38 75,90 25,90 9,38" fill="#15803d" stroke="#fef08a" stroke-width="2"/>
+                        <!-- Core Circle Backdrop -->
+                        <circle cx="50" cy="52" r="26" fill="#0284c7" stroke="#ffffff" stroke-width="2"/>
+                        <!-- Golden Star (Bintang Berakhlak Mulia) -->
+                        <polygon points="50,12 53,20 62,20 54,25 57,33 50,28 43,33 46,25 38,20 47,20" fill="#fbbf24" stroke="#ffffff" stroke-width="1"/>
+                        <!-- Open Book (Buku Cerdas) -->
+                        <path d="M34,48 Q50,43 50,54 Q50,43 66,48 L66,66 Q50,60 50,68 Q50,60 34,66 Z" fill="#ffffff" stroke="#0284c7" stroke-width="1.5"/>
+                        <!-- Pen & Quill (Pena Mandiri) -->
+                        <path d="M50,42 L53,58 L50,65 L47,58 Z" fill="#f59e0b"/>
+                        <!-- Supporting Hands & Earth (Berbudaya Lingkungan) -->
+                        <path d="M30,76 C40,68 60,68 70,76 C60,86 40,86 30,76 Z" fill="#10b981" stroke="#ffffff" stroke-width="1.5"/>
+                        <!-- Leaf Sprout (Setangkai Daun Eco-School) -->
+                        <path d="M48,36 C42,30 38,34 44,40 C48,42 50,40 48,36 Z" fill="#4ade80"/>
                     </svg>
                     <span class="hidden sm:inline text-[10px] sm:text-[11px] font-black text-amber-300 tracking-wider">SDN DUKUH MENANGGAL I</span>
                 </div>
@@ -108,8 +122,21 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-7">
             <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
                 <div class="flex flex-col md:flex-row items-center gap-4">
-                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white/10 backdrop-blur rounded-2xl flex items-center justify-center border border-white/20 shadow-inner shrink-0">
-                        <i class="fa-solid fa-trophy text-amber-400 text-3xl sm:text-4xl drop-shadow"></i>
+                    <!-- Main Logo Hero Display Badge -->
+                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white/15 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/25 shadow-lg shrink-0 p-2 relative group cursor-pointer" onclick="handleSecretLogoClick()" title="Logo SDN Dukuh Menanggal I/424">
+                        <svg class="w-full h-full drop-shadow-md" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <polygon points="50,3 96,36 78,95 22,95 4,36" fill="#f59e0b" stroke="#ffffff" stroke-width="2"/>
+                            <polygon points="50,7 91,38 75,90 25,90 9,38" fill="#15803d" stroke="#fef08a" stroke-width="2"/>
+                            <circle cx="50" cy="52" r="26" fill="#0284c7" stroke="#ffffff" stroke-width="2"/>
+                            <polygon points="50,12 53,20 62,20 54,25 57,33 50,28 43,33 46,25 38,20 47,20" fill="#fbbf24" stroke="#ffffff" stroke-width="1"/>
+                            <path d="M34,48 Q50,43 50,54 Q50,43 66,48 L66,66 Q50,60 50,68 Q50,60 34,66 Z" fill="#ffffff" stroke="#0284c7" stroke-width="1.5"/>
+                            <path d="M50,42 L53,58 L50,65 L47,58 Z" fill="#f59e0b"/>
+                            <path d="M30,76 C40,68 60,68 70,76 C60,86 40,86 30,76 Z" fill="#10b981" stroke="#ffffff" stroke-width="1.5"/>
+                            <path d="M48,36 C42,30 38,34 44,40 C48,42 50,40 48,36 Z" fill="#4ade80"/>
+                        </svg>
+                        <div class="absolute -bottom-1 -right-1 bg-amber-400 text-slate-900 rounded-full w-6 h-6 flex items-center justify-center text-[10px] font-black shadow border border-white">
+                            <i class="fa-solid fa-trophy"></i>
+                        </div>
                     </div>
                     <div>
                         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/20 text-amber-300 text-xs font-semibold mb-2 border border-amber-400/30">
@@ -125,7 +152,7 @@
                 </div>
                 
                 <div id="adminHeaderAction" class="mt-2 md:mt-0 flex items-center gap-3">
-                    <button onclick="openLoginModal()" id="loginBtn" class="p-2.5 text-white/30 hover:text-white bg-white/5 hover:bg-white/15 rounded-xl text-xs transition-all duration-200 border border-white/5 hover:border-white/20" title="Pengaturan Sistem">
+                    <button onclick="openLoginModal()" id="loginBtn" class="p-2.5 text-white/40 hover:text-white bg-white/5 hover:bg-white/15 rounded-xl text-xs transition-all duration-200 border border-white/10 hover:border-white/20" title="Pengaturan Sistem">
                         <i class="fa-solid fa-lock text-sm"></i>
                     </button>
                     <div id="adminBadge" class="hidden flex items-center gap-3 bg-emerald-500/20 border border-emerald-400/40 px-3 py-2 rounded-xl text-xs font-semibold text-emerald-200">
@@ -438,7 +465,7 @@
                     <input type="checkbox" id="isHolidayCheckbox" onchange="toggleHolidayMode(this.checked)" class="w-4 h-4 text-amber-600 rounded focus:ring-amber-500 cursor-pointer">
                 </div>
 
-                <!-- 5 Participants Input Container with Question Status Calculator -->
+                <!-- 5 Participants Input Container -->
                 <div id="scoreInputsContainer" class="space-y-3">
                     <h4 class="text-xs font-extrabold text-slate-600 uppercase tracking-wider flex items-center justify-between">
                         <span><i class="fa-solid fa-calculator text-brand-600 mr-1"></i> Rincian Nilai 5 Peserta Pekan Ini</span>
@@ -830,7 +857,6 @@
         let classesData = [...initialMockClasses];
         let seasonsData = [...initialMockSeasons];
 
-        // Firebase Initialization
         const appId = 'lnd-app-default';
         const firebaseConfig = {
             apiKey: "AIzaSyDummyKeyForLNDAppSDNDukuhMenanggal",
@@ -849,7 +875,6 @@
             useLocalStorageFallback = true;
         }
 
-        // Local Storage Sync Helpers
         function saveToLocalStorage() {
             localStorage.setItem('lnd_classes', JSON.stringify(classesData));
             localStorage.setItem('lnd_seasons', JSON.stringify(seasonsData));
@@ -884,7 +909,26 @@
         window.openCreateSeasonModal = () => window.openModal('modalCreateSeason');
         window.openAddSeasonModal = () => window.openModal('modalAddSeason');
 
-        // Secret Shortcut Login
+        // Toast notification helper
+        window.showToast = (msg, type = 'success') => {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMsg');
+            const toastIcon = document.getElementById('toastIcon');
+            if (!toast || !toastMsg) return;
+
+            toastMsg.innerText = msg;
+            if (type === 'error') {
+                toastIcon.className = "fa-solid fa-circle-exclamation text-rose-400 text-lg";
+            } else {
+                toastIcon.className = "fa-solid fa-circle-check text-emerald-400 text-lg";
+            }
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        };
+
         let logoClickCount = 0;
         let logoClickTimer = null;
         window.handleSecretLogoClick = () => {
@@ -1039,7 +1083,6 @@
             if (q3 === 'correct') score += 50;
             else if (q3 === 'wrong') score -= 15;
 
-            // Batas bawah minimum 0 agar tidak minus secara total per peserta
             if (score < 0) score = 0;
 
             const scoreInput = document.getElementById(`p${pIndex}_score`);
@@ -1223,7 +1266,7 @@
                             </div>
                         </div>
 
-                        <!-- Match History Accordion / List -->
+                        <!-- Match History List -->
                         <div class="mt-4 space-y-2">
                             <h4 class="text-[11px] font-bold text-slate-400 uppercase tracking-wider flex items-center justify-between">
                                 <span><i class="fa-solid fa-clock-rotate-left mr-1"></i> Riwayat Skor Pertandingan 2 Mingguan:</span>
@@ -1318,12 +1361,12 @@
         };
 
         window.addNewMatchdayPrompt = () => {
-            const name = prompt('Masukkan Nama Pekan Pertandingan (Contoh: Pekan 2):', `Pekan ${(document.getElementById('matchdaySelect').options.length)}`);
+            const select = document.getElementById('matchdaySelect');
+            const name = prompt('Masukkan Nama Pekan Pertandingan (Contoh: Pekan 2):', `Pekan ${(select.options.length)}`);
             if (!name) return;
             const month = prompt('Masukkan Bulan Pertandingan (Contoh: Bulan 1 / Bulan 2 / Bulan 3):', 'Bulan 1');
             if (!month) return;
 
-            const select = document.getElementById('matchdaySelect');
             const newOpt = document.createElement('option');
             newOpt.value = `custom_${Date.now()}`;
             newOpt.innerText = `${name} (${month}) [Baru]`;
@@ -1448,9 +1491,9 @@
             if (targetIdx === -1) return;
 
             const target = classesData[targetIdx];
-            const selectedIdx = document.getElementById('matchdaySelect').value;
+            const select = document.getElementById('matchdaySelect');
+            const selectedVal = select.value;
             const isHoliday = document.getElementById('isHolidayCheckbox').checked;
-            let matches = [...(target.matches || [])];
 
             const newParticipants = [];
             for (let i = 1; i <= 5; i++) {
@@ -1462,50 +1505,83 @@
                 });
             }
 
-            if (selectedIdx === 'new') {
-                const nextMatchNumber = matches.length + 1;
-                matches.push({
-                    matchday: `Pekan ${nextMatchNumber}`,
-                    month: 'Bulan 1',
-                    isHoliday: isHoliday,
-                    participants: newParticipants
-                });
-            } else if (selectedIdx.startsWith('custom_')) {
-                const selOpt = document.querySelector(`#matchdaySelect option[value="${selectedIdx}"]`);
-                matches.push({
-                    matchday: selOpt ? (selOpt.dataset.customName || 'Pekan Baru') : 'Pekan Baru',
-                    month: selOpt ? (selOpt.dataset.customMonth || 'Bulan 1') : 'Bulan 1',
+            let matchdayName = "Pekan 1";
+            let monthName = "Bulan 1";
+
+            if (selectedVal === 'new' || selectedVal.startsWith('custom_')) {
+                const selectedOpt = select.options[select.selectedIndex];
+                matchdayName = selectedOpt.dataset.customName || `Pekan ${(target.matches || []).length + 1}`;
+                monthName = selectedOpt.dataset.customMonth || "Bulan 1";
+
+                if (!target.matches) target.matches = [];
+                target.matches.push({
+                    matchday: matchdayName,
+                    month: monthName,
                     isHoliday: isHoliday,
                     participants: newParticipants
                 });
             } else {
-                const idx = Number(selectedIdx);
-                if (matches[idx]) {
-                    matches[idx].isHoliday = isHoliday;
-                    matches[idx].participants = newParticipants;
+                const idx = Number(selectedVal);
+                if (target.matches && target.matches[idx]) {
+                    target.matches[idx].isHoliday = isHoliday;
+                    target.matches[idx].participants = newParticipants;
+                    matchdayName = target.matches[idx].matchday;
                 }
             }
 
-            const updatedClass = { ...target, matches: matches };
-            classesData[targetIdx] = updatedClass;
-
             if (useLocalStorageFallback || !db) {
                 saveToLocalStorage();
-                window.closeModal('modalInputScore');
-                showToast('Skor pertandingan berhasil disimpan!');
+                closeModal('modalInputScore');
+                showToast(`Skor ${matchdayName} untuk ${target.name} berhasil disimpan!`);
                 renderApp();
                 return;
             }
 
             try {
-                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'lnd_classes', classId), updatedClass);
-                window.closeModal('modalInputScore');
-                showToast('Skor pertandingan berhasil disimpan!');
+                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'lnd_classes', classId), target);
+                closeModal('modalInputScore');
+                showToast(`Skor ${matchdayName} untuk ${target.name} berhasil disimpan!`);
             } catch (err) {
                 useLocalStorageFallback = true;
                 saveToLocalStorage();
-                window.closeModal('modalInputScore');
-                showToast('Skor pertandingan berhasil disimpan!');
+                closeModal('modalInputScore');
+                showToast(`Skor ${matchdayName} untuk ${target.name} berhasil disimpan!`);
+                renderApp();
+            }
+        };
+
+        window.saveNewSeason = async (e) => {
+            e.preventDefault();
+            const title = document.getElementById('newSeasonTitle').value.trim();
+            if (!title) return;
+
+            if (!seasonsList.includes(title)) {
+                seasonsList.push(title);
+            }
+            currentSeason = title;
+
+            if (useLocalStorageFallback || !db) {
+                saveToLocalStorage();
+                closeModal('modalCreateSeason');
+                showToast(`Season "${title}" berhasil dibuat!`);
+                renderApp();
+                return;
+            }
+
+            try {
+                const configDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'lnd_settings', 'config');
+                await setDoc(configDocRef, {
+                    seasonsList: seasonsList,
+                    activePublicSeason: activePublicSeason
+                });
+                closeModal('modalCreateSeason');
+                showToast(`Season "${title}" berhasil dibuat!`);
+                renderApp();
+            } catch (err) {
+                useLocalStorageFallback = true;
+                saveToLocalStorage();
+                closeModal('modalCreateSeason');
+                showToast(`Season "${title}" berhasil dibuat!`);
                 renderApp();
             }
         };
@@ -1516,88 +1592,38 @@
             const name = document.getElementById('newClassName').value.trim();
             const teacher = document.getElementById('newClassTeacher').value.trim();
 
-            const newId = `cls_${Date.now()}`;
-            const newObj = {
-                id: newId,
+            if (!name) return;
+
+            const newClassObj = {
+                id: `cls_${Date.now()}`,
                 season: currentSeason,
-                phase,
-                name,
-                teacher,
+                phase: phase,
+                name: name,
+                teacher: teacher,
                 matches: []
             };
 
-            classesData.push(newObj);
+            classesData.push(newClassObj);
 
             if (useLocalStorageFallback || !db) {
                 saveToLocalStorage();
-                window.closeModal('modalAddClass');
-                document.getElementById('newClassName').value = '';
-                document.getElementById('newClassTeacher').value = '';
-                showToast(`Kelas ${name} berhasil ditambahkan!`);
+                closeModal('modalAddClass');
+                showToast(`Kelas "${name}" berhasil ditambahkan!`);
                 renderApp();
                 return;
             }
 
             try {
-                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'lnd_classes', newId), newObj);
-                window.closeModal('modalAddClass');
-                document.getElementById('newClassName').value = '';
-                document.getElementById('newClassTeacher').value = '';
-                showToast(`Kelas ${name} berhasil ditambahkan!`);
+                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'lnd_classes', newClassObj.id), newClassObj);
+                closeModal('modalAddClass');
+                showToast(`Kelas "${name}" berhasil ditambahkan!`);
             } catch (err) {
                 useLocalStorageFallback = true;
                 saveToLocalStorage();
-                window.closeModal('modalAddClass');
-                document.getElementById('newClassName').value = '';
-                document.getElementById('newClassTeacher').value = '';
-                showToast(`Kelas ${name} berhasil ditambahkan!`);
+                closeModal('modalAddClass');
+                showToast(`Kelas "${name}" berhasil ditambahkan!`);
                 renderApp();
             }
-        };
-
-        window.saveNewSeason = (e) => {
-            e.preventDefault();
-            const title = document.getElementById('newSeasonTitle').value.trim();
-            if (!title) return;
-
-            if (!seasonsList.includes(title)) {
-                seasonsList.push(title);
-            }
-            currentSeason = title;
-
-            saveToLocalStorage();
-            window.closeModal('modalCreateSeason');
-            document.getElementById('newSeasonTitle').value = '';
-            showToast(`Season "${title}" berhasil dibuat!`);
-            renderApp();
-        };
-
-        window.deleteClassData = (classId) => {
-            const target = classesData.find(c => c.id === classId);
-            const className = target ? target.name : 'kelas ini';
-
-            window.openDeleteConfirm(
-                'Hapus Kelas?',
-                `Apakah Anda yakin ingin menghapus ${className}?`,
-                async () => {
-                    classesData = classesData.filter(c => c.id !== classId);
-                    if (useLocalStorageFallback || !db) {
-                        saveToLocalStorage();
-                        showToast(`Kelas ${className} berhasil dihapus.`);
-                        renderApp();
-                        return;
-                    }
-                    try {
-                        await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'lnd_classes', classId));
-                        showToast(`Kelas ${className} berhasil dihapus.`);
-                    } catch (err) {
-                        useLocalStorageFallback = true;
-                        saveToLocalStorage();
-                        showToast(`Kelas ${className} berhasil dihapus.`);
-                        renderApp();
-                    }
-                }
-            );
         };
 
         window.saveSeasonHistory = async (e) => {
@@ -1608,120 +1634,121 @@
             const j2 = document.getElementById('j2_class').value.trim();
             const j3 = document.getElementById('j3_class').value.trim();
 
-            const seasonId = `season_${Date.now()}`;
-            const newSeason = { id: seasonId, title, phase, j1, j2, j3 };
-            seasonsData.push(newSeason);
+            const newHist = {
+                id: `season_hist_${Date.now()}`,
+                title,
+                phase,
+                j1,
+                j2,
+                j3
+            };
+
+            seasonsData.push(newHist);
 
             if (useLocalStorageFallback || !db) {
                 saveToLocalStorage();
-                window.closeModal('modalAddSeason');
-                document.getElementById('seasonTitle').value = '';
-                document.getElementById('j1_class').value = '';
-                document.getElementById('j2_class').value = '';
-                document.getElementById('j3_class').value = '';
-                showToast('Riwayat Juara Season berhasil ditambahkan!');
+                closeModal('modalAddSeason');
+                showToast(`Riwayat Juara "${title}" berhasil disimpan!`);
                 renderSeasonHistory();
                 return;
             }
 
             try {
-                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'lnd_seasons', seasonId), newSeason);
-                window.closeModal('modalAddSeason');
-                document.getElementById('seasonTitle').value = '';
-                document.getElementById('j1_class').value = '';
-                document.getElementById('j2_class').value = '';
-                document.getElementById('j3_class').value = '';
-                showToast('Riwayat Juara Season berhasil ditambahkan!');
+                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'lnd_seasons', newHist.id), newHist);
+                closeModal('modalAddSeason');
+                showToast(`Riwayat Juara "${title}" berhasil disimpan!`);
             } catch (err) {
                 useLocalStorageFallback = true;
                 saveToLocalStorage();
-                window.closeModal('modalAddSeason');
-                document.getElementById('seasonTitle').value = '';
-                document.getElementById('j1_class').value = '';
-                document.getElementById('j2_class').value = '';
-                document.getElementById('j3_class').value = '';
-                showToast('Riwayat Juara Season berhasil ditambahkan!');
+                closeModal('modalAddSeason');
+                showToast(`Riwayat Juara "${title}" berhasil disimpan!`);
                 renderSeasonHistory();
             }
         };
 
-        window.deleteSeasonData = (seasonId) => {
-            const target = seasonsData.find(s => s.id === seasonId);
-            const title = target ? target.title : 'riwayat ini';
+        window.deleteClassData = (classId) => {
+            const cls = classesData.find(c => c.id === classId);
+            if (!cls) return;
 
             window.openDeleteConfirm(
-                'Hapus Riwayat Juara?',
-                `Apakah Anda yakin ingin menghapus ${title}?`,
+                `Hapus Kelas ${cls.name}?`,
+                `Apakah Anda yakin ingin menghapus kelas ${cls.name}? Seluruh data skor kelas ini akan terhapus.`,
                 async () => {
-                    seasonsData = seasonsData.filter(s => s.id !== seasonId);
+                    classesData = classesData.filter(c => c.id !== classId);
                     if (useLocalStorageFallback || !db) {
                         saveToLocalStorage();
-                        showToast('Riwayat juara berhasil dihapus.');
+                        showToast(`Kelas "${cls.name}" telah dihapus!`);
+                        renderApp();
+                        return;
+                    }
+                    try {
+                        await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'lnd_classes', classId));
+                        showToast(`Kelas "${cls.name}" telah dihapus!`);
+                    } catch (err) {
+                        useLocalStorageFallback = true;
+                        saveToLocalStorage();
+                        showToast(`Kelas "${cls.name}" telah dihapus!`);
+                        renderApp();
+                    }
+                }
+            );
+        };
+
+        window.deleteSeasonData = (seasonId) => {
+            const s = seasonsData.find(item => item.id === seasonId);
+            if (!s) return;
+
+            window.openDeleteConfirm(
+                `Hapus Riwayat Juara ${s.title}?`,
+                `Apakah Anda yakin ingin menghapus catatan juara ${s.title}?`,
+                async () => {
+                    seasonsData = seasonsData.filter(item => item.id !== seasonId);
+                    if (useLocalStorageFallback || !db) {
+                        saveToLocalStorage();
+                        showToast(`Riwayat Juara telah dihapus!`);
                         renderSeasonHistory();
                         return;
                     }
                     try {
                         await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'lnd_seasons', seasonId));
-                        showToast('Riwayat juara berhasil dihapus.');
+                        showToast(`Riwayat Juara telah dihapus!`);
                     } catch (err) {
                         useLocalStorageFallback = true;
                         saveToLocalStorage();
-                        showToast('Riwayat juara berhasil dihapus.');
+                        showToast(`Riwayat Juara telah dihapus!`);
                         renderSeasonHistory();
                     }
                 }
             );
         };
 
-        // Toast Helper
-        function showToast(message, type = 'success') {
-            const toast = document.getElementById('toast');
-            const toastMsg = document.getElementById('toastMsg');
-            const toastIcon = document.getElementById('toastIcon');
-
-            if (!toast || !toastMsg || !toastIcon) return;
-
-            toastMsg.innerText = message;
-            if (type === 'error') {
-                toastIcon.className = 'fa-solid fa-circle-xmark text-rose-400 text-lg';
-            } else if (type === 'info') {
-                toastIcon.className = 'fa-solid fa-circle-info text-amber-400 text-lg';
-            } else {
-                toastIcon.className = 'fa-solid fa-circle-check text-emerald-400 text-lg';
-            }
-
-            toast.classList.remove('translate-y-20', 'opacity-0');
-            setTimeout(() => {
-                toast.classList.add('translate-y-20', 'opacity-0');
-            }, 3000);
-        }
-
-        window.addEventListener('load', () => {
+        // Initialize Real-Time Sync & App Listeners
+        window.addEventListener('DOMContentLoaded', () => {
             loadFromLocalStorage();
 
-            if (db) {
+            if (db && !useLocalStorageFallback) {
                 try {
-                    const classesColRef = collection(db, 'artifacts', appId, 'public', 'data', 'lnd_classes');
-                    onSnapshot(classesColRef, (snapshot) => {
+                    // Sync Classes
+                    onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'lnd_classes'), (snapshot) => {
                         if (!snapshot.empty) {
-                            classesData = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+                            classesData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                            saveToLocalStorage();
                         }
                         renderApp();
-                    }, () => {
+                    }, (err) => {
                         useLocalStorageFallback = true;
-                        loadFromLocalStorage();
                         renderApp();
                     });
 
-                    const seasonsColRef = collection(db, 'artifacts', appId, 'public', 'data', 'lnd_seasons');
-                    onSnapshot(seasonsColRef, (snapshot) => {
+                    // Sync Seasons History
+                    onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'lnd_seasons'), (snapshot) => {
                         if (!snapshot.empty) {
-                            seasonsData = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
-                            renderSeasonHistory();
+                            seasonsData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                            saveToLocalStorage();
                         }
-                    }, () => {
+                        renderSeasonHistory();
+                    }, (err) => {
                         useLocalStorageFallback = true;
-                        loadFromLocalStorage();
                         renderSeasonHistory();
                     });
                 } catch (e) {
