@@ -1,17 +1,17 @@
 {
-  "updatedAt": "2026-09-14T11:56:50.391Z",
-  "activePublicSeasonId": "season_1789386960871",
+  "updatedAt": "2026-09-14T12:03:44.334Z",
+  "activePublicSeasonId": "season_1789366557827",
   "seasonsList": [
     {
       "id": "season_1789366557827",
       "name": "SEASON 1",
-      "isPublic": false,
+      "isPublic": true,
       "createdAt": 1789366557827
     },
     {
       "id": "season_1789386960871",
       "name": "SEASON 2",
-      "isPublic": true,
+      "isPublic": false,
       "createdAt": 1789386960871
     }
   ],
@@ -83,6 +83,117 @@
       "createdAt": 1789368138931
     }
   ],
-  "scoresList": [],
-  "juaraList": []
+  "scoresList": [
+    {
+      "id": "score_1789387149519",
+      "classId": "cls_1789366577769",
+      "seasonId": "season_1789366557827",
+      "matchDate": "2026-09-02",
+      "month": "September 2026",
+      "matchWeek": 1,
+      "score": 180,
+      "timestamp": 1788307200000
+    },
+    {
+      "id": "score_1789387167091",
+      "classId": "cls-4a",
+      "seasonId": "season_1789366557827",
+      "matchDate": "2026-09-02",
+      "month": "September 2026",
+      "matchWeek": 1,
+      "score": 210,
+      "timestamp": 1788307200000
+    },
+    {
+      "id": "score_1789387185692",
+      "classId": "cls_1789366584364",
+      "seasonId": "season_1789366557827",
+      "matchDate": "2026-09-02",
+      "month": "September 2026",
+      "matchWeek": 1,
+      "score": 190,
+      "timestamp": 1788307200000
+    },
+    {
+      "id": "score_1789387203284",
+      "classId": "cls_1789366591495",
+      "seasonId": "season_1789366557827",
+      "matchDate": "2026-09-02",
+      "month": "September 2026",
+      "matchWeek": 1,
+      "score": 215,
+      "timestamp": 1788307200000
+    },
+    {
+      "id": "score_1789387238231",
+      "classId": "cls-3a",
+      "seasonId": "season_1789366557827",
+      "matchDate": "2026-09-16",
+      "month": "September 2026",
+      "matchWeek": 1,
+      "score": 210,
+      "timestamp": 1789516800000
+    },
+    {
+      "id": "score_1789387254246",
+      "classId": "cls_1789366577769",
+      "seasonId": "season_1789366557827",
+      "matchDate": "2026-09-16",
+      "month": "September 2026",
+      "matchWeek": 2,
+      "score": 200,
+      "timestamp": 1789516800000
+    },
+    {
+      "id": "score_1789387281361",
+      "classId": "cls-3a",
+      "seasonId": "season_1789366557827",
+      "matchDate": "2026-09-16",
+      "month": "September 2026",
+      "matchWeek": 2,
+      "score": 210,
+      "timestamp": 1789516800000
+    },
+    {
+      "id": "score_1789387292461",
+      "classId": "cls_1789366584364",
+      "seasonId": "season_1789366557827",
+      "matchDate": "2026-09-16",
+      "month": "September 2026",
+      "matchWeek": 2,
+      "score": 200,
+      "timestamp": 1789516800000
+    },
+    {
+      "id": "score_1789387330017",
+      "classId": "cls-4a",
+      "seasonId": "season_1789366557827",
+      "matchDate": "2026-09-16",
+      "month": "September 2026",
+      "matchWeek": 2,
+      "score": 220,
+      "timestamp": 1789516800000
+    },
+    {
+      "id": "score_1789387346778",
+      "classId": "cls_1789366591495",
+      "seasonId": "season_1789366557827",
+      "matchDate": "2026-09-16",
+      "month": "September 2026",
+      "matchWeek": 2,
+      "score": 210,
+      "timestamp": 1789516800000
+    }
+  ],
+  "juaraList": [
+    {
+      "id": "juara_1789387401058",
+      "seasonId": "season_1789366557827",
+      "phase": "B",
+      "juara1": "Kelas 4A",
+      "juara2": "Kelas 4B",
+      "juara3": "Kelas 3A",
+      "createdAt": 1789387401058
+    }
+  ]
 }
