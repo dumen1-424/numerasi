@@ -1,0 +1,40 @@
+{
+  "updatedAt": "2026-09-14T06:15:35.771Z",
+  "activePublicSeasonId": "season-1",
+  "seasonsList": [
+    {
+      "id": "season-1",
+      "name": "Season 1 (Jan - Mar 2026)",
+      "isPublic": true,
+      "createdAt": 1789365334474
+    }
+  ],
+  "classesList": [
+    {
+      "id": "cls-3a",
+      "className": "Kelas 3A",
+      "phase": "B",
+      "createdAt": 1789365334474
+    },
+    {
+      "id": "cls-4a",
+      "className": "Kelas 4A",
+      "phase": "B",
+      "createdAt": 1789365334474
+    },
+    {
+      "id": "cls-5a",
+      "className": "Kelas 5A",
+      "phase": "C",
+      "createdAt": 1789365334474
+    },
+    {
+      "id": "cls-6a",
+      "className": "Kelas 6A",
+      "phase": "C",
+      "createdAt": 1789365334474
+    }
+  ],
+  "scoresList": [],
+  "juaraList": []
+}
