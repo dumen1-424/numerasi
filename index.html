@@ -24,14 +24,19 @@
             100% { background-position: 200% 0; }
         }
         .shine-text {
-            background: linear-gradient(90deg, #e0f2fe 0%, #ffffff 35%, #fef08a 50%, #ffffff 65%, #e0f2fe 100%);
-            background-size: 200% auto;
-            color: transparent;
-            -webkit-background-clip: text;
-            background-clip: text;
-            animation: shine 3.5s linear infinite;
-            display: inline-block;
-        }
+  background: linear-gradient(90deg, #e0f2fe 0%, #ffffff 35%, #fef08a 50%, #ffffff 65%, #e0f2fe 100%);
+  background-size: 200% auto;
+
+  /* Perbaikan untuk HP */
+  color: #ffffff; /* Warna cadangan jika efek clip gagal */
+  -webkit-text-fill-color: transparent; /* Wajib untuk browser HP */
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  /* Kecepatan diperlambat menjadi 6 detik */
+  animation: shine 6s linear infinite;
+  display: inline-block;
+}
     </style>
 </head>
 <body class="bg-slate-100 min-h-screen flex flex-col text-slate-800">
