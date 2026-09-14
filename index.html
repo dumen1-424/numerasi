@@ -87,6 +87,9 @@
                     <option value="November">November</option>
                     <option value="Desember">Desember</option>
                 </select>
+                <button onclick="loadCentralData(true)" title="Muat Ulang Data Terbaru dari GitHub" class="bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 px-3 py-1.5 rounded-lg text-xs font-semibold transition flex items-center gap-1">
+                    <i class="fa-solid fa-rotate text-blue-600"></i> <span class="hidden sm:inline">Refresh Data</span>
+                </button>
             </div>
         </div>
     </div>
@@ -173,17 +176,21 @@
             </div>
         </div>
 
-        <!-- VIEW 3: Dashboard Admin (Controlled via Login) -->
-        <div id="viewAdmin" class="hidden space-y-8">
+        <!-- VIEW 3: Dashboard Admin (Perbaikan Tag Kontainer Admin) -->
+        <div id="viewAdmin" class="hidden space-y-6">
+            <!-- Admin Header -->
             <div class="bg-gradient-to-r from-purple-900 to-indigo-900 text-white rounded-2xl p-6 shadow-md">
-                <div class="flex justify-between items-center">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
                     <div>
                         <h2 class="text-xl font-bold flex items-center gap-2">
                             <i class="fa-solid fa-user-shield text-amber-400"></i> Panel Kontrol Admin
                         </h2>
                         <p class="text-xs text-purple-200 mt-1">Kelola Season, Kelas, dan Input Skor Pertandingan</p>
                     </div>
-                    <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <button onclick="syncToGitHub()" class="bg-emerald-500 hover:bg-emerald-600 text-white border border-emerald-400/40 px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
+                            <i class="fa-brands fa-github text-sm"></i> Sync ke GitHub
+                        </button>
                         <span id="storageModeBadge" class="text-[11px] bg-purple-800/80 border border-purple-400/30 text-purple-200 px-3 py-1 rounded-full font-medium">
                             <i class="fa-solid fa-database text-emerald-400 mr-1"></i> Storage Ready
                         </span>
@@ -195,7 +202,7 @@
             </div>
 
             <!-- Admin Grid Sections -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 
                 <!-- Section 1: Kelola Season -->
                 <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 space-y-4">
@@ -294,6 +301,29 @@
                         </button>
                     </form>
                 </div>
+
+                <!-- Section 4: Sinkronisasi Langsung ke GitHub -->
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 space-y-4">
+                    <h3 class="font-bold text-slate-800 border-b pb-2 flex items-center justify-between">
+                        <span><i class="fa-brands fa-github text-slate-800 mr-2"></i>4. Sync ke GitHub</span>
+                    </h3>
+                    <p class="text-[11px] text-slate-500 leading-relaxed">
+                        Perbarui data di GitHub secara instan agar pengunjung di semua perangkat melihat data terbaru.
+                    </p>
+                    <div class="space-y-3">
+                        <div>
+                            <label class="text-xs font-semibold text-slate-600">Nama Repo (User/Repo)</label>
+                            <input type="text" id="githubRepoInput" placeholder="contoh: username/liga-numerasi" class="w-full text-xs border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-slate-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="text-xs font-semibold text-slate-600">GitHub Access Token (PAT)</label>
+                            <input type="password" id="githubTokenInput" placeholder="ghp_xxxxxxxxxxxx" class="w-full text-xs border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-slate-500 outline-none">
+                        </div>
+                        <button type="button" onclick="syncToGitHub()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-2.5 rounded-lg transition flex items-center justify-center gap-2 shadow">
+                            <i class="fa-brands fa-github"></i> Sinkronkan Data Sekarang
+                        </button>
+                    </div>
+                </div>
             </div>
 
             <!-- Section Input Skor Pertandingan Berkala -->
@@ -378,117 +408,125 @@
     </main>
 
     <!-- MODAL: Login Admin -->
-    <div id="modalLogin" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-slate-100 space-y-4">
-            <div class="flex justify-between items-center border-b pb-3">
-                <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
-                    <i class="fa-solid fa-lock text-blue-600"></i> Authentication Admin
-                </h3>
-                <button onclick="toggleAuthModal()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+    <div id="modalLogin" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100 relative transform transition-all">
+            <button onclick="toggleAuthModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 w-8 h-8 rounded-full flex items-center justify-center bg-slate-100 hover:bg-slate-200 transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <i class="fa-solid fa-lock text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-800">Login Administrator</h3>
+                <p class="text-xs text-slate-500 mt-1">Masukkan kata sandi untuk mengelola data liga</p>
             </div>
-            
+
             <form onsubmit="handleLoginSubmit(event)" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-semibold text-slate-600 mb-1">Kata Sandi Admin</label>
-                    <input type="password" id="adminPasswordInput" placeholder="Masukkan password admin" required class="w-full text-sm border border-slate-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 outline-none">
-                    <div class="flex justify-end mt-1.5">
-                        <button type="button" onclick="openForgotPasswordModal()" class="text-[11px] text-blue-600 hover:text-blue-800 font-semibold transition flex items-center gap-1">
-                            <i class="fa-solid fa-circle-question"></i> Lupa Password?
-                        </button>
-                    </div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Kata Sandi (Password)</label>
+                    <input type="password" id="adminPasswordInput" placeholder="Masukkan password admin..." required class="w-full text-sm border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none">
+                    <p id="loginErrorMsg" class="hidden text-xs text-rose-500 mt-1 font-semibold flex items-center gap-1">
+                        <i class="fa-solid fa-circle-exclamation"></i> Password salah! Silakan coba lagi.
+                    </p>
                 </div>
 
-                <div id="loginErrorMsg" class="hidden text-xs text-rose-600 font-semibold bg-rose-50 p-2.5 rounded-lg border border-rose-200 flex items-center gap-2">
-                    <i class="fa-solid fa-triangle-exclamation text-rose-500"></i> Password salah! Silakan coba lagi.
+                <div class="flex items-center justify-between text-xs">
+                    <button type="button" onclick="openForgotPasswordModal()" class="text-purple-600 hover:text-purple-800 font-semibold underline">
+                        Lupa Password?
+                    </button>
                 </div>
 
-                <div class="flex justify-end gap-2 pt-2">
-                    <button type="button" onclick="toggleAuthModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg">Batal</button>
-                    <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-lg shadow">Masuk Admin</button>
-                </div>
+                <button type="submit" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 rounded-xl shadow-md transition-all">
+                    Masuk Mode Admin
+                </button>
             </form>
         </div>
     </div>
 
-    <!-- MODAL: Lupa Password Admin -->
-    <div id="modalForgotPassword" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-slate-100 space-y-4">
-            <div class="flex justify-between items-center border-b pb-3">
-                <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
-                    <i class="fa-solid fa-envelope-circle-check text-amber-500"></i> Lupa Password Admin
-                </h3>
-                <button onclick="closeForgotPasswordModal()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+    <!-- MODAL: Lupa Password -->
+    <div id="modalForgotPassword" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100 relative">
+            <button onclick="closeForgotPasswordModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 w-8 h-8 rounded-full flex items-center justify-center bg-slate-100 hover:bg-slate-200 transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <i class="fa-solid fa-key text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-800">Pemulihan Kata Sandi</h3>
+                <p class="text-xs text-slate-500 mt-1">Masukkan email akun GitHub Anda untuk pengiriman petunjuk reset</p>
             </div>
-            
-            <p class="text-xs text-slate-600 leading-relaxed">
-                Masukkan alamat email yang digunakan untuk login GitHub / Admin. Instruksi reset dan tautan pemulihan kata sandi akan dikirimkan ke email tersebut.
-            </p>
 
             <form onsubmit="handleForgotPasswordSubmit(event)" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-semibold text-slate-600 mb-1">Email GitHub / Admin</label>
-                    <input type="email" id="forgotEmailInput" placeholder="contoh: admin@github.com" required class="w-full text-sm border border-slate-300 rounded-lg p-2.5 focus:ring-2 focus:ring-amber-500 outline-none">
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Email GitHub / Admin</label>
+                    <input type="email" id="forgotEmailInput" placeholder="contoh: admin@github.com" required class="w-full text-sm border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-amber-500 outline-none">
+                </div>
+
+                <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 rounded-xl shadow-md transition">
+                    Kirim Petunjuk Reset
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: Edit Skor -->
+    <div id="modalEditScore" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-slate-100 relative">
+            <button onclick="closeEditScoreModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 w-8 h-8 rounded-full flex items-center justify-center bg-slate-100 hover:bg-slate-200 transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-pen-to-square text-indigo-600"></i> Edit Skor Pertandingan
+            </h3>
+
+            <form onsubmit="handleEditScoreSubmit(event)" class="space-y-4">
+                <input type="hidden" id="editScoreId">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Skor Baru</label>
+                    <input type="number" id="editScoreValueInput" min="0" required class="w-full text-base font-bold border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-indigo-500 outline-none">
                 </div>
 
                 <div class="flex justify-end gap-2 pt-2">
-                    <button type="button" onclick="closeForgotPasswordModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg">Batal</button>
-                    <button type="submit" class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white text-xs font-semibold rounded-lg shadow flex items-center gap-1.5">
-                        <i class="fa-solid fa-paper-plane"></i> Kirim Ke Email
+                    <button type="button" onclick="closeEditScoreModal()" class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                        Batal
+                    </button>
+                    <button type="submit" class="px-4 py-2 rounded-xl text-xs font-bold bg-indigo-600 text-white hover:bg-indigo-700 transition">
+                        Simpan Perubahan
                     </button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- MODAL: Confirmation Modal (Replaces default confirm/alert) -->
-    <div id="modalConfirm" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl text-center space-y-4">
-            <div class="w-12 h-12 bg-rose-100 text-rose-600 rounded-full flex items-center justify-center mx-auto text-xl">
-                <i class="fa-solid fa-triangle-exclamation"></i>
+    <!-- MODAL: Konfirmasi Hapus -->
+    <div id="modalConfirm" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-slate-100 text-center relative">
+            <div class="w-14 h-14 bg-rose-100 text-rose-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
             </div>
-            <div>
-                <h3 id="confirmTitle" class="font-bold text-slate-800 text-lg">Konfirmasi Hapus</h3>
-                <p id="confirmMessage" class="text-xs text-slate-500 mt-1">Apakah Anda yakin ingin menghapus data ini? Tindakan ini tidak dapat dibatalkan.</p>
-            </div>
-            <div class="flex justify-center gap-3 pt-2">
-                <button onclick="closeConfirmModal(false)" class="w-1/2 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl">Batal</button>
-                <button id="btnConfirmYes" onclick="closeConfirmModal(true)" class="w-1/2 py-2 bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold rounded-xl shadow-md">Ya, Hapus</button>
-            </div>
-        </div>
-    </div>
+            <h3 class="text-lg font-bold text-slate-800 mb-2">Konfirmasi Hapus</h3>
+            <p class="text-xs text-slate-500 mb-6">Apakah Anda yakin ingin menghapus data ini? Aksi ini tidak dapat dibatalkan.</p>
 
-    <!-- MODAL: Edit Skor -->
-    <div id="modalEditScore" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-slate-100 space-y-4">
-            <div class="flex justify-between items-center border-b pb-3">
-                <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
-                    <i class="fa-solid fa-pen-to-square text-indigo-600"></i> Edit Skor Pertandingan
-                </h3>
-                <button onclick="closeEditScoreModal()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <div class="flex items-center justify-center gap-3">
+                <button onclick="closeConfirmModal(false)" class="w-1/2 py-2.5 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                    Batal
+                </button>
+                <button onclick="closeConfirmModal(true)" class="w-1/2 py-2.5 rounded-xl text-xs font-bold bg-rose-600 text-white hover:bg-rose-700 transition shadow-sm">
+                    Ya, Hapus
+                </button>
             </div>
-            
-            <form onsubmit="handleEditScoreSubmit(event)" class="space-y-4">
-                <input type="hidden" id="editScoreId">
-                <div>
-                    <label class="block text-xs font-semibold text-slate-600 mb-1">Skor Baru</label>
-                    <input type="number" id="editScoreValueInput" min="0" required class="w-full text-sm border border-slate-300 rounded-lg p-2.5 focus:ring-2 focus:ring-indigo-500 outline-none">
-                </div>
-
-                <div class="flex justify-end gap-2 pt-2">
-                    <button type="button" onclick="closeEditScoreModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg">Batal</button>
-                    <button type="submit" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg shadow">Simpan Perubahan</button>
-                </div>
-            </form>
         </div>
     </div>
 
     <!-- Toast Notification -->
-    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-800 text-white px-4 py-3 rounded-xl shadow-lg flex items-center gap-3 text-xs">
-        <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400 text-base"></i>
-        <span id="toastMsg">Pesan Notifikasi</span>
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="bg-slate-900 text-white px-4 py-3 rounded-xl shadow-xl border border-slate-700 flex items-center gap-3">
+            <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400 text-base"></i>
+            <span id="toastMsg" class="text-xs font-medium">Notifikasi</span>
+        </div>
     </div>
 
-    <!-- Firebase Engine and Storage Logic -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
@@ -544,7 +582,134 @@
         const getPublicCollection = (colName) => collection(db, 'artifacts', appId, 'public', 'data', colName);
         const getPublicDoc = (colName, docId) => doc(db, 'artifacts', appId, 'public', 'data', colName, docId);
 
+        // Load central lnd_data.json if stored on GitHub repository
+        window.loadCentralData = async function(showNotification = false) {
+            try {
+                const res = await fetch('./lnd_data.json?t=' + Date.now());
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data && Array.isArray(data.seasonsList)) {
+                        seasonsList = data.seasonsList || [];
+                        classesList = data.classesList || [];
+                        scoresList = data.scoresList || [];
+                        juaraList = data.juaraList || [];
+                        if (data.activePublicSeasonId) {
+                            activePublicSeasonId = data.activePublicSeasonId;
+                        }
+                        saveAndSyncLocalStorage();
+                        refreshAllViews();
+                        if (showNotification) showToast("Data terbaru berhasil dimuat dari GitHub!");
+                        return true;
+                    }
+                }
+            } catch (err) {
+                console.log("File lnd_data.json belum dibuat di GitHub.", err);
+            }
+            if (showNotification) showToast("Menggunakan data lokal browser saat ini.");
+            return false;
+        };
+
+        // Direct GitHub REST API Sync Function
+        window.syncToGitHub = async function() {
+            if (!isAdminLoggedIn) {
+                showToast("Silakan login sebagai Admin terlebih dahulu!", true);
+                return;
+            }
+
+            const repoInput = document.getElementById('githubRepoInput');
+            const tokenInput = document.getElementById('githubTokenInput');
+
+            const repoInfo = repoInput ? repoInput.value.trim() : '';
+            const token = tokenInput ? tokenInput.value.trim() : '';
+
+            if (!repoInfo || !token) {
+                showToast("Mohon isi Nama Repo (username/repo) dan Token GitHub Admin!", true);
+                return;
+            }
+
+            localStorage.setItem('lnd_github_repo', repoInfo);
+            localStorage.setItem('lnd_github_token', token);
+
+            showToast("Sedang menyinkronkan data langsung ke GitHub...");
+
+            const payloadData = {
+                updatedAt: new Date().toISOString(),
+                activePublicSeasonId,
+                seasonsList,
+                classesList,
+                scoresList,
+                juaraList
+            };
+
+            const jsonString = JSON.stringify(payloadData, null, 2);
+            const utf8Bytes = new TextEncoder().encode(jsonString);
+            let binary = '';
+            for (let i = 0; i < utf8Bytes.length; i++) {
+                binary += String.fromCharCode(utf8Bytes[i]);
+            }
+            const contentEncoded = btoa(binary);
+
+            const apiUrl = `https://api.github.com/repos/${repoInfo}/contents/lnd_data.json`;
+
+            try {
+                // Step 1: Fetch existing SHA if file exists
+                let sha = null;
+                const getRes = await fetch(apiUrl, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Accept': 'application/vnd.github.v3+json'
+                    }
+                });
+
+                if (getRes.ok) {
+                    const fileInfo = await getRes.json();
+                    sha = fileInfo.sha;
+                }
+
+                // Step 2: Commit lnd_data.json directly to GitHub Repository
+                const putBody = {
+                    message: "Update data Liga Numerasi Digital via Dashboard Admin",
+                    content: contentEncoded
+                };
+                if (sha) putBody.sha = sha;
+
+                const putRes = await fetch(apiUrl, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/vnd.github.v3+json'
+                    },
+                    body: JSON.stringify(putBody)
+                });
+
+                if (putRes.ok) {
+                    showToast("Berhasil disinkronkan langsung ke GitHub Repository!");
+                    saveAndSyncLocalStorage();
+                } else {
+                    const errData = await putRes.json();
+                    showToast("Gagal Sync: " + (errData.message || "Periksa token & nama repo"), true);
+                }
+            } catch (err) {
+                console.error("GitHub Sync error:", err);
+                showToast("Terjadi kesalahan koneksi saat sync ke GitHub", true);
+            }
+        };
+
         async function initAuth() {
+            // Restore stored GitHub repo & token settings if available
+            const savedRepo = localStorage.getItem('lnd_github_repo');
+            const savedToken = localStorage.getItem('lnd_github_token');
+            if (savedRepo && document.getElementById('githubRepoInput')) {
+                document.getElementById('githubRepoInput').value = savedRepo;
+            }
+            if (savedToken && document.getElementById('githubTokenInput')) {
+                document.getElementById('githubTokenInput').value = savedToken;
+            }
+
+            // Attempt to load central data file from GitHub repository
+            await loadCentralData();
+
             // If dummy firebase config (e.g. hosted standalone on GitHub Pages), use LocalStorage engine
             if (!firebaseConfig.apiKey || firebaseConfig.apiKey.includes('dummy')) {
                 console.log("GitHub Pages Standalone Mode detected. Using LocalStorage Storage Engine.");
@@ -1209,14 +1374,18 @@
             const activeClass = "px-5 py-2.5 rounded-t-xl font-bold text-sm border-b-2 border-blue-600 text-blue-600 bg-white shadow-sm flex items-center gap-2 whitespace-nowrap transition-all";
             const inactiveClass = "px-5 py-2.5 rounded-t-xl font-bold text-sm text-slate-500 hover:text-slate-700 hover:bg-white/50 border-b-2 border-transparent flex items-center gap-2 whitespace-nowrap transition-all";
 
-            btnB.className = tabName === 'faseB' ? activeClass : inactiveClass;
-            btnC.className = tabName === 'faseC' ? activeClass : inactiveClass;
-            btnJuara.className = tabName === 'juara' ? activeClass : inactiveClass;
+            if (btnB) btnB.className = tabName === 'faseB' ? activeClass : inactiveClass;
+            if (btnC) btnC.className = tabName === 'faseC' ? activeClass : inactiveClass;
+            if (btnJuara) btnJuara.className = tabName === 'juara' ? activeClass : inactiveClass;
             if (btnAdmin) btnAdmin.className = tabName === 'admin' ? activeClass.replace('border-blue-600 text-blue-600', 'border-purple-600 text-purple-600') : inactiveClass;
 
-            document.getElementById('viewKlasemen').classList.toggle('hidden', tabName !== 'faseB' && tabName !== 'faseC');
-            document.getElementById('viewJuara').classList.toggle('hidden', tabName !== 'juara');
-            document.getElementById('viewAdmin').classList.toggle('hidden', tabName !== 'admin');
+            const viewKlasemen = document.getElementById('viewKlasemen');
+            const viewJuara = document.getElementById('viewJuara');
+            const viewAdmin = document.getElementById('viewAdmin');
+
+            if (viewKlasemen) viewKlasemen.classList.toggle('hidden', tabName !== 'faseB' && tabName !== 'faseC');
+            if (viewJuara) viewJuara.classList.toggle('hidden', tabName !== 'juara');
+            if (viewAdmin) viewAdmin.classList.toggle('hidden', tabName !== 'admin');
 
             updateUI();
         };
@@ -1236,8 +1405,62 @@
             if (isAdminLoggedIn) {
                 switchTab('admin');
             } else {
-                document.getElementById('modalLogin').classList.toggle('hidden');
+                const modal = document.getElementById('modalLogin');
+                if (modal) modal.classList.toggle('hidden');
             }
+        };
+
+        window.openForgotPasswordModal = function() {
+            const loginModal = document.getElementById('modalLogin');
+            const forgotModal = document.getElementById('modalForgotPassword');
+            if (loginModal) loginModal.classList.add('hidden');
+            if (forgotModal) forgotModal.classList.remove('hidden');
+        };
+
+        window.closeForgotPasswordModal = function() {
+            const forgotModal = document.getElementById('modalForgotPassword');
+            if (forgotModal) forgotModal.classList.add('hidden');
+        };
+
+        window.openEditScoreModal = function(id, currentScore) {
+            const idInput = document.getElementById('editScoreId');
+            const scoreInput = document.getElementById('editScoreValueInput');
+            const modal = document.getElementById('modalEditScore');
+            if (idInput) idInput.value = id;
+            if (scoreInput) scoreInput.value = currentScore;
+            if (modal) modal.classList.remove('hidden');
+        };
+
+        window.closeEditScoreModal = function() {
+            const modal = document.getElementById('modalEditScore');
+            if (modal) modal.classList.add('hidden');
+        };
+
+        window.confirmDelete = function(collectionName, docId) {
+            onConfirmAction = async () => {
+                if (isFirebaseActive) {
+                    try {
+                        await deleteDoc(getPublicDoc(collectionName, docId));
+                    } catch (err) {
+                        console.error("Firebase delete error, using local:", err);
+                        deleteLocalItem(collectionName, docId);
+                    }
+                } else {
+                    deleteLocalItem(collectionName, docId);
+                }
+                showToast("Data berhasil dihapus!");
+            };
+            const modal = document.getElementById('modalConfirm');
+            if (modal) modal.classList.remove('hidden');
+        };
+
+        window.closeConfirmModal = function(isConfirmed) {
+            const modal = document.getElementById('modalConfirm');
+            if (modal) modal.classList.add('hidden');
+            if (isConfirmed && typeof onConfirmAction === 'function') {
+                onConfirmAction();
+            }
+            onConfirmAction = null;
         };
 
         window.openForgotPasswordModal = function() {
