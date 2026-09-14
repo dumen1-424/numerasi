@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-14T12:04:20.005Z",
+  "updatedAt": "2026-09-14T12:11:40.277Z",
   "activePublicSeasonId": "season_1789366557827",
   "seasonsList": [
     {
@@ -7,12 +7,6 @@
       "name": "SEASON 1",
       "isPublic": true,
       "createdAt": 1789366557827
-    },
-    {
-      "id": "season_1789386960871",
-      "name": "SEASON 2",
-      "isPublic": false,
-      "createdAt": 1789386960871
     }
   ],
   "classesList": [
@@ -23,177 +17,66 @@
       "createdAt": 1789365334474
     },
     {
-      "id": "cls-4a",
-      "className": "Kelas 4A",
-      "phase": "B",
-      "createdAt": 1789365334474
-    },
-    {
-      "id": "cls-5a",
-      "className": "Kelas 5A",
-      "phase": "C",
-      "createdAt": 1789365334474
-    },
-    {
-      "id": "cls-6a",
-      "className": "Kelas 6A",
-      "phase": "C",
-      "createdAt": 1789365334474
-    },
-    {
-      "id": "cls_1789366577769",
+      "id": "cls_1789387792202",
       "className": "Kelas 3B",
       "phase": "B",
-      "createdAt": 1789366577769
+      "createdAt": 1789387792202
     },
     {
-      "id": "cls_1789366584364",
+      "id": "cls_1789387797976",
       "className": "Kelas 3C",
       "phase": "B",
-      "createdAt": 1789366584364
+      "createdAt": 1789387797976
     },
     {
-      "id": "cls_1789366591495",
+      "id": "cls_1789387810176",
+      "className": "Kelas 4A",
+      "phase": "B",
+      "createdAt": 1789387810176
+    },
+    {
+      "id": "cls_1789387816092",
       "className": "Kelas 4B",
       "phase": "B",
-      "createdAt": 1789366591495
+      "createdAt": 1789387816092
     },
     {
-      "id": "cls_1789368121124",
+      "id": "cls_1789387849728",
+      "className": "Kelas 5A",
+      "phase": "C",
+      "createdAt": 1789387849728
+    },
+    {
+      "id": "cls_1789387854426",
       "className": "Kelas 5B",
       "phase": "C",
-      "createdAt": 1789368121124
+      "createdAt": 1789387854426
     },
     {
-      "id": "cls_1789368127727",
+      "id": "cls_1789387859503",
       "className": "Kelas 5C",
       "phase": "C",
-      "createdAt": 1789368127727
+      "createdAt": 1789387859503
     },
     {
-      "id": "cls_1789368133270",
+      "id": "cls_1789387870409",
+      "className": "Kelas 6A",
+      "phase": "C",
+      "createdAt": 1789387870409
+    },
+    {
+      "id": "cls_1789387875090",
       "className": "Kelas 6B",
       "phase": "C",
-      "createdAt": 1789368133270
+      "createdAt": 1789387875090
     },
     {
-      "id": "cls_1789368138931",
+      "id": "cls_1789387879392",
       "className": "Kelas 6C",
       "phase": "C",
-      "createdAt": 1789368138931
+      "createdAt": 1789387879392
     }
   ],
-  "scoresList": [
-    {
-      "id": "score_1789387149519",
-      "classId": "cls_1789366577769",
-      "seasonId": "season_1789366557827",
-      "matchDate": "2026-09-02",
-      "month": "September 2026",
-      "matchWeek": 1,
-      "score": 180,
-      "timestamp": 1788307200000
-    },
-    {
-      "id": "score_1789387167091",
-      "classId": "cls-4a",
-      "seasonId": "season_1789366557827",
-      "matchDate": "2026-09-02",
-      "month": "September 2026",
-      "matchWeek": 1,
-      "score": 210,
-      "timestamp": 1788307200000
-    },
-    {
-      "id": "score_1789387185692",
-      "classId": "cls_1789366584364",
-      "seasonId": "season_1789366557827",
-      "matchDate": "2026-09-02",
-      "month": "September 2026",
-      "matchWeek": 1,
-      "score": 190,
-      "timestamp": 1788307200000
-    },
-    {
-      "id": "score_1789387203284",
-      "classId": "cls_1789366591495",
-      "seasonId": "season_1789366557827",
-      "matchDate": "2026-09-02",
-      "month": "September 2026",
-      "matchWeek": 1,
-      "score": 215,
-      "timestamp": 1788307200000
-    },
-    {
-      "id": "score_1789387238231",
-      "classId": "cls-3a",
-      "seasonId": "season_1789366557827",
-      "matchDate": "2026-09-16",
-      "month": "September 2026",
-      "matchWeek": 1,
-      "score": 210,
-      "timestamp": 1789516800000
-    },
-    {
-      "id": "score_1789387254246",
-      "classId": "cls_1789366577769",
-      "seasonId": "season_1789366557827",
-      "matchDate": "2026-09-16",
-      "month": "September 2026",
-      "matchWeek": 2,
-      "score": 200,
-      "timestamp": 1789516800000
-    },
-    {
-      "id": "score_1789387281361",
-      "classId": "cls-3a",
-      "seasonId": "season_1789366557827",
-      "matchDate": "2026-09-16",
-      "month": "September 2026",
-      "matchWeek": 2,
-      "score": 210,
-      "timestamp": 1789516800000
-    },
-    {
-      "id": "score_1789387292461",
-      "classId": "cls_1789366584364",
-      "seasonId": "season_1789366557827",
-      "matchDate": "2026-09-16",
-      "month": "September 2026",
-      "matchWeek": 2,
-      "score": 200,
-      "timestamp": 1789516800000
-    },
-    {
-      "id": "score_1789387330017",
-      "classId": "cls-4a",
-      "seasonId": "season_1789366557827",
-      "matchDate": "2026-09-16",
-      "month": "September 2026",
-      "matchWeek": 2,
-      "score": 220,
-      "timestamp": 1789516800000
-    },
-    {
-      "id": "score_1789387346778",
-      "classId": "cls_1789366591495",
-      "seasonId": "season_1789366557827",
-      "matchDate": "2026-09-16",
-      "month": "September 2026",
-      "matchWeek": 2,
-      "score": 210,
-      "timestamp": 1789516800000
-    }
-  ],
-  "juaraList": [
-    {
-      "id": "juara_1789387401058",
-      "seasonId": "season_1789366557827",
-      "phase": "B",
-      "juara1": "Kelas 4A",
-      "juara2": "Kelas 4B",
-      "juara3": "Kelas 3A",
-      "createdAt": 1789387401058
-    }
-  ]
+  "scoresList": [],
+  "juaraList": []
 }
