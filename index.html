@@ -17,11 +17,26 @@
         .gold-glow { box-shadow: 0 0 15px rgba(245, 158, 11, 0.4); }
         .silver-glow { box-shadow: 0 0 15px rgba(156, 163, 175, 0.4); }
         .bronze-glow { box-shadow: 0 0 15px rgba(217, 119, 6, 0.3); }
+
+        /* Efek Cahaya Berjalan pada Teks Judul */
+        @keyframes shine {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .shine-text {
+            background: linear-gradient(90deg, #e0f2fe 0%, #ffffff 35%, #fef08a 50%, #ffffff 65%, #e0f2fe 100%);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: shine 3.5s linear infinite;
+            display: inline-block;
+        }
     </style>
 </head>
 <body class="bg-slate-100 min-h-screen flex flex-col text-slate-800">
 
-<!-- Header Utama -->
+    <!-- Header Utama -->
     <header class="bg-gradient-header text-white shadow-lg border-b border-blue-400/30">
         <div class="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
             
@@ -40,7 +55,8 @@
                         <img src="dumen.png" alt="Logo SDN Dukuh Menanggal" class="w-full h-full object-contain drop-shadow">
                     </div>
                     <div>
-                        <h1 class="text-lg sm:text-2xl md:text-3xl font-extrabold tracking-tight leading-tight uppercase">
+                        <!-- Judul dengan Efek Cahaya Berjalan -->
+                        <h1 class="text-lg sm:text-2xl md:text-3xl font-extrabold tracking-tight leading-tight uppercase shine-text">
                             LIGA NUMERASI DIGITAL (LND)
                         </h1>
                         <p class="text-xs sm:text-base font-medium text-blue-100">
