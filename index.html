@@ -183,9 +183,14 @@
                         </h2>
                         <p class="text-xs text-purple-200 mt-1">Kelola Season, Kelas, dan Input Skor Pertandingan</p>
                     </div>
-                    <button onclick="logoutAdmin()" class="bg-rose-500/20 hover:bg-rose-500/40 text-rose-200 border border-rose-400/30 px-3 py-1.5 rounded-lg text-xs font-semibold transition">
-                        Keluar Admin
-                    </button>
+                    <div class="flex items-center gap-3">
+                        <span id="storageModeBadge" class="text-[11px] bg-purple-800/80 border border-purple-400/30 text-purple-200 px-3 py-1 rounded-full font-medium">
+                            <i class="fa-solid fa-database text-emerald-400 mr-1"></i> Storage Ready
+                        </span>
+                        <button onclick="logoutAdmin()" class="bg-rose-500/20 hover:bg-rose-500/40 text-rose-200 border border-rose-400/30 px-3 py-1.5 rounded-lg text-xs font-semibold transition">
+                            Keluar Admin
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -483,7 +488,7 @@
         <span id="toastMsg">Pesan Notifikasi</span>
     </div>
 
-    <!-- Firebase Engine and App Logic -->
+    <!-- Firebase Engine and Storage Logic -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
@@ -500,9 +505,11 @@
             appId: "1:123456789:web:123456"
         };
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
+        let app, auth, db;
+        let isFirebaseActive = false;
+
+        // Broadcast channel for multi-tab realtime sync when on GitHub Pages
+        const broadcastChannel = typeof BroadcastChannel !== 'undefined' ? new BroadcastChannel('lnd_sync_channel') : null;
 
         // State Variables
         let currentUser = null;
@@ -510,93 +517,180 @@
         let activeTab = 'faseB'; // 'faseB', 'faseC', 'juara', 'admin'
         let currentSelectedMonth = 'ALL';
         let activePublicSeasonId = null;
-        let adminPassHash = "adminlnd123"; // Default internal storage password
+        let adminPassHash = "adminlnd123";
 
-        // Data Store (Synced via Firestore)
+        // Data Store
         let seasonsList = [];
         let classesList = [];
         let scoresList = [];
         let juaraList = [];
 
+        // Default initial data for fresh setup on GitHub Pages
+        const DEFAULT_SEASONS = [
+            { id: 'season-1', name: 'Season 1 (Jan - Mar 2026)', isPublic: true, createdAt: Date.now() }
+        ];
+
+        const DEFAULT_CLASSES = [
+            { id: 'cls-3a', className: 'Kelas 3A', phase: 'B', createdAt: Date.now() },
+            { id: 'cls-4a', className: 'Kelas 4A', phase: 'B', createdAt: Date.now() },
+            { id: 'cls-5a', className: 'Kelas 5A', phase: 'C', createdAt: Date.now() },
+            { id: 'cls-6a', className: 'Kelas 6A', phase: 'C', createdAt: Date.now() }
+        ];
+
         // Confirmation Callback Holder
         let onConfirmAction = null;
 
-        // Firestore Paths (Strict adherence to RULE 1)
+        // Firestore Helpers
         const getPublicCollection = (colName) => collection(db, 'artifacts', appId, 'public', 'data', colName);
         const getPublicDoc = (colName, docId) => doc(db, 'artifacts', appId, 'public', 'data', colName, docId);
 
-        // Authentication Handler
         async function initAuth() {
+            // If dummy firebase config (e.g. hosted standalone on GitHub Pages), use LocalStorage engine
+            if (!firebaseConfig.apiKey || firebaseConfig.apiKey.includes('dummy')) {
+                console.log("GitHub Pages Standalone Mode detected. Using LocalStorage Storage Engine.");
+                isFirebaseActive = false;
+                loadFromLocalStorage();
+                updateStorageBadge();
+                return;
+            }
+
             try {
+                app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app);
+
                 if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
                     await signInWithCustomToken(auth, __initial_auth_token);
                 } else {
                     await signInAnonymously(auth);
                 }
+                isFirebaseActive = true;
+                updateStorageBadge();
+                initRealtimeListeners();
             } catch (err) {
-                console.error("Auth error:", err);
+                console.warn("Firebase Auth Error, activating LocalStorage fallback:", err);
+                isFirebaseActive = false;
+                loadFromLocalStorage();
+                updateStorageBadge();
             }
         }
 
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                currentUser = user;
-                initRealtimeListeners();
+        function updateStorageBadge() {
+            const badge = document.getElementById('storageModeBadge');
+            if (badge) {
+                badge.innerHTML = isFirebaseActive 
+                    ? `<i class="fa-solid fa-cloud text-emerald-400 mr-1"></i> Cloud Firebase Active`
+                    : `<i class="fa-solid fa-hard-drive text-amber-400 mr-1"></i> Storage Local Active`;
+            }
+        }
+
+        // LocalStorage Engine Handlers
+        function loadFromLocalStorage() {
+            try {
+                const storedSeasons = localStorage.getItem('lnd_seasons');
+                const storedClasses = localStorage.getItem('lnd_classes');
+                const storedScores = localStorage.getItem('lnd_scores');
+                const storedJuara = localStorage.getItem('lnd_juara');
+
+                seasonsList = storedSeasons ? JSON.parse(storedSeasons) : DEFAULT_SEASONS;
+                classesList = storedClasses ? JSON.parse(storedClasses) : DEFAULT_CLASSES;
+                scoresList = storedScores ? JSON.parse(storedScores) : [];
+                juaraList = storedJuara ? JSON.parse(storedJuara) : [];
+
+                if (!storedSeasons) localStorage.setItem('lnd_seasons', JSON.stringify(seasonsList));
+                if (!storedClasses) localStorage.setItem('lnd_classes', JSON.stringify(classesList));
+                if (!storedScores) localStorage.setItem('lnd_scores', JSON.stringify(scoresList));
+                if (!storedJuara) localStorage.setItem('lnd_juara', JSON.stringify(juaraList));
+
+                const activeSeason = seasonsList.find(s => s.isPublic === true);
+                if (activeSeason) {
+                    activePublicSeasonId = activeSeason.id;
+                } else if (seasonsList.length > 0) {
+                    activePublicSeasonId = seasonsList[0].id;
+                }
+
+                refreshAllViews();
+            } catch (e) {
+                console.error("LocalStorage load error:", e);
+            }
+        }
+
+        function saveAndSyncLocalStorage() {
+            try {
+                localStorage.setItem('lnd_seasons', JSON.stringify(seasonsList));
+                localStorage.setItem('lnd_classes', JSON.stringify(classesList));
+                localStorage.setItem('lnd_scores', JSON.stringify(scoresList));
+                localStorage.setItem('lnd_juara', JSON.stringify(juaraList));
+
+                if (broadcastChannel) {
+                    broadcastChannel.postMessage('sync_data');
+                }
+            } catch (e) {
+                console.error("LocalStorage save error:", e);
+            }
+        }
+
+        if (broadcastChannel) {
+            broadcastChannel.onmessage = (event) => {
+                if (event.data === 'sync_data') {
+                    loadFromLocalStorage();
+                }
+            };
+        }
+
+        window.addEventListener('storage', (e) => {
+            if (e.key && e.key.startsWith('lnd_')) {
+                loadFromLocalStorage();
             }
         });
 
-        // Initialize Realtime Listeners
         function initRealtimeListeners() {
-            if (!currentUser) return;
+            if (!currentUser || !isFirebaseActive) return;
 
-            // 0. Listen to Admin Credentials Config
             onSnapshot(getPublicDoc('settings', 'admin_auth'), (docSnap) => {
                 if (docSnap.exists() && docSnap.data()?.pass) {
                     adminPassHash = docSnap.data().pass;
                 }
             }, (err) => console.error("Error fetching admin auth:", err));
 
-            // 1. Listen to Seasons
             onSnapshot(getPublicCollection('seasons'), (snapshot) => {
                 seasonsList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                
-                // If no active season set, auto-pick or set default
                 const activeSeason = seasonsList.find(s => s.isPublic === true);
                 if (activeSeason) {
                     activePublicSeasonId = activeSeason.id;
                 } else if (seasonsList.length > 0 && !activePublicSeasonId) {
                     activePublicSeasonId = seasonsList[0].id;
                 }
-                
-                renderPublicSeasonSelect();
-                renderAdminSeasonList();
-                renderJuaraSeasonSelect();
-                updateUI();
+                refreshAllViews();
             }, (err) => console.error("Error fetching seasons:", err));
 
-            // 2. Listen to Classes
             onSnapshot(getPublicCollection('classes'), (snapshot) => {
                 classesList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                renderAdminClassList();
-                renderScoreClassSelect();
-                updateUI();
+                refreshAllViews();
             }, (err) => console.error("Error fetching classes:", err));
 
-            // 3. Listen to Scores
             onSnapshot(getPublicCollection('scores'), (snapshot) => {
                 scoresList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                renderAdminScoresTable();
-                updateUI();
+                refreshAllViews();
             }, (err) => console.error("Error fetching scores:", err));
 
-            // 4. Listen to Juara History
             onSnapshot(getPublicCollection('juara'), (snapshot) => {
                 juaraList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 renderJuaraView();
             }, (err) => console.error("Error fetching juara:", err));
         }
 
-        // Calculate & Render Standings
+        function refreshAllViews() {
+            renderPublicSeasonSelect();
+            renderAdminSeasonList();
+            renderAdminClassList();
+            renderScoreClassSelect();
+            renderJuaraSeasonSelect();
+            renderAdminScoresTable();
+            renderJuaraView();
+            updateUI();
+        }
+
         function updateUI() {
             if (activeTab === 'faseB' || activeTab === 'faseC') {
                 renderKlasemen();
@@ -617,7 +711,6 @@
                 return;
             }
 
-            // Filter classes by Phase
             const filteredClasses = classesList.filter(c => c.phase === phase);
 
             if (filteredClasses.length === 0) {
@@ -625,7 +718,6 @@
                 return;
             }
 
-            // Calculate total score per class for selected season & month filter
             const leaderboard = filteredClasses.map(cls => {
                 let relevantScores = scoresList.filter(s => s.classId === cls.id && s.seasonId === activePublicSeasonId);
                 
@@ -643,14 +735,9 @@
                 };
             });
 
-            // Sort descending by totalScore
             leaderboard.sort((a, b) => b.totalScore - a.totalScore);
 
-            // Build HTML
             let html = '';
-            leaderboard.forEach((index, item) => {
-            });
-
             leaderboard.forEach((item, index) => {
                 const rank = index + 1;
                 let rankBadge = `<span class="font-bold text-slate-600">${rank}</span>`;
@@ -688,6 +775,8 @@
 
         function renderJuaraView() {
             const container = document.getElementById('juaraContainer');
+            if (!container) return;
+
             if (juaraList.length === 0) {
                 container.innerHTML = `<div class="col-span-full text-center p-8 text-slate-400">Belum ada riwayat juara yang diinput oleh Admin.</div>`;
                 return;
@@ -746,9 +835,9 @@
             container.innerHTML = html;
         }
 
-        // Populate Select Dropdowns
         function renderPublicSeasonSelect() {
             const select = document.getElementById('publicSeasonSelect');
+            if (!select) return;
             if (seasonsList.length === 0) {
                 select.innerHTML = `<option value="">Belum Ada Season</option>`;
                 return;
@@ -763,6 +852,7 @@
 
         function renderAdminSeasonList() {
             const container = document.getElementById('adminSeasonList');
+            if (!container) return;
             if (seasonsList.length === 0) {
                 container.innerHTML = `<p class="text-slate-400 italic">Belum ada season.</p>`;
                 return;
@@ -787,6 +877,7 @@
 
         function renderAdminClassList() {
             const container = document.getElementById('adminClassList');
+            if (!container) return;
             if (classesList.length === 0) {
                 container.innerHTML = `<p class="text-slate-400 italic">Belum ada kelas.</p>`;
                 return;
@@ -807,6 +898,7 @@
 
         function renderScoreClassSelect() {
             const select = document.getElementById('scoreClassSelect');
+            if (!select) return;
             select.innerHTML = `<option value="">Pilih Kelas...</option>` + classesList.map(c => `
                 <option value="${c.id}">${escapeHtml(c.className)} (Fase ${c.phase})</option>
             `).join('');
@@ -814,6 +906,7 @@
 
         function renderJuaraSeasonSelect() {
             const select = document.getElementById('juaraSeasonSelect');
+            if (!select) return;
             select.innerHTML = seasonsList.map(s => `
                 <option value="${s.id}">${escapeHtml(s.name)}</option>
             `).join('');
@@ -821,6 +914,7 @@
 
         function renderAdminScoresTable() {
             const tbody = document.getElementById('adminScoresTableBody');
+            if (!tbody) return;
             if (scoresList.length === 0) {
                 tbody.innerHTML = `<tr><td colspan="7" class="text-center p-4 text-slate-400">Belum ada data skor pertandingan.</td></tr>`;
                 return;
@@ -855,7 +949,6 @@
             }).join('');
         }
 
-        // Admin Operations (Add Data)
         window.handleAddSeason = async function(e) {
             e.preventDefault();
             if (!isAdminLoggedIn) return;
@@ -864,19 +957,29 @@
             const name = nameInput.value.trim();
             if (!name) return;
 
-            try {
-                const isFirst = seasonsList.length === 0;
-                await addDoc(getPublicCollection('seasons'), {
-                    name,
-                    isPublic: isFirst,
-                    createdAt: Date.now()
-                });
-                nameInput.value = '';
-                showToast("Season berhasil ditambahkan!");
-            } catch (err) {
-                console.error("Error adding season:", err);
-                showToast("Gagal menambah season", true);
+            const isFirst = seasonsList.length === 0;
+            const seasonId = 'season_' + Date.now();
+            const newSeason = { id: seasonId, name, isPublic: isFirst, createdAt: Date.now() };
+
+            if (isFirebaseActive) {
+                try {
+                    await addDoc(getPublicCollection('seasons'), { name, isPublic: isFirst, createdAt: Date.now() });
+                } catch (err) {
+                    console.error("Firebase addSeason error, using local:", err);
+                    seasonsList.push(newSeason);
+                    if (isFirst) activePublicSeasonId = seasonId;
+                    saveAndSyncLocalStorage();
+                    refreshAllViews();
+                }
+            } else {
+                seasonsList.push(newSeason);
+                if (isFirst) activePublicSeasonId = seasonId;
+                saveAndSyncLocalStorage();
+                refreshAllViews();
             }
+
+            nameInput.value = '';
+            showToast("Season berhasil ditambahkan!");
         };
 
         window.handleAddClass = async function(e) {
@@ -885,21 +988,28 @@
 
             const className = document.getElementById('classNameInput').value.trim();
             const phase = document.getElementById('classPhaseInput').value;
-
             if (!className) return;
 
-            try {
-                await addDoc(getPublicCollection('classes'), {
-                    className,
-                    phase,
-                    createdAt: Date.now()
-                });
-                document.getElementById('classNameInput').value = '';
-                showToast("Kelas berhasil disimpan!");
-            } catch (err) {
-                console.error("Error adding class:", err);
-                showToast("Gagal menyimpan kelas", true);
+            const classId = 'cls_' + Date.now();
+            const newClass = { id: classId, className, phase, createdAt: Date.now() };
+
+            if (isFirebaseActive) {
+                try {
+                    await addDoc(getPublicCollection('classes'), { className, phase, createdAt: Date.now() });
+                } catch (err) {
+                    console.error("Firebase addClass error, using local:", err);
+                    classesList.push(newClass);
+                    saveAndSyncLocalStorage();
+                    refreshAllViews();
+                }
+            } else {
+                classesList.push(newClass);
+                saveAndSyncLocalStorage();
+                refreshAllViews();
             }
+
+            document.getElementById('classNameInput').value = '';
+            showToast("Kelas berhasil disimpan!");
         };
 
         window.handleAddJuara = async function(e) {
@@ -914,23 +1024,28 @@
 
             if (!seasonId || !juara1 || !juara2 || !juara3) return;
 
-            try {
-                await addDoc(getPublicCollection('juara'), {
-                    seasonId,
-                    phase,
-                    juara1,
-                    juara2,
-                    juara3,
-                    createdAt: Date.now()
-                });
-                document.getElementById('juara1Input').value = '';
-                document.getElementById('juara2Input').value = '';
-                document.getElementById('juara3Input').value = '';
-                showToast("Riwayat Juara berhasil ditambahkan!");
-            } catch (err) {
-                console.error("Error adding juara:", err);
-                showToast("Gagal menyimpan riwayat juara", true);
+            const juaraId = 'juara_' + Date.now();
+            const newJuara = { id: juaraId, seasonId, phase, juara1, juara2, juara3, createdAt: Date.now() };
+
+            if (isFirebaseActive) {
+                try {
+                    await addDoc(getPublicCollection('juara'), { seasonId, phase, juara1, juara2, juara3, createdAt: Date.now() });
+                } catch (err) {
+                    console.error("Firebase addJuara error, using local:", err);
+                    juaraList.push(newJuara);
+                    saveAndSyncLocalStorage();
+                    refreshAllViews();
+                }
+            } else {
+                juaraList.push(newJuara);
+                saveAndSyncLocalStorage();
+                refreshAllViews();
             }
+
+            document.getElementById('juara1Input').value = '';
+            document.getElementById('juara2Input').value = '';
+            document.getElementById('juara3Input').value = '';
+            showToast("Riwayat Juara berhasil ditambahkan!");
         };
 
         window.handleAddScore = async function(e) {
@@ -947,37 +1062,66 @@
                 return;
             }
 
-            try {
-                await addDoc(getPublicCollection('scores'), {
-                    classId,
-                    seasonId: activePublicSeasonId,
-                    month,
-                    matchWeek: Number(matchWeek),
-                    score: Number(scoreVal),
-                    timestamp: Date.now()
-                });
-                document.getElementById('scoreValueInput').value = '';
-                showToast("Skor pertandingan berhasil dimasukkan!");
-            } catch (err) {
-                console.error("Error adding score:", err);
-                showToast("Gagal memasukkan skor", true);
+            const scoreId = 'score_' + Date.now();
+            const newScore = {
+                id: scoreId,
+                classId,
+                seasonId: activePublicSeasonId,
+                month,
+                matchWeek: Number(matchWeek),
+                score: Number(scoreVal),
+                timestamp: Date.now()
+            };
+
+            if (isFirebaseActive) {
+                try {
+                    await addDoc(getPublicCollection('scores'), {
+                        classId,
+                        seasonId: activePublicSeasonId,
+                        month,
+                        matchWeek: Number(matchWeek),
+                        score: Number(scoreVal),
+                        timestamp: Date.now()
+                    });
+                } catch (err) {
+                    console.error("Firebase addScore error, using local:", err);
+                    scoresList.push(newScore);
+                    saveAndSyncLocalStorage();
+                    refreshAllViews();
+                }
+            } else {
+                scoresList.push(newScore);
+                saveAndSyncLocalStorage();
+                refreshAllViews();
             }
+
+            document.getElementById('scoreValueInput').value = '';
+            showToast("Skor pertandingan berhasil dimasukkan!");
         };
 
         window.setPublicSeason = async function(seasonId) {
             if (!isAdminLoggedIn) return;
-            try {
-                // Set all to false first
-                const updatePromises = seasonsList.map(s => 
-                    updateDoc(getPublicDoc('seasons', s.id), { isPublic: s.id === seasonId })
-                );
-                await Promise.all(updatePromises);
-                activePublicSeasonId = seasonId;
-                showToast("Season aktif publik diperbarui!");
-            } catch (err) {
-                console.error("Error setting public season:", err);
-                showToast("Gagal memperbarui season publik", true);
+
+            if (isFirebaseActive) {
+                try {
+                    const updatePromises = seasonsList.map(s => 
+                        updateDoc(getPublicDoc('seasons', s.id), { isPublic: s.id === seasonId })
+                    );
+                    await Promise.all(updatePromises);
+                } catch (err) {
+                    console.error("Firebase setPublicSeason error, using local:", err);
+                    seasonsList.forEach(s => s.isPublic = (s.id === seasonId));
+                    saveAndSyncLocalStorage();
+                    refreshAllViews();
+                }
+            } else {
+                seasonsList.forEach(s => s.isPublic = (s.id === seasonId));
+                saveAndSyncLocalStorage();
+                refreshAllViews();
             }
+
+            activePublicSeasonId = seasonId;
+            showToast("Season aktif publik diperbarui!");
         };
 
         // Edit Score Modal Handlers
@@ -996,33 +1140,54 @@
             if (!isAdminLoggedIn) return;
 
             const id = document.getElementById('editScoreId').value;
-            const newScore = document.getElementById('editScoreValueInput').value;
+            const newScore = Number(document.getElementById('editScoreValueInput').value);
 
-            try {
-                await updateDoc(getPublicDoc('scores', id), {
-                    score: Number(newScore)
-                });
-                closeEditScoreModal();
-                showToast("Skor pertandingan berhasil diperbarui!");
-            } catch (err) {
-                console.error("Error updating score:", err);
-                showToast("Gagal meng-edit skor", true);
+            if (isFirebaseActive) {
+                try {
+                    await updateDoc(getPublicDoc('scores', id), { score: newScore });
+                } catch (err) {
+                    console.error("Firebase editScore error, using local:", err);
+                    const item = scoresList.find(s => s.id === id);
+                    if (item) item.score = newScore;
+                    saveAndSyncLocalStorage();
+                    refreshAllViews();
+                }
+            } else {
+                const item = scoresList.find(s => s.id === id);
+                if (item) item.score = newScore;
+                saveAndSyncLocalStorage();
+                refreshAllViews();
             }
+
+            closeEditScoreModal();
+            showToast("Skor pertandingan berhasil diperbarui!");
         };
 
-        // Custom Delete Confirmation Dialog Modal (Replaces Browser confirm)
         window.confirmDelete = function(collectionName, docId) {
             onConfirmAction = async () => {
-                try {
-                    await deleteDoc(getPublicDoc(collectionName, docId));
-                    showToast("Data berhasil dihapus!");
-                } catch (err) {
-                    console.error("Error deleting doc:", err);
-                    showToast("Gagal menghapus data", true);
+                if (isFirebaseActive) {
+                    try {
+                        await deleteDoc(getPublicDoc(collectionName, docId));
+                    } catch (err) {
+                        console.error("Firebase delete error, using local:", err);
+                        deleteLocalItem(collectionName, docId);
+                    }
+                } else {
+                    deleteLocalItem(collectionName, docId);
                 }
+                showToast("Data berhasil dihapus!");
             };
             document.getElementById('modalConfirm').classList.remove('hidden');
         };
+
+        function deleteLocalItem(colName, id) {
+            if (colName === 'seasons') seasonsList = seasonsList.filter(item => item.id !== id);
+            if (colName === 'classes') classesList = classesList.filter(item => item.id !== id);
+            if (colName === 'scores') scoresList = scoresList.filter(item => item.id !== id);
+            if (colName === 'juara') juaraList = juaraList.filter(item => item.id !== id);
+            saveAndSyncLocalStorage();
+            refreshAllViews();
+        }
 
         window.closeConfirmModal = function(isConfirmed) {
             document.getElementById('modalConfirm').classList.add('hidden');
@@ -1036,7 +1201,6 @@
         window.switchTab = function(tabName) {
             activeTab = tabName;
             
-            // Buttons UI
             const btnB = document.getElementById('tabFaseB');
             const btnC = document.getElementById('tabFaseC');
             const btnJuara = document.getElementById('tabJuara');
@@ -1050,7 +1214,6 @@
             btnJuara.className = tabName === 'juara' ? activeClass : inactiveClass;
             if (btnAdmin) btnAdmin.className = tabName === 'admin' ? activeClass.replace('border-blue-600 text-blue-600', 'border-purple-600 text-purple-600') : inactiveClass;
 
-            // Views Visibility
             document.getElementById('viewKlasemen').classList.toggle('hidden', tabName !== 'faseB' && tabName !== 'faseC');
             document.getElementById('viewJuara').classList.toggle('hidden', tabName !== 'juara');
             document.getElementById('viewAdmin').classList.toggle('hidden', tabName !== 'admin');
@@ -1071,7 +1234,6 @@
         // Admin Auth Modal & Logic
         window.toggleAuthModal = function() {
             if (isAdminLoggedIn) {
-                // If logged in, clicking switches to Admin Tab
                 switchTab('admin');
             } else {
                 document.getElementById('modalLogin').classList.toggle('hidden');
@@ -1092,21 +1254,20 @@
             const email = document.getElementById('forgotEmailInput').value.trim();
             if (!email) return;
 
-            try {
-                // Record recovery attempt / reset trigger securely in Firestore
-                await setDoc(getPublicDoc('settings', 'recovery_logs'), {
-                    requestedEmail: email,
-                    timestamp: Date.now()
-                }, { merge: true });
-
-                closeForgotPasswordModal();
-                showToast(`Petunjuk reset password telah dikirim ke ${email}. Silakan cek email GitHub Anda.`);
-                document.getElementById('forgotEmailInput').value = '';
-            } catch (err) {
-                console.error("Error submitting forgot password:", err);
-                showToast("Tautan reset password telah dikirimkan ke email Anda.");
-                closeForgotPasswordModal();
+            if (isFirebaseActive) {
+                try {
+                    await setDoc(getPublicDoc('settings', 'recovery_logs'), {
+                        requestedEmail: email,
+                        timestamp: Date.now()
+                    }, { merge: true });
+                } catch (err) {
+                    console.error("Error submitting forgot password:", err);
+                }
             }
+
+            closeForgotPasswordModal();
+            showToast(`Petunjuk reset password telah dikirim ke ${email}. Silakan cek email GitHub Anda.`);
+            document.getElementById('forgotEmailInput').value = '';
         };
 
         window.handleLoginSubmit = function(e) {
@@ -1119,7 +1280,6 @@
                 document.getElementById('loginErrorMsg').classList.add('hidden');
                 document.getElementById('modalLogin').classList.add('hidden');
                 
-                // Update Admin Button UI
                 document.getElementById('authBtnText').innerText = "Dashboard Admin";
                 document.getElementById('adminBadge').classList.remove('hidden');
                 document.getElementById('tabAdmin').classList.remove('hidden');
@@ -1127,7 +1287,6 @@
                 showToast("Login Admin Berhasil!");
                 switchTab('admin');
             } else {
-                // Clear password input and show security error without showing any hint
                 document.getElementById('adminPasswordInput').value = '';
                 document.getElementById('loginErrorMsg').classList.remove('hidden');
             }
@@ -1148,6 +1307,7 @@
             const toastMsg = document.getElementById('toastMsg');
             const toastIcon = document.getElementById('toastIcon');
 
+            if (!toast) return;
             toastMsg.innerText = msg;
             if (isError) {
                 toastIcon.className = "fa-solid fa-circle-xmark text-rose-400 text-base";
