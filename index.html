@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Liga Numerasi Digital (LND) - SDN Dukuh Menanggal I/424</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -12,12 +12,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+        }
         .glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
         .bg-gradient-header { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #1d4ed8 100%); }
-        .gold-glow { box-shadow: 0 0 15px rgba(245, 158, 11, 0.5); }
-        .silver-glow { box-shadow: 0 0 15px rgba(156, 163, 175, 0.4); }
-        .bronze-glow { box-shadow: 0 0 15px rgba(217, 119, 6, 0.3); }
+        .gold-glow { box-shadow: 0 0 12px rgba(245, 158, 11, 0.4); }
+        .silver-glow { box-shadow: 0 0 12px rgba(156, 163, 175, 0.4); }
+        .bronze-glow { box-shadow: 0 0 12px rgba(217, 119, 6, 0.3); }
 
         /* Efek Cahaya Berjalan pada Teks Judul */
         @keyframes shine {
@@ -35,7 +39,7 @@
             display: inline-block;
         }
 
-        /* Animasi Marquee (Berjalan sampai habis baru muncul kembali dari kanan) */
+        /* Animasi Marquee Running Text */
         @keyframes marquee {
             0% { transform: translate3d(100%, 0, 0); }
             100% { transform: translate3d(-100%, 0, 0); }
@@ -43,64 +47,62 @@
         .animate-marquee {
             display: inline-flex;
             white-space: nowrap;
-            animation: marquee 22s linear infinite;
+            animation: marquee 20s linear infinite;
             will-change: transform;
             backface-visibility: hidden;
             -webkit-backface-visibility: hidden;
-            perspective: 1000px;
         }
-        /* Berhenti saat kursor atau sentuhan pengguna berada di atas teks */
         .marquee-container:hover .animate-marquee {
             animation-play-state: paused;
         }
     </style>
 </head>
-<body class="bg-slate-100 min-h-screen flex flex-col text-slate-800">
+<body class="bg-slate-100 min-h-screen flex flex-col text-slate-800 overflow-x-hidden antialiased">
 
     <!-- Header Utama -->
-    <header class="bg-gradient-header text-white shadow-lg border-b border-blue-400/30">
-        <div class="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
+    <header class="bg-gradient-header text-white shadow-lg border-b border-blue-400/30 w-full overflow-hidden">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6">
             
             <!-- 1. Deretan Gambar Logo di Atas Judul -->
-            <div class="flex items-center justify-center gap-3 sm:gap-6 md:gap-8 mb-4 pb-3 border-b border-white/15 w-full">
-                <img src="tutwuri.png" alt="Tut Wuri Handayani" class="h-8 sm:h-12 md:h-16 lg:h-20 w-auto max-w-[20%] object-contain drop-shadow shrink-0">
-                <img src="dispendik.png" alt="Dinas Pendidikan" class="h-8 sm:h-12 md:h-16 lg:h-20 w-auto max-w-[20%] object-contain drop-shadow shrink-0">
-                <img src="adiwiyata.png" alt="Adiwiyata" class="h-8 sm:h-12 md:h-16 lg:h-20 w-auto max-w-[20%] object-contain drop-shadow shrink-0">
-                <img src="sra.png" alt="Sekolah Ramah Anak" class="h-8 sm:h-12 md:h-16 lg:h-20 w-auto max-w-[20%] object-contain drop-shadow shrink-0">
+            <div class="flex items-center justify-center flex-wrap gap-2 sm:gap-6 md:gap-8 mb-3 sm:mb-4 pb-2 sm:pb-3 border-b border-white/15 w-full">
+                <img src="tutwuri.png" alt="Tut Wuri Handayani" class="h-7 sm:h-12 md:h-16 w-auto max-w-[20%] object-contain drop-shadow shrink-0">
+                <img src="dispendik.png" alt="Dinas Pendidikan" class="h-7 sm:h-12 md:h-16 w-auto max-w-[20%] object-contain drop-shadow shrink-0">
+                <img src="adiwiyata.png" alt="Adiwiyata" class="h-7 sm:h-12 md:h-16 w-auto max-w-[20%] object-contain drop-shadow shrink-0">
+                <img src="sra.png" alt="Sekolah Ramah Anak" class="h-7 sm:h-12 md:h-16 w-auto max-w-[20%] object-contain drop-shadow shrink-0">
             </div>
 
             <!-- 2. Section Judul dengan Gambar Dumen & Tombol Admin Tunggal -->
-            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-                <div class="flex items-center gap-3 sm:gap-4 text-center md:text-left w-full md:w-auto">
-                    <div class="w-12 h-12 sm:w-16 sm:h-16 bg-white/10 rounded-2xl flex items-center justify-center backdrop-blur-md border border-white/20 shadow-inner shrink-0 p-1.5">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-4 w-full">
+                <div class="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left w-full md:w-auto min-w-0">
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 bg-white/10 rounded-2xl flex items-center justify-center backdrop-blur-md border border-white/20 shadow-inner shrink-0 p-1.5 mx-auto sm:mx-0">
                         <img src="dumen.png" alt="Logo SDN Dukuh Menanggal" class="w-full h-full object-contain drop-shadow">
                     </div>
-                    <div class="flex-1">
+                    <div class="flex-1 min-w-0 w-full">
                         <!-- Judul dengan Efek Cahaya Berjalan -->
-                        <h1 class="text-lg sm:text-2xl md:text-3xl font-extrabold tracking-tight leading-tight uppercase shine-text">
+                        <h1 class="text-base sm:text-2xl md:text-3xl font-extrabold tracking-tight leading-tight uppercase shine-text block truncate">
                             LIGA NUMERASI DIGITAL (LND)
                         </h1>
-                        <p class="text-xs sm:text-base font-medium text-blue-100">
+                        <p class="text-xs sm:text-base font-medium text-blue-100 truncate">
                             SDN DUKUH MENANGGAL I/424 SURABAYA
                         </p>
                         <!-- Alamat Sekolah -->
-                        <p class="text-[11px] sm:text-xs text-blue-200 mt-0.5 flex items-center justify-center md:justify-start gap-1">
+                        <p class="text-[10px] sm:text-xs text-blue-200 mt-0.5 flex items-center justify-center sm:justify-start gap-1 truncate">
                             <i class="fa-solid fa-location-dot text-amber-400"></i>
-                            JL. Dukuh Menanggal No. 3 – 7, Surabaya
+                            <span>JL. Dukuh Menanggal No. 3 – 7, Surabaya</span>
                         </p>
 
                         <!-- TULISAN BERJALAN / ANNOUNCEMENT TICKER -->
-                        <div class="mt-3 marquee-container relative overflow-hidden rounded-xl bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 p-[2px] shadow-lg border border-amber-300/60 gold-glow max-w-2xl">
-                            <div class="bg-slate-950/90 backdrop-blur-md rounded-[10px] px-3 py-1.5 flex items-center gap-2 overflow-hidden">
+                        <div class="mt-2.5 marquee-container relative overflow-hidden rounded-xl bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 p-[2px] shadow-lg border border-amber-300/60 gold-glow w-full max-w-2xl">
+                            <div class="bg-slate-950/90 backdrop-blur-md rounded-[10px] px-2.5 py-1.5 flex items-center gap-2 overflow-hidden">
                                 
                                 <!-- Badge Status Animasi Membal -->
-                                <span class="shrink-0 bg-gradient-to-r from-rose-600 via-amber-500 to-amber-600 text-white text-[10px] sm:text-xs font-extrabold px-2.5 py-1 rounded-lg uppercase tracking-wider flex items-center gap-1.5 shadow border border-amber-400/40">
+                                <span class="shrink-0 bg-gradient-to-r from-rose-600 via-amber-500 to-amber-600 text-white text-[9px] sm:text-xs font-extrabold px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md sm:rounded-lg uppercase tracking-wider flex items-center gap-1 shadow border border-amber-400/40">
                                     <i class="fa-solid fa-bullhorn text-amber-200 animate-bounce"></i>
                                     <span>INFO LIGA</span>
                                 </span>
 
                                 <!-- Area Running Text -->
-                                <div class="relative overflow-hidden w-full flex items-center">
+                                <div class="relative overflow-hidden w-full flex items-center min-w-0">
                                     <div id="runningTextDisplay" class="animate-marquee text-xs sm:text-sm font-bold text-amber-200 tracking-wide flex items-center whitespace-nowrap">
                                         <!-- Injected via JS -->
                                     </div>
@@ -112,11 +114,11 @@
                 </div>
 
                 <!-- Admin Action Button -->
-                <div class="flex items-center gap-2">
-                    <div id="adminBadge" class="hidden bg-emerald-500/20 text-emerald-200 border border-emerald-400/40 text-xs px-3 py-1.5 rounded-full font-semibold flex items-center gap-1.5">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Mode Admin Active
+                <div class="flex items-center justify-center sm:justify-end gap-2 w-full md:w-auto mt-1 md:mt-0">
+                    <div id="adminBadge" class="hidden bg-emerald-500/20 text-emerald-200 border border-emerald-400/40 text-[11px] sm:text-xs px-2.5 py-1 rounded-full font-semibold items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Admin
                     </div>
-                    <button id="authBtn" onclick="toggleAuthModal()" class="bg-white/10 hover:bg-white/20 text-white border border-white/30 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 flex items-center gap-2 shadow-sm">
+                    <button id="authBtn" onclick="toggleAuthModal()" class="bg-white/10 hover:bg-white/20 active:scale-95 text-white border border-white/30 px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center gap-1.5 shadow-sm">
                         <i class="fa-solid fa-user-gear"></i> <span id="authBtnText">Login Admin</span>
                     </button>
                 </div>
@@ -125,77 +127,78 @@
     </header>
     
     <!-- Control Bar (Season & Filter) -->
-    <div class="bg-white border-b border-slate-200 sticky top-0 z-20 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center justify-between gap-3">
+    <div class="bg-white border-b border-slate-200 sticky top-0 z-20 shadow-sm w-full">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2.5 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 sm:gap-3">
             
             <!-- Season Selector Display -->
-            <div class="flex items-center gap-2">
-                <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Season Ditampilkan:</span>
-                <select id="publicSeasonSelect" onchange="changePublicSeason(this.value)" class="bg-blue-50 border border-blue-200 text-blue-900 font-bold text-sm rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <div class="flex items-center justify-between sm:justify-start gap-2 w-full sm:w-auto">
+                <span class="text-[11px] sm:text-xs font-bold text-slate-500 uppercase tracking-wider shrink-0">Season:</span>
+                <select id="publicSeasonSelect" onchange="changePublicSeason(this.value)" class="w-full sm:w-auto bg-blue-50 border border-blue-200 text-blue-900 font-bold text-xs sm:text-sm rounded-lg px-2.5 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option value="">Memuat Season...</option>
                 </select>
             </div>
 
             <!-- Month & Year Real Filter -->
-            <div class="flex items-center gap-2">
-                <i class="fa-regular fa-calendar-days text-slate-400"></i>
-                <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Filter Bulan:</span>
-                <select id="monthFilterSelect" onchange="applyMonthFilter(this.value)" class="bg-slate-50 border border-slate-300 text-slate-700 text-sm rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <div class="flex items-center justify-between sm:justify-end gap-1.5 sm:gap-2 w-full sm:w-auto">
+                <span class="text-[11px] sm:text-xs font-bold text-slate-500 uppercase tracking-wider shrink-0 flex items-center gap-1">
+                    <i class="fa-regular fa-calendar-days text-slate-400"></i> Filter:
+                </span>
+                <select id="monthFilterSelect" onchange="applyMonthFilter(this.value)" class="flex-1 sm:flex-none bg-slate-50 border border-slate-300 text-slate-700 text-xs sm:text-sm rounded-lg px-2 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option value="ALL">Semua Bulan (Total Season)</option>
                 </select>
-                <button onclick="loadCentralData(true)" title="Muat Ulang Data Terbaru dari GitHub" class="bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 px-3 py-1.5 rounded-lg text-xs font-semibold transition flex items-center gap-1">
-                    <i class="fa-solid fa-rotate text-blue-600"></i> <span class="hidden sm:inline">Refresh Data</span>
+                <button onclick="loadCentralData(true)" title="Muat Ulang Data Terbaru dari GitHub" class="bg-blue-50 hover:bg-blue-100 active:scale-95 text-blue-700 border border-blue-200 px-2.5 py-1.5 rounded-lg text-xs font-semibold transition shrink-0 flex items-center gap-1">
+                    <i class="fa-solid fa-rotate text-blue-600"></i> <span class="hidden sm:inline">Refresh</span>
                 </button>
             </div>
         </div>
     </div>
 
     <!-- Main Content Area -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+    <main class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 flex-grow w-full">
 
         <!-- Tab Menu Bar -->
-        <div class="grid grid-cols-3 sm:flex border-b border-slate-200 mb-6 gap-1 sm:space-x-2 pb-1">
-            <button id="tabFaseB" onclick="switchTab('faseB')" class="px-2 sm:px-5 py-2.5 rounded-t-xl font-bold text-xs sm:text-sm border-b-2 border-blue-600 text-blue-600 bg-white shadow-sm flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 transition-all">
-                <i class="fa-solid fa-shapes"></i> <span>Klasemen Fase B</span>
+        <div class="grid grid-cols-3 border-b border-slate-200 mb-4 sm:mb-6 gap-1 pb-1 w-full">
+            <button id="tabFaseB" onclick="switchTab('faseB')" class="px-1.5 sm:px-5 py-2 rounded-t-xl font-bold text-[11px] sm:text-sm border-b-2 border-blue-600 text-blue-600 bg-white shadow-sm flex flex-col sm:flex-row items-center justify-center gap-1 transition-all text-center">
+                <i class="fa-solid fa-shapes text-sm sm:text-base"></i> <span class="leading-tight">Klasemen Fase B</span>
             </button>
-            <button id="tabFaseC" onclick="switchTab('faseC')" class="px-2 sm:px-5 py-2.5 rounded-t-xl font-bold text-xs sm:text-sm text-slate-500 hover:text-slate-700 hover:bg-white/50 border-b-2 border-transparent flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 transition-all">
-                <i class="fa-solid fa-cubes"></i> <span>Klasemen Fase C</span>
+            <button id="tabFaseC" onclick="switchTab('faseC')" class="px-1.5 sm:px-5 py-2 rounded-t-xl font-bold text-[11px] sm:text-sm text-slate-500 hover:text-slate-700 hover:bg-white/50 border-b-2 border-transparent flex flex-col sm:flex-row items-center justify-center gap-1 transition-all text-center">
+                <i class="fa-solid fa-cubes text-sm sm:text-base"></i> <span class="leading-tight">Klasemen Fase C</span>
             </button>
-            <button id="tabJuara" onclick="switchTab('juara')" class="px-2 sm:px-5 py-2.5 rounded-t-xl font-bold text-xs sm:text-sm text-slate-500 hover:text-slate-700 hover:bg-white/50 border-b-2 border-transparent flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 transition-all">
-                <i class="fa-solid fa-trophy text-amber-500"></i> <span>Riwayat Juara</span>
+            <button id="tabJuara" onclick="switchTab('juara')" class="px-1.5 sm:px-5 py-2 rounded-t-xl font-bold text-[11px] sm:text-sm text-slate-500 hover:text-slate-700 hover:bg-white/50 border-b-2 border-transparent flex flex-col sm:flex-row items-center justify-center gap-1 transition-all text-center">
+                <i class="fa-solid fa-trophy text-amber-500 text-sm sm:text-base"></i> <span class="leading-tight">Riwayat Juara</span>
             </button>
         </div>
 
         <!-- VIEW 1: Klasemen (Fase B / Fase C) -->
-        <div id="viewKlasemen" class="space-y-6">
-            <div class="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-slate-200/80">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-6 border-b border-slate-100 pb-4">
+        <div id="viewKlasemen" class="space-y-4 sm:space-y-6 w-full">
+            <div class="bg-white rounded-2xl p-3 sm:p-6 shadow-sm border border-slate-200/80 w-full">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1 sm:gap-2 mb-4 border-b border-slate-100 pb-3">
                     <div>
-                        <h2 id="klasemenTitle" class="text-xl font-extrabold text-slate-800 flex items-center gap-2">
+                        <h2 id="klasemenTitle" class="text-base sm:text-xl font-extrabold text-slate-800 flex items-center gap-2">
                             <!-- Injected JS -->
                         </h2>
-                        <p class="text-xs text-slate-500 mt-1">
+                        <p class="text-[11px] sm:text-xs text-slate-500 mt-0.5">
                             Diperbarui secara otomatis setiap pertandingan (2 Minggu Sekali)
                         </p>
                     </div>
                 </div>
 
-                <!-- Table Container -->
-                <div class="overflow-x-auto rounded-xl border border-slate-200">
+                <!-- Table Container (Mobile Fit - No Scroll Required) -->
+                <div class="w-full rounded-xl border border-slate-200 overflow-hidden">
                     <table class="w-full text-left border-collapse">
                         <thead>
-                            <tr class="bg-slate-50 text-slate-600 text-xs font-bold uppercase tracking-wider border-b border-slate-200">
-                                <th class="p-4 text-center w-16">Peringkat</th>
-                                <th class="p-4">Nama Kelas</th>
-                                <th class="p-4 text-center">Jml Tanding</th>
-                                <th class="p-4 text-right">Total Skor</th>
+                            <tr class="bg-slate-50 text-slate-600 text-[10px] sm:text-xs font-bold uppercase tracking-wider border-b border-slate-200">
+                                <th class="py-2.5 px-2 sm:p-4 text-center w-10 sm:w-16">Rank</th>
+                                <th class="py-2.5 px-2 sm:p-4">Nama Kelas</th>
+                                <th class="py-2.5 px-1 sm:p-4 text-center w-16 sm:w-28">Main</th>
+                                <th class="py-2.5 px-2 sm:p-4 text-right">Skor Total</th>
                             </tr>
                         </thead>
-                        <tbody id="klasemenTableBody" class="divide-y divide-slate-200 text-sm font-medium">
+                        <tbody id="klasemenTableBody" class="divide-y divide-slate-200 text-xs sm:text-sm font-medium">
                             <tr>
-                                <td colspan="4" class="text-center p-8 text-slate-400">
-                                    <i class="fa-solid fa-spinner fa-spin text-2xl mb-2"></i>
-                                    <p>Memuat data klasemen...</p>
+                                <td colspan="4" class="text-center p-6 text-slate-400">
+                                    <i class="fa-solid fa-spinner fa-spin text-xl mb-2"></i>
+                                    <p class="text-xs">Memuat data klasemen...</p>
                                 </td>
                             </tr>
                         </tbody>
@@ -205,63 +208,63 @@
         </div>
 
         <!-- VIEW 2: Riwayat Juara (Hall of Fame) -->
-        <div id="viewJuara" class="hidden space-y-6">
-            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
-                <div class="mb-6">
-                    <h2 class="text-xl font-extrabold text-slate-800 flex items-center gap-2">
-                        <i class="fa-solid fa-award text-amber-500 text-2xl"></i>
+        <div id="viewJuara" class="hidden space-y-6 w-full">
+            <div class="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-slate-200 w-full">
+                <div class="mb-4 sm:mb-6">
+                    <h2 class="text-lg sm:text-xl font-extrabold text-slate-800 flex items-center gap-2">
+                        <i class="fa-solid fa-award text-amber-500 text-xl sm:text-2xl"></i>
                         Riwayat Juara Liga Numerasi Digital
                     </h2>
                     <p class="text-xs text-slate-500 mt-1">Daftar Pemenang Juara 1, 2, dan 3 di Setiap Season</p>
                 </div>
 
-                <div id="juaraContainer" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div id="juaraContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                     <div class="col-span-full text-center p-8 text-slate-400">
-                        <i class="fa-solid fa-trophy text-4xl mb-2 text-slate-300"></i>
-                        <p>Memuat riwayat juara...</p>
+                        <i class="fa-solid fa-trophy text-3xl mb-2 text-slate-300"></i>
+                        <p class="text-xs">Memuat riwayat juara...</p>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- VIEW 3: Dashboard Admin -->
-        <div id="viewAdmin" class="hidden space-y-6">
+        <div id="viewAdmin" class="hidden space-y-6 w-full">
             <!-- Admin Header -->
-            <div class="bg-gradient-to-r from-purple-900 to-indigo-900 text-white rounded-2xl p-6 shadow-md">
+            <div class="bg-gradient-to-r from-purple-900 to-indigo-900 text-white rounded-2xl p-4 sm:p-6 shadow-md w-full">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
                     <div>
-                        <h2 class="text-xl font-bold flex items-center gap-2">
+                        <h2 class="text-lg sm:text-xl font-bold flex items-center gap-2">
                             <i class="fa-solid fa-user-shield text-amber-400"></i> Panel Kontrol Admin
                         </h2>
-                        <p class="text-xs text-purple-200 mt-1">Kelola Season, Kelas, dan Input Skor Pertandingan</p>
+                        <p class="text-xs text-purple-200 mt-0.5">Kelola Season, Kelas, dan Input Skor Pertandingan</p>
                     </div>
-                    <div class="flex items-center gap-2 flex-wrap">
-                        <button onclick="syncToGitHub()" class="bg-emerald-500 hover:bg-emerald-600 text-white border border-emerald-400/40 px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
-                            <i class="fa-brands fa-github text-sm"></i> Sync ke GitHub
+                    <div class="flex items-center gap-2 flex-wrap w-full sm:w-auto">
+                        <button onclick="syncToGitHub()" class="flex-1 sm:flex-none bg-emerald-500 hover:bg-emerald-600 text-white border border-emerald-400/40 px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 shadow-sm">
+                            <i class="fa-brands fa-github text-sm"></i> Sync GitHub
                         </button>
-                        <span id="storageModeBadge" class="text-[11px] bg-purple-800/80 border border-purple-400/30 text-purple-200 px-3 py-1 rounded-full font-medium">
-                            <i class="fa-solid fa-database text-emerald-400 mr-1"></i> Storage Ready
+                        <span id="storageModeBadge" class="text-[10px] sm:text-[11px] bg-purple-800/80 border border-purple-400/30 text-purple-200 px-2.5 py-1 rounded-full font-medium">
+                            <i class="fa-solid fa-database text-emerald-400 mr-1"></i> Storage
                         </span>
                         <button onclick="logoutAdmin()" class="bg-rose-500/20 hover:bg-rose-500/40 text-rose-200 border border-rose-400/30 px-3 py-1.5 rounded-lg text-xs font-semibold transition">
-                            Keluar Admin
+                            Keluar
                         </button>
                     </div>
                 </div>
             </div>
 
             <!-- Admin Grid Sections -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 w-full">
                 
                 <!-- Section 1: Kelola Season -->
-                <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 space-y-4">
-                    <h3 class="font-bold text-slate-800 border-b pb-2 flex items-center justify-between">
+                <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-4">
+                    <h3 class="font-bold text-slate-800 border-b pb-2 flex items-center justify-between text-sm sm:text-base">
                         <span><i class="fa-solid fa-calendar-plus text-blue-600 mr-2"></i>1. Kelola Season</span>
                     </h3>
                     
                     <form id="formAddSeason" onsubmit="handleAddSeason(event)" class="space-y-3">
                         <div>
                             <label class="text-xs font-semibold text-slate-600">Nama Season Baru</label>
-                            <input type="text" id="seasonNameInput" placeholder="Contoh: Season 1 (Jan-Mar 2026)" required class="w-full text-sm border border-slate-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 outline-none">
+                            <input type="text" id="seasonNameInput" placeholder="Contoh: Season 1 (Jan-Mar 2026)" required class="w-full text-xs sm:text-sm border border-slate-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-500 outline-none">
                         </div>
                         <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs py-2.5 rounded-lg transition">
                             <i class="fa-solid fa-plus mr-1"></i> Tambah Season Baru
@@ -277,20 +280,20 @@
                 </div>
 
                 <!-- Section 2: Kelola Kelas -->
-                <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 space-y-4">
-                    <h3 class="font-bold text-slate-800 border-b pb-2 flex items-center justify-between">
+                <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-4">
+                    <h3 class="font-bold text-slate-800 border-b pb-2 flex items-center justify-between text-sm sm:text-base">
                         <span><i class="fa-solid fa-school text-emerald-600 mr-2"></i>2. Tambah Kelas</span>
                     </h3>
 
                     <form id="formAddClass" onsubmit="handleAddClass(event)" class="space-y-3">
-                        <div class="grid grid-cols-2 gap-2">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                             <div>
                                 <label class="text-xs font-semibold text-slate-600">Nama Kelas</label>
-                                <input type="text" id="classNameInput" placeholder="Contoh: Kelas 4A" required class="w-full text-sm border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-emerald-500 outline-none">
+                                <input type="text" id="classNameInput" placeholder="Contoh: Kelas 4A" required class="w-full text-xs sm:text-sm border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-emerald-500 outline-none">
                             </div>
                             <div>
                                 <label class="text-xs font-semibold text-slate-600">Fase</label>
-                                <select id="classPhaseInput" required class="w-full text-sm border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-emerald-500 outline-none">
+                                <select id="classPhaseInput" required class="w-full text-xs sm:text-sm border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-emerald-500 outline-none bg-white">
                                     <option value="B">Fase B (Kls 3 & 4)</option>
                                     <option value="C">Fase C (Kls 5 & 6)</option>
                                 </select>
@@ -311,37 +314,37 @@
                 </div>
 
                 <!-- Section 3: Input Riwayat Juara -->
-                <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 space-y-4">
-                    <h3 class="font-bold text-slate-800 border-b pb-2 flex items-center justify-between">
+                <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-4">
+                    <h3 class="font-bold text-slate-800 border-b pb-2 flex items-center justify-between text-sm sm:text-base">
                         <span><i class="fa-solid fa-trophy text-amber-500 mr-2"></i>3. Input Riwayat Juara</span>
                     </h3>
 
                     <form id="formAddJuara" onsubmit="handleAddJuara(event)" class="space-y-3">
                         <div>
                             <label class="text-xs font-semibold text-slate-600">Target Season</label>
-                            <select id="juaraSeasonSelect" required class="w-full text-sm border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-amber-500 outline-none">
+                            <select id="juaraSeasonSelect" required class="w-full text-xs sm:text-sm border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-amber-500 outline-none bg-white">
                                 <!-- Injected JS -->
                             </select>
                         </div>
                         <div>
                             <label class="text-xs font-semibold text-slate-600">Fase</label>
-                            <select id="juaraPhaseSelect" required class="w-full text-sm border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-amber-500 outline-none">
+                            <select id="juaraPhaseSelect" required class="w-full text-xs sm:text-sm border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-amber-500 outline-none bg-white">
                                 <option value="B">Fase B</option>
                                 <option value="C">Fase C</option>
                             </select>
                         </div>
-                        <div class="grid grid-cols-3 gap-2">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
                             <div>
                                 <label class="text-xs font-semibold text-amber-600">Juara 1</label>
-                                <input type="text" id="juara1Input" placeholder="Kls 4A" required class="w-full text-xs border border-amber-300 rounded-lg p-1.5">
+                                <input type="text" id="juara1Input" placeholder="Kls 4A" required class="w-full text-xs border border-amber-300 rounded-lg p-2">
                             </div>
                             <div>
                                 <label class="text-xs font-semibold text-slate-500">Juara 2</label>
-                                <input type="text" id="juara2Input" placeholder="Kls 3B" required class="w-full text-xs border border-slate-300 rounded-lg p-1.5">
+                                <input type="text" id="juara2Input" placeholder="Kls 3B" required class="w-full text-xs border border-slate-300 rounded-lg p-2">
                             </div>
                             <div>
                                 <label class="text-xs font-semibold text-amber-700">Juara 3</label>
-                                <input type="text" id="juara3Input" placeholder="Kls 4C" required class="w-full text-xs border border-amber-600/30 rounded-lg p-1.5">
+                                <input type="text" id="juara3Input" placeholder="Kls 4C" required class="w-full text-xs border border-amber-600/30 rounded-lg p-2">
                             </div>
                         </div>
                         <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-semibold text-xs py-2.5 rounded-lg transition">
@@ -351,8 +354,8 @@
                 </div>
 
                 <!-- Section 4: Sinkronisasi Langsung ke GitHub -->
-                <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 space-y-4">
-                    <h3 class="font-bold text-slate-800 border-b pb-2 flex items-center justify-between">
+                <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-4">
+                    <h3 class="font-bold text-slate-800 border-b pb-2 flex items-center justify-between text-sm sm:text-base">
                         <span><i class="fa-brands fa-github text-slate-800 mr-2"></i>4. Sync ke GitHub</span>
                     </h3>
                     <p class="text-[11px] text-slate-500 leading-relaxed">
@@ -374,8 +377,8 @@
                 </div>
 
                 <!-- Section 5: Kelola Running Text -->
-                <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 space-y-4">
-                    <h3 class="font-bold text-slate-800 border-b pb-2 flex items-center justify-between">
+                <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-4">
+                    <h3 class="font-bold text-slate-800 border-b pb-2 flex items-center justify-between text-sm sm:text-base">
                         <span><i class="fa-solid fa-bullhorn text-rose-600 mr-2"></i>5. Edit Running Text</span>
                     </h3>
                     <p class="text-[11px] text-slate-500 leading-relaxed">
@@ -396,28 +399,28 @@
             </div>
 
             <!-- Section Input Skor Pertandingan -->
-            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
-                <h3 class="font-bold text-slate-800 text-base mb-4 flex items-center gap-2 border-b pb-3">
+            <div class="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-slate-200 w-full">
+                <h3 class="font-bold text-slate-800 text-sm sm:text-base mb-4 flex items-center gap-2 border-b pb-3">
                     <i class="fa-solid fa-gamepad text-indigo-600"></i>
-                    Input & Kelola Skor Pertandingan Real (Multi-Tahun)
+                    Input & Kelola Skor Pertandingan Real
                 </h3>
 
-                <form id="formAddScore" onsubmit="handleAddScore(event)" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 mb-6 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <form id="formAddScore" onsubmit="handleAddScore(event)" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4 mb-6 bg-slate-50 p-3 sm:p-4 rounded-xl border border-slate-200">
                     <div>
                         <label class="text-xs font-semibold text-slate-600">Pilih Kelas</label>
-                        <select id="scoreClassSelect" required class="w-full text-sm border border-slate-300 rounded-lg p-2 bg-white focus:ring-2 focus:ring-indigo-500 outline-none">
+                        <select id="scoreClassSelect" required class="w-full text-xs sm:text-sm border border-slate-300 rounded-lg p-2 bg-white focus:ring-2 focus:ring-indigo-500 outline-none">
                             <option value="">Pilih Kelas...</option>
                         </select>
                     </div>
 
                     <div>
                         <label class="text-xs font-semibold text-slate-600">Tanggal Pertandingan Real</label>
-                        <input type="date" id="scoreDateInput" required class="w-full text-sm border border-slate-300 rounded-lg p-2 bg-white focus:ring-2 focus:ring-indigo-500 outline-none">
+                        <input type="date" id="scoreDateInput" required class="w-full text-xs sm:text-sm border border-slate-300 rounded-lg p-2 bg-white focus:ring-2 focus:ring-indigo-500 outline-none">
                     </div>
 
                     <div>
                         <label class="text-xs font-semibold text-slate-600">Pekan ke-</label>
-                        <select id="scoreWeekSelect" required class="w-full text-sm border border-slate-300 rounded-lg p-2 bg-white focus:ring-2 focus:ring-indigo-500 outline-none">
+                        <select id="scoreWeekSelect" required class="w-full text-xs sm:text-sm border border-slate-300 rounded-lg p-2 bg-white focus:ring-2 focus:ring-indigo-500 outline-none">
                             <option value="1">Pekan 1 (Minggu Ke-1)</option>
                             <option value="2">Pekan 2 (Minggu Ke-3)</option>
                             <option value="3">Pekan 3</option>
@@ -427,19 +430,21 @@
 
                     <div>
                         <label class="text-xs font-semibold text-slate-600">Skor Diperoleh</label>
-                        <input type="number" id="scoreValueInput" placeholder="Contoh: 85" min="0" required class="w-full text-sm border border-slate-300 rounded-lg p-2 bg-white focus:ring-2 focus:ring-indigo-500 outline-none">
+                        <input type="number" id="scoreValueInput" placeholder="Contoh: 85" min="0" required class="w-full text-xs sm:text-sm border border-slate-300 rounded-lg p-2 bg-white focus:ring-2 focus:ring-indigo-500 outline-none">
                     </div>
 
                     <div class="flex items-end">
-                        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm p-2 rounded-lg transition shadow-sm">
+                        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-xs sm:text-sm p-2.5 rounded-lg transition shadow-sm">
                             <i class="fa-solid fa-plus-circle mr-1"></i> Submit Skor
                         </button>
                     </div>
                 </form>
 
                 <!-- Riwayat Input Skor Pertandingan -->
-                <h4 class="text-xs font-bold text-slate-500 uppercase mb-3">Riwayat Riil Input Skor (Bisa Di-edit / Dihapus)</h4>
-                <div class="overflow-x-auto rounded-xl border border-slate-200">
+                <h4 class="text-xs font-bold text-slate-500 uppercase mb-3">Riwayat Input Skor Pertandingan</h4>
+                
+                <!-- Desktop Table View (Hidden on Mobile) -->
+                <div class="hidden md:block overflow-x-auto rounded-xl border border-slate-200">
                     <table class="w-full text-left border-collapse text-xs">
                         <thead>
                             <tr class="bg-slate-100 text-slate-600 font-bold border-b border-slate-200">
@@ -457,6 +462,12 @@
                         </tbody>
                     </table>
                 </div>
+
+                <!-- Mobile Responsive Cards View (Visible on Mobile) -->
+                <div id="adminScoresMobileContainer" class="block md:hidden space-y-2.5">
+                    <!-- Injected JS Mobile Cards -->
+                </div>
+
             </div>
 
         </div>
@@ -465,15 +476,15 @@
 
     <!-- MODAL: Login Admin -->
     <div id="modalLogin" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100 relative transform transition-all">
+        <div class="bg-white rounded-2xl max-w-md w-full p-5 sm:p-6 shadow-2xl border border-slate-100 relative transform transition-all">
             <button onclick="toggleAuthModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 w-8 h-8 rounded-full flex items-center justify-center bg-slate-100 hover:bg-slate-200 transition">
                 <i class="fa-solid fa-xmark"></i>
             </button>
-            <div class="text-center mb-6">
+            <div class="text-center mb-5">
                 <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mx-auto mb-3">
                     <i class="fa-solid fa-lock text-xl"></i>
                 </div>
-                <h3 class="text-xl font-bold text-slate-800">Login Administrator</h3>
+                <h3 class="text-lg sm:text-xl font-bold text-slate-800">Login Administrator</h3>
                 <p class="text-xs text-slate-500 mt-1">Masukkan kata sandi untuk mengelola data liga</p>
             </div>
 
@@ -492,7 +503,7 @@
                     </button>
                 </div>
 
-                <button type="submit" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 rounded-xl shadow-md transition-all">
+                <button type="submit" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 rounded-xl shadow-md transition-all text-xs sm:text-sm">
                     Masuk Mode Admin
                 </button>
             </form>
@@ -501,15 +512,15 @@
 
     <!-- MODAL: Lupa Password -->
     <div id="modalForgotPassword" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100 relative">
+        <div class="bg-white rounded-2xl max-w-md w-full p-5 sm:p-6 shadow-2xl border border-slate-100 relative">
             <button onclick="closeForgotPasswordModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 w-8 h-8 rounded-full flex items-center justify-center bg-slate-100 hover:bg-slate-200 transition">
                 <i class="fa-solid fa-xmark"></i>
             </button>
-            <div class="text-center mb-6">
+            <div class="text-center mb-5">
                 <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-3">
                     <i class="fa-solid fa-key text-xl"></i>
                 </div>
-                <h3 class="text-xl font-bold text-slate-800">Pemulihan Kata Sandi</h3>
+                <h3 class="text-lg sm:text-xl font-bold text-slate-800">Pemulihan Kata Sandi</h3>
                 <p class="text-xs text-slate-500 mt-1">Masukkan email akun GitHub Anda untuk pengiriman petunjuk reset</p>
             </div>
 
@@ -519,7 +530,7 @@
                     <input type="email" id="forgotEmailInput" placeholder="contoh: admin@github.com" required class="w-full text-sm border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-amber-500 outline-none">
                 </div>
 
-                <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 rounded-xl shadow-md transition">
+                <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 rounded-xl shadow-md transition text-xs sm:text-sm">
                     Kirim Petunjuk Reset
                 </button>
             </form>
@@ -528,11 +539,11 @@
 
     <!-- MODAL: Edit Skor -->
     <div id="modalEditScore" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-slate-100 relative">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-5 sm:p-6 shadow-2xl border border-slate-100 relative">
             <button onclick="closeEditScoreModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 w-8 h-8 rounded-full flex items-center justify-center bg-slate-100 hover:bg-slate-200 transition">
                 <i class="fa-solid fa-xmark"></i>
             </button>
-            <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+            <h3 class="text-base sm:text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
                 <i class="fa-solid fa-pen-to-square text-indigo-600"></i> Edit Skor Pertandingan
             </h3>
 
@@ -544,10 +555,10 @@
                 </div>
 
                 <div class="flex justify-end gap-2 pt-2">
-                    <button type="button" onclick="closeEditScoreModal()" class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                    <button type="button" onclick="closeEditScoreModal()" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
                         Batal
                     </button>
-                    <button type="submit" class="px-4 py-2 rounded-xl text-xs font-bold bg-indigo-600 text-white hover:bg-indigo-700 transition">
+                    <button type="submit" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-indigo-600 text-white hover:bg-indigo-700 transition">
                         Simpan Perubahan
                     </button>
                 </div>
@@ -557,14 +568,14 @@
 
     <!-- MODAL: Konfirmasi Hapus -->
     <div id="modalConfirm" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-slate-100 text-center relative">
-            <div class="w-14 h-14 bg-rose-100 text-rose-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
+        <div class="bg-white rounded-2xl max-w-sm w-full p-5 sm:p-6 shadow-2xl border border-slate-100 text-center relative">
+            <div class="w-12 h-12 bg-rose-100 text-rose-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                <i class="fa-solid fa-triangle-exclamation text-xl"></i>
             </div>
-            <h3 class="text-lg font-bold text-slate-800 mb-2">Konfirmasi Hapus</h3>
-            <p class="text-xs text-slate-500 mb-6">Apakah Anda yakin ingin menghapus data ini? Aksi ini tidak dapat dibatalkan.</p>
+            <h3 class="text-base sm:text-lg font-bold text-slate-800 mb-1.5">Konfirmasi Hapus</h3>
+            <p class="text-xs text-slate-500 mb-5">Apakah Anda yakin ingin menghapus data ini? Aksi ini tidak dapat dibatalkan.</p>
 
-            <div class="flex items-center justify-center gap-3">
+            <div class="flex items-center justify-center gap-2 sm:gap-3">
                 <button onclick="closeConfirmModal(false)" class="w-1/2 py-2.5 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
                     Batal
                 </button>
@@ -576,17 +587,17 @@
     </div>
 
     <!-- Toast Notification -->
-    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
-        <div class="bg-slate-900 text-white px-4 py-3 rounded-xl shadow-xl border border-slate-700 flex items-center gap-3">
-            <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400 text-base"></i>
+    <div id="toast" class="fixed bottom-4 right-4 left-4 sm:left-auto z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="bg-slate-900 text-white px-4 py-3 rounded-xl shadow-xl border border-slate-700 flex items-center gap-3 max-w-md mx-auto">
+            <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400 text-base shrink-0"></i>
             <span id="toastMsg" class="text-xs font-medium">Notifikasi</span>
         </div>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc, updateDoc, deleteDoc, onSnapshot, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, updateDoc, deleteDoc, onSnapshot, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // Constants
         const INDO_MONTHS = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
@@ -821,7 +832,7 @@
             if (badge) {
                 badge.innerHTML = isFirebaseActive 
                     ? `<i class="fa-solid fa-cloud text-emerald-400 mr-1"></i> Cloud Firebase Active`
-                    : `<i class="fa-solid fa-hard-drive text-amber-400 mr-1"></i> Storage Local Active`;
+                    : `<i class="fa-solid fa-hard-drive text-amber-400 mr-1"></i> Local Storage`;
             }
         }
 
@@ -1018,14 +1029,14 @@
                 : `<i class="fa-solid fa-cubes text-emerald-600"></i> Klasemen Fase C (Kelas 5 & 6)`;
 
             if (!activePublicSeasonId) {
-                tbody.innerHTML = `<tr><td colspan="4" class="text-center p-8 text-slate-400">Belum ada Season aktif yang dipilih. Admin dapat membuat atau mengaktifkan season di Panel Admin.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="4" class="text-center p-6 text-slate-400 text-xs">Belum ada Season aktif. Admin dapat membuat atau mengaktifkan season di Panel Admin.</td></tr>`;
                 return;
             }
 
             const filteredClasses = classesList.filter(c => c.phase === phase);
 
             if (filteredClasses.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="4" class="text-center p-8 text-slate-400">Belum ada data kelas untuk Fase ${phase} di season ini.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="4" class="text-center p-6 text-slate-400 text-xs">Belum ada data kelas untuk Fase ${phase} di season ini.</td></tr>`;
                 return;
             }
 
@@ -1055,27 +1066,27 @@
                 let rowBg = "hover:bg-slate-50";
 
                 if (rank === 1) {
-                    rankBadge = `<span class="w-8 h-8 rounded-full bg-amber-400 text-amber-950 font-black flex items-center justify-center mx-auto gold-glow text-sm"><i class="fa-solid fa-crown text-xs mr-0.5"></i>1</span>`;
+                    rankBadge = `<span class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-amber-400 text-amber-950 font-black flex items-center justify-center mx-auto gold-glow text-xs sm:text-sm"><i class="fa-solid fa-crown text-[10px] sm:text-xs mr-0.5"></i>1</span>`;
                     rowBg = "bg-amber-50/40 hover:bg-amber-50";
                 } else if (rank === 2) {
-                    rankBadge = `<span class="w-8 h-8 rounded-full bg-slate-300 text-slate-800 font-black flex items-center justify-center mx-auto silver-glow text-sm">2</span>`;
+                    rankBadge = `<span class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-slate-300 text-slate-800 font-black flex items-center justify-center mx-auto silver-glow text-xs sm:text-sm">2</span>`;
                     rowBg = "bg-slate-50/80 hover:bg-slate-100";
                 } else if (rank === 3) {
-                    rankBadge = `<span class="w-8 h-8 rounded-full bg-amber-700 text-amber-100 font-black flex items-center justify-center mx-auto bronze-glow text-sm">3</span>`;
+                    rankBadge = `<span class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-amber-700 text-amber-100 font-black flex items-center justify-center mx-auto bronze-glow text-xs sm:text-sm">3</span>`;
                     rowBg = "bg-orange-50/30 hover:bg-orange-50";
                 }
 
                 html += `
                     <tr class="${rowBg} transition-colors">
-                        <td class="p-4 text-center">${rankBadge}</td>
-                        <td class="p-4 font-bold text-slate-800 text-base">
+                        <td class="py-3 px-2 sm:p-4 text-center">${rankBadge}</td>
+                        <td class="py-3 px-2 sm:p-4 font-bold text-slate-800 text-xs sm:text-base">
                             ${escapeHtml(item.className)}
                         </td>
-                        <td class="p-4 text-center">
-                            <span class="bg-slate-200 text-slate-700 px-2.5 py-1 rounded-full text-xs font-semibold">${item.matchCount} Kali</span>
+                        <td class="py-3 px-1 sm:p-4 text-center">
+                            <span class="bg-slate-200 text-slate-700 px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-semibold whitespace-nowrap">${item.matchCount} Main</span>
                         </td>
-                        <td class="p-4 text-right font-black text-blue-700 text-lg">
-                            ${item.totalScore.toLocaleString('id-ID')} <span class="text-xs font-normal text-slate-500">pts</span>
+                        <td class="py-3 px-2 sm:p-4 text-right font-black text-blue-700 text-sm sm:text-lg">
+                            ${item.totalScore.toLocaleString('id-ID')} <span class="text-[10px] sm:text-xs font-normal text-slate-500">pts</span>
                         </td>
                     </tr>
                 `;
@@ -1089,7 +1100,7 @@
             if (!container) return;
 
             if (juaraList.length === 0) {
-                container.innerHTML = `<div class="col-span-full text-center p-8 text-slate-400">Belum ada riwayat juara yang diinput oleh Admin.</div>`;
+                container.innerHTML = `<div class="col-span-full text-center p-8 text-slate-400 text-xs">Belum ada riwayat juara yang diinput oleh Admin.</div>`;
                 return;
             }
 
@@ -1099,13 +1110,13 @@
                 const seasonName = seasonObj ? seasonObj.name : 'Season N/A';
 
                 html += `
-                    <div class="bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-2xl p-5 shadow-lg relative overflow-hidden border border-slate-700">
-                        <div class="flex justify-between items-start mb-4 border-b border-slate-700 pb-3">
+                    <div class="bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-2xl p-4 sm:p-5 shadow-lg relative overflow-hidden border border-slate-700">
+                        <div class="flex justify-between items-start mb-3 border-b border-slate-700 pb-2.5">
                             <div>
-                                <span class="text-[10px] font-bold uppercase tracking-widest text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full border border-amber-400/20">
+                                <span class="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-amber-400 bg-amber-400/10 px-2.5 py-0.5 rounded-full border border-amber-400/20">
                                     Fase ${item.phase}
                                 </span>
-                                <h3 class="text-lg font-extrabold mt-2 text-white">${escapeHtml(seasonName)}</h3>
+                                <h3 class="text-base sm:text-lg font-extrabold mt-1.5 text-white">${escapeHtml(seasonName)}</h3>
                             </div>
                             ${isAdminLoggedIn ? `
                                 <button onclick="confirmDelete('juara', '${item.id}')" class="text-rose-400 hover:text-rose-300 text-xs bg-rose-500/10 p-2 rounded-lg border border-rose-500/20">
@@ -1114,29 +1125,29 @@
                             ` : ''}
                         </div>
 
-                        <div class="space-y-3 text-sm">
+                        <div class="space-y-2 sm:space-y-3 text-xs sm:text-sm">
                             <div class="flex items-center justify-between bg-amber-500/10 border border-amber-500/30 p-2.5 rounded-xl">
                                 <div class="flex items-center gap-2">
-                                    <i class="fa-solid fa-trophy text-amber-400 text-lg"></i>
+                                    <i class="fa-solid fa-trophy text-amber-400 text-base sm:text-lg"></i>
                                     <span class="font-bold text-amber-200">Juara 1</span>
                                 </div>
-                                <span class="font-black text-base text-amber-300">${escapeHtml(item.juara1)}</span>
+                                <span class="font-black text-sm sm:text-base text-amber-300">${escapeHtml(item.juara1)}</span>
                             </div>
 
                             <div class="flex items-center justify-between bg-slate-700/50 border border-slate-600/50 p-2.5 rounded-xl">
                                 <div class="flex items-center gap-2">
-                                    <i class="fa-solid fa-medal text-slate-300 text-lg"></i>
+                                    <i class="fa-solid fa-medal text-slate-300 text-base sm:text-lg"></i>
                                     <span class="font-bold text-slate-200">Juara 2</span>
                                 </div>
-                                <span class="font-black text-base text-slate-300">${escapeHtml(item.juara2)}</span>
+                                <span class="font-black text-sm sm:text-base text-slate-300">${escapeHtml(item.juara2)}</span>
                             </div>
 
                             <div class="flex items-center justify-between bg-amber-900/20 border border-amber-800/30 p-2.5 rounded-xl">
                                 <div class="flex items-center gap-2">
-                                    <i class="fa-solid fa-award text-amber-600 text-lg"></i>
+                                    <i class="fa-solid fa-award text-amber-600 text-base sm:text-lg"></i>
                                     <span class="font-bold text-amber-400">Juara 3</span>
                                 </div>
-                                <span class="font-black text-base text-amber-500">${escapeHtml(item.juara3)}</span>
+                                <span class="font-black text-sm sm:text-base text-amber-500">${escapeHtml(item.juara3)}</span>
                             </div>
                         </div>
                     </div>
@@ -1156,7 +1167,7 @@
 
             select.innerHTML = seasonsList.map(s => `
                 <option value="${s.id}" ${s.id === activePublicSeasonId ? 'selected' : ''}>
-                    ${escapeHtml(s.name)} ${s.isPublic ? '(Aktif Publik)' : ''}
+                    ${escapeHtml(s.name)} ${s.isPublic ? '(Aktif)' : ''}
                 </option>
             `).join('');
         }
@@ -1165,19 +1176,19 @@
             const container = document.getElementById('adminSeasonList');
             if (!container) return;
             if (seasonsList.length === 0) {
-                container.innerHTML = `<p class="text-slate-400 italic">Belum ada season.</p>`;
+                container.innerHTML = `<p class="text-slate-400 italic text-xs">Belum ada season.</p>`;
                 return;
             }
 
             container.innerHTML = seasonsList.map(s => `
                 <div class="flex items-center justify-between bg-slate-50 p-2 rounded border border-slate-200">
-                    <span class="font-medium text-slate-700 ${s.isPublic ? 'font-bold text-blue-600' : ''}">${escapeHtml(s.name)}</span>
-                    <div class="flex items-center gap-1">
+                    <span class="font-medium text-slate-700 truncate max-w-[150px] ${s.isPublic ? 'font-bold text-blue-600' : ''}">${escapeHtml(s.name)}</span>
+                    <div class="flex items-center gap-1 shrink-0">
                         ${!s.isPublic ? `
-                            <button onclick="setPublicSeason('${s.id}')" class="bg-blue-100 hover:bg-blue-200 text-blue-700 px-2 py-1 rounded text-[10px] font-semibold">
+                            <button onclick="setPublicSeason('${s.id}')" class="bg-blue-100 hover:bg-blue-200 text-blue-700 px-2 py-0.5 rounded text-[10px] font-semibold">
                                 Tampilkan
                             </button>
-                        ` : '<span class="text-[10px] bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded font-bold">Publik</span>'}
+                        ` : '<span class="text-[10px] bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">Publik</span>'}
                         <button onclick="confirmDelete('seasons', '${s.id}')" class="text-rose-600 hover:text-rose-800 p-1">
                             <i class="fa-solid fa-trash"></i>
                         </button>
@@ -1190,7 +1201,7 @@
             const container = document.getElementById('adminClassList');
             if (!container) return;
             if (classesList.length === 0) {
-                container.innerHTML = `<p class="text-slate-400 italic">Belum ada kelas.</p>`;
+                container.innerHTML = `<p class="text-slate-400 italic text-xs">Belum ada kelas.</p>`;
                 return;
             }
 
@@ -1225,39 +1236,82 @@
 
         function renderAdminScoresTable() {
             const tbody = document.getElementById('adminScoresTableBody');
-            if (!tbody) return;
+            const mobileContainer = document.getElementById('adminScoresMobileContainer');
+            
+            if (!tbody && !mobileContainer) return;
+            
             if (scoresList.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="7" class="text-center p-4 text-slate-400">Belum ada data skor pertandingan.</td></tr>`;
+                if (tbody) tbody.innerHTML = `<tr><td colspan="7" class="text-center p-4 text-slate-400">Belum ada data skor pertandingan.</td></tr>`;
+                if (mobileContainer) mobileContainer.innerHTML = `<p class="text-center p-4 text-slate-400 text-xs">Belum ada data skor pertandingan.</p>`;
                 return;
             }
 
             const sortedScores = [...scoresList].sort((a,b) => (b.timestamp || 0) - (a.timestamp || 0));
 
-            tbody.innerHTML = sortedScores.map(s => {
-                const cls = classesList.find(c => c.id === s.classId);
-                const className = cls ? cls.className : 'Kelas Terhapus';
-                const classPhase = cls ? cls.phase : '-';
-                const dateStr = s.matchDate ? new Date(s.matchDate).toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }) : (s.timestamp ? new Date(s.timestamp).toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }) : '-');
+            // Render Table View (Desktop)
+            if (tbody) {
+                tbody.innerHTML = sortedScores.map(s => {
+                    const cls = classesList.find(c => c.id === s.classId);
+                    const className = cls ? cls.className : 'Kelas Terhapus';
+                    const classPhase = cls ? cls.phase : '-';
+                    const dateStr = s.matchDate ? new Date(s.matchDate).toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }) : (s.timestamp ? new Date(s.timestamp).toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }) : '-');
 
-                return `
-                    <tr class="hover:bg-slate-50">
-                        <td class="p-3 font-mono text-slate-600 font-semibold">${dateStr}</td>
-                        <td class="p-3 font-bold text-slate-800">${escapeHtml(className)}</td>
-                        <td class="p-3"><span class="bg-slate-200 px-1.5 py-0.5 rounded text-[10px]">Fase ${classPhase}</span></td>
-                        <td class="p-3 font-semibold text-slate-700">${escapeHtml(s.month || '-')}</td>
-                        <td class="p-3">Pekan ${s.matchWeek}</td>
-                        <td class="p-3 text-right font-black text-indigo-700">${s.score}</td>
-                        <td class="p-3 text-center space-x-2">
-                            <button onclick="openEditScoreModal('${s.id}', ${s.score})" class="text-indigo-600 hover:text-indigo-800 font-semibold text-[11px] bg-indigo-50 px-2 py-1 rounded border border-indigo-200">
-                                <i class="fa-solid fa-pen"></i> Edit
-                            </button>
-                            <button onclick="confirmDelete('scores', '${s.id}')" class="text-rose-600 hover:text-rose-800 font-semibold text-[11px] bg-rose-50 px-2 py-1 rounded border border-rose-200">
-                                <i class="fa-solid fa-trash"></i> Hapus
-                            </button>
-                        </td>
-                    </tr>
-                `;
-            }).join('');
+                    return `
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-3 font-mono text-slate-600 font-semibold">${dateStr}</td>
+                            <td class="p-3 font-bold text-slate-800">${escapeHtml(className)}</td>
+                            <td class="p-3"><span class="bg-slate-200 px-1.5 py-0.5 rounded text-[10px]">Fase ${classPhase}</span></td>
+                            <td class="p-3 font-semibold text-slate-700">${escapeHtml(s.month || '-')}</td>
+                            <td class="p-3">Pekan ${s.matchWeek}</td>
+                            <td class="p-3 text-right font-black text-indigo-700">${s.score}</td>
+                            <td class="p-3 text-center space-x-2">
+                                <button onclick="openEditScoreModal('${s.id}', ${s.score})" class="text-indigo-600 hover:text-indigo-800 font-semibold text-[11px] bg-indigo-50 px-2 py-1 rounded border border-indigo-200">
+                                    <i class="fa-solid fa-pen"></i> Edit
+                                </button>
+                                <button onclick="confirmDelete('scores', '${s.id}')" class="text-rose-600 hover:text-rose-800 font-semibold text-[11px] bg-rose-50 px-2 py-1 rounded border border-rose-200">
+                                    <i class="fa-solid fa-trash"></i> Hapus
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+
+            // Render Mobile Cards View (Smartphones)
+            if (mobileContainer) {
+                mobileContainer.innerHTML = sortedScores.map(s => {
+                    const cls = classesList.find(c => c.id === s.classId);
+                    const className = cls ? cls.className : 'Kelas Terhapus';
+                    const classPhase = cls ? cls.phase : '-';
+                    const dateStr = s.matchDate ? new Date(s.matchDate).toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }) : '-';
+
+                    return `
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 flex items-center justify-between gap-2 text-xs">
+                            <div class="space-y-1">
+                                <div class="flex items-center gap-1.5">
+                                    <span class="font-bold text-slate-800 text-sm">${escapeHtml(className)}</span>
+                                    <span class="bg-slate-200 px-1.5 py-0.5 rounded text-[9px] font-semibold">Fase ${classPhase}</span>
+                                </div>
+                                <div class="text-[11px] text-slate-500 flex items-center gap-2">
+                                    <span><i class="fa-regular fa-calendar text-slate-400 mr-1"></i>${dateStr}</span>
+                                    <span>• Pekan ${s.matchWeek}</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-end gap-1.5 shrink-0">
+                                <span class="font-black text-indigo-700 text-base">${s.score} <span class="text-[10px] font-normal text-slate-500">pts</span></span>
+                                <div class="flex items-center gap-1">
+                                    <button onclick="openEditScoreModal('${s.id}', ${s.score})" class="text-indigo-600 bg-indigo-100/80 px-2 py-0.5 rounded text-[10px] font-bold">
+                                        Edit
+                                    </button>
+                                    <button onclick="confirmDelete('scores', '${s.id}')" class="text-rose-600 bg-rose-100/80 px-2 py-0.5 rounded text-[10px] font-bold">
+                                        Hapus
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
         }
 
         window.handleAddSeason = async function(e) {
@@ -1452,8 +1506,8 @@
             const btnC = document.getElementById('tabFaseC');
             const btnJuara = document.getElementById('tabJuara');
 
-            const activeClass = "px-2 sm:px-5 py-2.5 rounded-t-xl font-bold text-xs sm:text-sm border-b-2 border-blue-600 text-blue-600 bg-white shadow-sm flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 transition-all";
-            const inactiveClass = "px-2 sm:px-5 py-2.5 rounded-t-xl font-bold text-xs sm:text-sm text-slate-500 hover:text-slate-700 hover:bg-white/50 border-b-2 border-transparent flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 transition-all";
+            const activeClass = "px-1.5 sm:px-5 py-2 rounded-t-xl font-bold text-[11px] sm:text-sm border-b-2 border-blue-600 text-blue-600 bg-white shadow-sm flex flex-col sm:flex-row items-center justify-center gap-1 transition-all text-center";
+            const inactiveClass = "px-1.5 sm:px-5 py-2 rounded-t-xl font-bold text-[11px] sm:text-sm text-slate-500 hover:text-slate-700 hover:bg-white/50 border-b-2 border-transparent flex flex-col sm:flex-row items-center justify-center gap-1 transition-all text-center";
 
             if (btnB) btnB.className = tabName === 'faseB' ? activeClass : inactiveClass;
             if (btnC) btnC.className = tabName === 'faseC' ? activeClass : inactiveClass;
@@ -1536,6 +1590,7 @@
                 
                 document.getElementById('authBtnText').innerText = "Dashboard Admin";
                 document.getElementById('adminBadge').classList.remove('hidden');
+                document.getElementById('adminBadge').classList.add('flex');
                 
                 showToast("Login Admin Berhasil!");
                 switchTab('admin');
@@ -1549,6 +1604,7 @@
             isAdminLoggedIn = false;
             document.getElementById('authBtnText').innerText = "Login Admin";
             document.getElementById('adminBadge').classList.add('hidden');
+            document.getElementById('adminBadge').classList.remove('flex');
             switchTab('faseB');
             showToast("Anda telah keluar dari mode Admin");
         };
@@ -1641,9 +1697,9 @@
             if (!toast) return;
             toastMsg.innerText = msg;
             if (isError) {
-                toastIcon.className = "fa-solid fa-circle-xmark text-rose-400 text-base";
+                toastIcon.className = "fa-solid fa-circle-xmark text-rose-400 text-base shrink-0";
             } else {
-                toastIcon.className = "fa-solid fa-circle-check text-emerald-400 text-base";
+                toastIcon.className = "fa-solid fa-circle-check text-emerald-400 text-base shrink-0";
             }
 
             toast.classList.remove('translate-y-20', 'opacity-0');
