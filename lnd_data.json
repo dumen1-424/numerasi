@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-17T21:51:53.927Z",
+  "updatedAt": "2026-09-24T05:19:09.487Z",
   "activePublicSeasonId": "season_1789366557827",
   "runningText": "Saksikan pertandingan pertama untuk FASE B pada tanggal 23 September 2026 ✦ Dukung kelas kalian & raih Skor tertinggi ✦",
   "seasonsList": [
@@ -138,6 +138,56 @@
       "matchWeek": 1,
       "score": 175,
       "timestamp": 1789516800000
+    },
+    {
+      "id": "score_1790226992176",
+      "classId": "cls-3a",
+      "seasonId": "season_1789366557827",
+      "matchDate": "2026-09-23",
+      "month": "September 2026",
+      "matchWeek": 1,
+      "score": 310,
+      "timestamp": 1790121600000
+    },
+    {
+      "id": "score_1790227016517",
+      "classId": "cls_1789387792202",
+      "seasonId": "season_1789366557827",
+      "matchDate": "2026-09-23",
+      "month": "September 2026",
+      "matchWeek": 1,
+      "score": 380,
+      "timestamp": 1790121600000
+    },
+    {
+      "id": "score_1790227037540",
+      "classId": "cls_1789387797976",
+      "seasonId": "season_1789366557827",
+      "matchDate": "2026-09-23",
+      "month": "September 2026",
+      "matchWeek": 1,
+      "score": 180,
+      "timestamp": 1790121600000
+    },
+    {
+      "id": "score_1790227061183",
+      "classId": "cls_1789387810176",
+      "seasonId": "season_1789366557827",
+      "matchDate": "2026-09-23",
+      "month": "September 2026",
+      "matchWeek": 1,
+      "score": 195,
+      "timestamp": 1790121600000
+    },
+    {
+      "id": "score_1790227074678",
+      "classId": "cls_1789387816092",
+      "seasonId": "season_1789366557827",
+      "matchDate": "2026-09-23",
+      "month": "September 2026",
+      "matchWeek": 1,
+      "score": 200,
+      "timestamp": 1790121600000
     }
   ],
   "juaraList": []
