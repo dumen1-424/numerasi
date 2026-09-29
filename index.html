@@ -244,7 +244,7 @@
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-grow w-full">
 
         <!-- Navigation Tabs Bar -->
-        <div class="grid grid-cols-3 gap-2 bg-slate-200/80 p-1.5 rounded-2xl mb-6 shadow-inner">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 bg-slate-200/80 p-1.5 rounded-2xl mb-6 shadow-inner">
             <button id="tabFaseB" onclick="switchTab('faseB')" class="py-2.5 px-2 sm:px-4 rounded-xl font-extrabold text-xs sm:text-sm bg-white text-indigo-700 shadow-md flex items-center justify-center gap-2 transition-all">
                 <i class="fa-solid fa-shapes text-indigo-500 text-sm sm:text-base"></i>
                 <span class="leading-tight">Fase B <span class="hidden sm:inline">(Kls 3 & 4)</span></span>
@@ -256,6 +256,10 @@
             <button id="tabJuara" onclick="switchTab('juara')" class="py-2.5 px-2 sm:px-4 rounded-xl font-extrabold text-xs sm:text-sm text-slate-600 hover:text-slate-900 flex items-center justify-center gap-2 transition-all">
                 <i class="fa-solid fa-crown text-amber-500 text-sm sm:text-base"></i>
                 <span class="leading-tight">Hall of Fame</span>
+            </button>
+            <button id="tabKomentar" onclick="switchTab('komentar')" class="py-2.5 px-2 sm:px-4 rounded-xl font-extrabold text-xs sm:text-sm text-slate-600 hover:text-slate-900 flex items-center justify-center gap-2 transition-all">
+                <i class="fa-solid fa-comments text-teal-500 text-sm sm:text-base"></i>
+                <span class="leading-tight">Komentar</span>
             </button>
         </div>
 
@@ -321,6 +325,65 @@
                     <div class="col-span-full text-center p-12 text-slate-400">
                         <i class="fa-solid fa-trophy text-4xl mb-3 text-slate-300"></i>
                         <p class="text-xs font-bold">Memuat riwayat juara...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW 4: Menu Komentar & Dukungan -->
+        <div id="viewKomentar" class="hidden space-y-6 w-full">
+            <div class="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-slate-200 w-full">
+                <div class="mb-6 flex items-center justify-between flex-wrap gap-2 border-b border-slate-100 pb-4">
+                    <div>
+                        <h2 class="text-lg sm:text-xl font-black text-slate-800 flex items-center gap-2">
+                            <i class="fa-solid fa-comments text-teal-500 text-2xl"></i>
+                            Ruang Komentar & Dukungan
+                        </h2>
+                        <p class="text-xs text-slate-500 mt-0.5">Berikan pesan semangat dan dukungan untuk kelas favoritmu di Liga Numerasi Digital!</p>
+                    </div>
+                </div>
+
+                <!-- Form Input Komentar -->
+                <form id="formAddComment" onsubmit="handleAddComment(event)" class="bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-200 space-y-3.5 mb-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Nama / Asal Kelas <span class="text-rose-500">*</span></label>
+                            <input type="text" id="commentNameInput" placeholder="Contoh: Budi (Kls 4A) / Wali Murid" required class="w-full text-xs sm:text-sm border border-slate-300 rounded-xl p-2.5 bg-white focus:ring-2 focus:ring-teal-500 outline-none font-semibold">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Status / Peran</label>
+                            <select id="commentRoleInput" class="w-full text-xs sm:text-sm border border-slate-300 rounded-xl p-2.5 bg-white focus:ring-2 focus:ring-teal-500 outline-none font-semibold">
+                                <option value="Siswa">Siswa</option>
+                                <option value="Wali Murid">Wali Murid / Orang Tua</option>
+                                <option value="Guru / Staf">Guru / Staf Sekolah</option>
+                                <option value="Pendukung">Pendukung</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Pesan Komentar <span class="text-rose-500">*</span></label>
+                        <textarea id="commentTextInput" rows="3" placeholder="Tuliskan komentar atau kata-kata semangat di sini... (Dilengkapi penyaringan kata tidak pantas)" required class="w-full text-xs sm:text-sm border border-slate-300 rounded-xl p-2.5 bg-white focus:ring-2 focus:ring-teal-500 outline-none"></textarea>
+                    </div>
+                    <div class="flex items-center justify-between flex-wrap gap-2 pt-1">
+                        <span class="text-[11px] text-slate-400 font-medium flex items-center gap-1">
+                            <i class="fa-solid fa-shield-halved text-teal-600"></i> Penyaringan kata tidak sopan otomatis aktif
+                        </span>
+                        <button type="submit" class="bg-teal-600 hover:bg-teal-700 active:scale-95 text-white font-bold text-xs sm:text-sm px-5 py-2.5 rounded-xl transition shadow-md flex items-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i> Kirim Komentar
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Daftar Komentar -->
+                <div class="space-y-3">
+                    <h3 class="text-xs font-extrabold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+                        <i class="fa-solid fa-list-ul text-teal-600"></i> Komentar Terbaru
+                    </h3>
+                    <div id="commentsListContainer" class="space-y-3">
+                        <div class="text-center p-8 text-slate-400">
+                            <i class="fa-solid fa-spinner fa-spin text-2xl text-teal-500 mb-2"></i>
+                            <p class="text-xs font-bold">Memuat komentar...</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -708,6 +771,29 @@
         // Constants
         const INDO_MONTHS = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
 
+        // Bad words filter list (Indonesia & English profanity list)
+        const BAD_WORDS = [
+            'anjing', 'babi', 'jancok', 'jancuk', 'kontol', 'memek', 'goblok', 'tolol', 'bangsat', 
+            'bajingan', 'tai', 'taik', 'asu', 'pantek', 'kampang', 'bodoh', 'peler', 'pepek', 
+            'itil', 'puki', 'fuck', 'shit', 'bitch', 'asshole', 'kuntul', 'lonte', 'bencong', 'banci'
+        ];
+
+        function filterBadWords(text) {
+            if (!text) return { filteredText: '', hasBadWords: false };
+            let filteredText = text;
+            let hasBadWords = false;
+
+            BAD_WORDS.forEach(word => {
+                const regex = new RegExp(`\\b${word}\\b|${word}`, 'gi');
+                if (regex.test(filteredText)) {
+                    hasBadWords = true;
+                    filteredText = filteredText.replace(regex, (match) => '*'.repeat(match.length));
+                }
+            });
+
+            return { filteredText, hasBadWords };
+        }
+
         function formatMonthYear(dateStr) {
             if (!dateStr) return '';
             const parts = dateStr.split('-');
@@ -756,6 +842,7 @@
         let classesList = [];
         let scoresList = [];
         let juaraList = [];
+        let commentsList = [];
 
         // Default initial data
         const DEFAULT_SEASONS = [
@@ -787,6 +874,7 @@
                         classesList = data.classesList || [];
                         scoresList = data.scoresList || [];
                         juaraList = data.juaraList || [];
+                        commentsList = data.commentsList || [];
                         if (data.runningText) {
                             runningText = data.runningText;
                         }
@@ -836,7 +924,8 @@
                 seasonsList,
                 classesList,
                 scoresList,
-                juaraList
+                juaraList,
+                commentsList
             };
 
             const jsonString = JSON.stringify(payloadData, null, 2);
@@ -948,6 +1037,7 @@
                 const storedClasses = localStorage.getItem('lnd_classes');
                 const storedScores = localStorage.getItem('lnd_scores');
                 const storedJuara = localStorage.getItem('lnd_juara');
+                const storedComments = localStorage.getItem('lnd_comments');
                 const storedRunningText = localStorage.getItem('lnd_running_text');
 
                 if (storedRunningText) runningText = storedRunningText;
@@ -955,11 +1045,13 @@
                 classesList = storedClasses ? JSON.parse(storedClasses) : DEFAULT_CLASSES;
                 scoresList = storedScores ? JSON.parse(storedScores) : [];
                 juaraList = storedJuara ? JSON.parse(storedJuara) : [];
+                commentsList = storedComments ? JSON.parse(storedComments) : [];
 
                 if (!storedSeasons) localStorage.setItem('lnd_seasons', JSON.stringify(seasonsList));
                 if (!storedClasses) localStorage.setItem('lnd_classes', JSON.stringify(classesList));
                 if (!storedScores) localStorage.setItem('lnd_scores', JSON.stringify(scoresList));
                 if (!storedJuara) localStorage.setItem('lnd_juara', JSON.stringify(juaraList));
+                if (!storedComments) localStorage.setItem('lnd_comments', JSON.stringify(commentsList));
                 if (!storedRunningText) localStorage.setItem('lnd_running_text', runningText);
 
                 const activeSeason = seasonsList.find(s => s.isPublic === true);
@@ -981,6 +1073,7 @@
                 localStorage.setItem('lnd_classes', JSON.stringify(classesList));
                 localStorage.setItem('lnd_scores', JSON.stringify(scoresList));
                 localStorage.setItem('lnd_juara', JSON.stringify(juaraList));
+                localStorage.setItem('lnd_comments', JSON.stringify(commentsList));
                 localStorage.setItem('lnd_running_text', runningText);
 
                 if (broadcastChannel) {
@@ -1046,6 +1139,11 @@
                 juaraList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 renderJuaraView();
             }, (err) => console.error("Error fetching juara:", err));
+
+            onSnapshot(getPublicCollection('comments'), (snapshot) => {
+                commentsList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                renderCommentsView();
+            }, (err) => console.error("Error fetching comments:", err));
         }
 
         function refreshAllViews() {
@@ -1058,6 +1156,7 @@
             renderJuaraSeasonSelect();
             renderAdminScoresTable();
             renderJuaraView();
+            renderCommentsView();
             updateUI();
         }
 
@@ -1318,6 +1417,128 @@
 
             container.innerHTML = html;
         }
+
+        // Render Ruang Komentar Publik & Cross-device
+        function renderCommentsView() {
+            const container = document.getElementById('commentsListContainer');
+            if (!container) return;
+
+            if (!commentsList || commentsList.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center p-8 bg-slate-50 rounded-2xl border border-dashed border-slate-200 text-slate-400">
+                        <i class="fa-regular fa-comment-dots text-3xl mb-2 text-slate-300"></i>
+                        <p class="text-xs font-bold">Belum ada komentar. Jadilah yang pertama memberikan dukungan!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Urutkan komentar dari yang paling baru
+            const sortedComments = [...commentsList].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+
+            container.innerHTML = sortedComments.map(item => {
+                const timeAgo = item.createdAt ? new Date(item.createdAt).toLocaleString('id-ID', {
+                    day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'
+                }) : '-';
+
+                let badgeColor = 'bg-teal-100 text-teal-800';
+                if (item.role === 'Wali Murid') badgeColor = 'bg-amber-100 text-amber-800';
+                if (item.role === 'Guru / Staf') badgeColor = 'bg-purple-100 text-purple-800';
+                if (item.role === 'Pendukung') badgeColor = 'bg-blue-100 text-blue-800';
+
+                return `
+                    <div class="bg-slate-50 border border-slate-200/80 rounded-2xl p-4 space-y-2 transition hover:bg-white hover:shadow-sm">
+                        <div class="flex items-center justify-between flex-wrap gap-2">
+                            <div class="flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-full bg-teal-600 text-white font-bold flex items-center justify-center text-xs uppercase shadow-sm">
+                                    ${escapeHtml(item.name ? item.name.charAt(0) : 'U')}
+                                </div>
+                                <div>
+                                    <div class="flex items-center gap-1.5 flex-wrap">
+                                        <span class="font-black text-slate-800 text-xs sm:text-sm">${escapeHtml(item.name || 'Anonim')}</span>
+                                        <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${badgeColor}">
+                                            ${escapeHtml(item.role || 'Siswa')}
+                                        </span>
+                                    </div>
+                                    <span class="text-[10px] text-slate-400 font-medium">${timeAgo}</span>
+                                </div>
+                            </div>
+                            ${isAdminLoggedIn ? `
+                                <button onclick="confirmDelete('comments', '${item.id}')" class="text-rose-500 hover:text-rose-700 text-xs bg-rose-50 hover:bg-rose-100 px-2.5 py-1 rounded-lg border border-rose-200 transition font-bold">
+                                    <i class="fa-solid fa-trash mr-1"></i> Hapus
+                                </button>
+                            ` : ''}
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed bg-white p-3 rounded-xl border border-slate-100">
+                            ${escapeHtml(item.text)}
+                        </p>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Handler Submit Komentar Baru
+        window.handleAddComment = async function(e) {
+            e.preventDefault();
+
+            const nameInput = document.getElementById('commentNameInput');
+            const roleInput = document.getElementById('commentRoleInput');
+            const textInput = document.getElementById('commentTextInput');
+
+            const rawName = nameInput.value.trim();
+            const role = roleInput.value;
+            const rawText = textInput.value.trim();
+
+            if (!rawName || !rawText) {
+                showToast("Mohon isi nama dan pesan komentar Anda!", true);
+                return;
+            }
+
+            // Lakukan penyaringan kata tidak pantas
+            const filterNameRes = filterBadWords(rawName);
+            const filterTextRes = filterBadWords(rawText);
+
+            const name = filterNameRes.filteredText;
+            const text = filterTextRes.filteredText;
+            const isBadWordDetected = filterNameRes.hasBadWords || filterTextRes.hasBadWords;
+
+            const commentId = 'cmt_' + Date.now();
+            const newComment = {
+                id: commentId,
+                name,
+                role,
+                text,
+                createdAt: Date.now()
+            };
+
+            if (isFirebaseActive) {
+                try {
+                    await addDoc(getPublicCollection('comments'), {
+                        name,
+                        role,
+                        text,
+                        createdAt: Date.now()
+                    });
+                } catch (err) {
+                    console.error("Firebase addComment error, using local:", err);
+                    commentsList.push(newComment);
+                    saveAndSyncLocalStorage();
+                    renderCommentsView();
+                }
+            } else {
+                commentsList.push(newComment);
+                saveAndSyncLocalStorage();
+                renderCommentsView();
+            }
+
+            textInput.value = '';
+            
+            if (isBadWordDetected) {
+                showToast("Komentar berhasil dikirim! Kata-kata yang tidak pantas telah disensor (***).");
+            } else {
+                showToast("Komentar Anda berhasil dipublikasikan!");
+            }
+        };
 
         function renderPublicSeasonSelect() {
             const select = document.getElementById('publicSeasonSelect');
@@ -1667,6 +1888,7 @@
             const btnB = document.getElementById('tabFaseB');
             const btnC = document.getElementById('tabFaseC');
             const btnJuara = document.getElementById('tabJuara');
+            const btnKomentar = document.getElementById('tabKomentar');
 
             const activeClass = "py-2.5 px-2 sm:px-4 rounded-xl font-extrabold text-xs sm:text-sm bg-white text-indigo-700 shadow-md flex items-center justify-center gap-2 transition-all";
             const inactiveClass = "py-2.5 px-2 sm:px-4 rounded-xl font-extrabold text-xs sm:text-sm text-slate-600 hover:text-slate-900 flex items-center justify-center gap-2 transition-all";
@@ -1674,14 +1896,17 @@
             if (btnB) btnB.className = tabName === 'faseB' ? activeClass : inactiveClass;
             if (btnC) btnC.className = tabName === 'faseC' ? activeClass : inactiveClass;
             if (btnJuara) btnJuara.className = tabName === 'juara' ? activeClass : inactiveClass;
+            if (btnKomentar) btnKomentar.className = tabName === 'komentar' ? activeClass : inactiveClass;
 
             const viewKlasemen = document.getElementById('viewKlasemen');
             const viewJuara = document.getElementById('viewJuara');
             const viewAdmin = document.getElementById('viewAdmin');
+            const viewKomentar = document.getElementById('viewKomentar');
 
             if (viewKlasemen) viewKlasemen.classList.toggle('hidden', tabName !== 'faseB' && tabName !== 'faseC');
             if (viewJuara) viewJuara.classList.toggle('hidden', tabName !== 'juara');
             if (viewAdmin) viewAdmin.classList.toggle('hidden', tabName !== 'admin');
+            if (viewKomentar) viewKomentar.classList.toggle('hidden', tabName !== 'komentar');
 
             updateUI();
         };
@@ -1837,6 +2062,7 @@
             if (colName === 'classes') classesList = classesList.filter(item => item.id !== id);
             if (colName === 'scores') scoresList = scoresList.filter(item => item.id !== id);
             if (colName === 'juara') juaraList = juaraList.filter(item => item.id !== id);
+            if (colName === 'comments') commentsList = commentsList.filter(item => item.id !== id);
             saveAndSyncLocalStorage();
             refreshAllViews();
         }
