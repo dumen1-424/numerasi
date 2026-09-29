@@ -813,15 +813,16 @@
 
         // Global Variables
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'lnd-dukuh-menanggal';
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
-            apiKey: "dummy-api-key",
-            authDomain: "dummy.firebaseapp.com",
-            projectId: "dummy-project",
-            storageBucket: "dummy.appspot.com",
-            messagingSenderId: "123456789",
-            appId: "1:123456789:web:123456"
-        };
-
+       const firebaseConfig = {
+    apiKey: "AIzaSyDF4izF_kEsdnBvtEPJmVThpGRODG2KJEc",
+    authDomain: "web-komentar-7a1dd.firebaseapp.com",
+    databaseURL: "https://web-komentar-7a1dd-default-rtdb.firebaseio.com",
+    projectId: "web-komentar-7a1dd",
+    storageBucket: "web-komentar-7a1dd.firebasestorage.app",
+    messagingSenderId: "376981959376",
+    appId: "1:376981959376:web:fef39a1c61ae64e5ae64d5",
+    measurementId: "G-W4GQDB9G1B"
+};
         let app, auth, db;
         let isFirebaseActive = false;
 
@@ -2110,73 +2111,5 @@
             initAuth();
         };
     </script>
-   <!-- Library Firebase -->
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-
-<script>
-  // 1. Konfigurasi Firebase anda
-  const firebaseConfig = {
-    apiKey: "AIzaSyDF4izF_kEsdnBvtEPJmVThpGRODG2KJEc",
-    authDomain: "web-komentar-7a1dd.firebaseapp.com",
-    databaseURL: "https://web-komentar-7a1dd-default-rtdb.firebaseio.com",
-    projectId: "web-komentar-7a1dd",
-    storageBucket: "web-komentar-7a1dd.firebasestorage.app",
-    messagingSenderId: "376981959376",
-    appId: "1:376981959376:web:fef39a1c61ae64e5ae64d5",
-    measurementId: "G-W4GQDB9G1B"
-  };
-
-  // 2. Inisialisasi Firebase
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.database();
-  const commentsRef = db.ref("komentar");
-
-  // 3. Elemen Borang & Senarai Komen
-  const form = document.getElementById("comment-form");
-  const nameInput = document.getElementById("name-input");
-  const commentInput = document.getElementById("comment-input");
-  const commentsList = document.getElementById("comments-list");
-
-  // 4. Hantar komen ke Firebase apabila borang dihantar
-  if (form) {
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const nama = nameInput.value.trim();
-      const isiKomentar = commentInput.value.trim();
-
-      if (nama && isiKomentar) {
-        commentsRef.push({
-          nama: nama,
-          text: isiKomentar,
-          waktu: new Date().toLocaleDateString("id-ID", {
-            day: "numeric",
-            month: "short",
-            year: "numeric",
-            hour: "2-digit",
-            minute: "2-digit"
-          })
-        });
-
-        nameInput.value = "";
-        commentInput.value = "";
-      }
-    });
-  }
-
-  // 5. Papar komen secara automatik di Laptop & HP
-  commentsRef.on("child_added", (snapshot) => {
-    const data = snapshot.val();
-    const div = document.createElement("div");
-    div.className = "comment-item";
-    div.innerHTML = `
-      <strong>${data.nama}</strong> <small>(${data.waktu})</small>
-      <p>${data.text}</p>
-    `;
-    if (commentsList) {
-      commentsList.prepend(div);
-    }
-  });
-</script>
-</body>
+ </body>
 </html>
