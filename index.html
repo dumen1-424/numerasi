@@ -813,16 +813,16 @@
 
         // Global Variables
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'lnd-dukuh-menanggal';
-       const firebaseConfig = {
-    apiKey: "AIzaSyDF4izF_kEsdnBvtEPJmVThpGRODG2KJEc",
-    authDomain: "web-komentar-7a1dd.firebaseapp.com",
-    databaseURL: "https://web-komentar-7a1dd-default-rtdb.firebaseio.com",
-    projectId: "web-komentar-7a1dd",
-    storageBucket: "web-komentar-7a1dd.firebasestorage.app",
-    messagingSenderId: "376981959376",
-    appId: "1:376981959376:web:fef39a1c61ae64e5ae64d5",
-    measurementId: "G-W4GQDB9G1B"
-};
+        const firebaseConfig = {
+            apiKey: "AIzaSyDF4izF_kEsdnBvtEPJmVThpGRODG2KJEc",
+            authDomain: "web-komentar-7a1dd.firebaseapp.com",
+            databaseURL: "https://web-komentar-7a1dd-default-rtdb.firebaseio.com",
+            projectId: "web-komentar-7a1dd",
+            storageBucket: "web-komentar-7a1dd.firebasestorage.app",
+            messagingSenderId: "376981959376",
+            appId: "1:376981959376:web:fef39a1c61ae64e5ae64d5",
+            measurementId: "G-W4GQDB9G1B"
+        };
         let app, auth, db;
         let isFirebaseActive = false;
 
@@ -2073,33 +2073,37 @@
             if (modal) modal.classList.add('hidden');
             if (isConfirmed && typeof onConfirmAction === 'function') {
                 onConfirmAction();
+                onConfirmAction = null;
             }
-            onConfirmAction = null;
         };
 
-        // Toast & Helper Utilities
-        function showToast(msg, isError = false) {
+        // Toast Notification Function
+        function showToast(message, isError = false) {
             const toast = document.getElementById('toast');
             const toastMsg = document.getElementById('toastMsg');
             const toastIcon = document.getElementById('toastIcon');
 
-            if (!toast) return;
-            toastMsg.innerText = msg;
+            if (!toast || !toastMsg) return;
+
+            toastMsg.innerText = message;
             if (isError) {
-                toastIcon.className = "fa-solid fa-circle-xmark text-rose-400 text-lg shrink-0";
+                toastIcon.className = "fa-solid fa-circle-exclamation text-rose-400 text-lg shrink-0";
             } else {
                 toastIcon.className = "fa-solid fa-circle-check text-emerald-400 text-lg shrink-0";
             }
 
             toast.classList.remove('translate-y-24', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
             setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
                 toast.classList.add('translate-y-24', 'opacity-0');
-            }, 3200);
+            }, 3000);
         }
 
-        function escapeHtml(text) {
-            if (!text) return '';
-            return String(text)
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str)
                 .replace(/&/g, "&amp;")
                 .replace(/</g, "&lt;")
                 .replace(/>/g, "&gt;")
@@ -2107,9 +2111,10 @@
                 .replace(/'/g, "&#039;");
         }
 
-        window.onload = function() {
+        // Initialize App on DOM Load
+        document.addEventListener('DOMContentLoaded', () => {
             initAuth();
-        };
+        });
     </script>
- </body>
+</body>
 </html>
