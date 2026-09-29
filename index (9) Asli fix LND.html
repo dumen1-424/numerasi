@@ -1,0 +1,1888 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Liga Numerasi Digital (LND) - SDN Dukuh Menanggal I/424</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#312e81',
+                        },
+                        gold: {
+                            300: '#fde047',
+                            400: '#facc15',
+                            500: '#eab308',
+                            600: '#ca8a04',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'shine': 'shine 5s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-6px)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: 1, filter: 'drop-shadow(0 0 15px rgba(245, 158, 11, 0.6))' },
+                            '50%': { opacity: 0.85, filter: 'drop-shadow(0 0 5px rgba(245, 158, 11, 0.2))' },
+                        },
+                        shine: {
+                            '0%': { backgroundPosition: '-200% 0' },
+                            '100%': { backgroundPosition: '200% 0' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts Plus Jakarta Sans & Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+        }
+
+        .glass-header {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .shine-text {
+            background: linear-gradient(90deg, #38bdf8 0%, #ffffff 25%, #fef08a 50%, #ffffff 75%, #38bdf8 100%);
+            background-size: 200% auto;
+            color: #ffffff;
+            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: shine 4s linear infinite;
+        }
+
+        .gold-podium {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde047 50%, #d97706 100%);
+            box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.4);
+        }
+
+        .silver-podium {
+            background: linear-gradient(135deg, #f1f5f9 0%, #cbd5e1 50%, #64748b 100%);
+            box-shadow: 0 10px 20px -5px rgba(148, 163, 184, 0.3);
+        }
+
+        .bronze-podium {
+            background: linear-gradient(135deg, #ffedd5 0%, #fb923c 50%, #c2410c 100%);
+            box-shadow: 0 10px 20px -5px rgba(234, 88, 12, 0.3);
+        }
+
+        /* Marquee Ticker */
+        @keyframes marquee {
+            0% { transform: translate3d(100%, 0, 0); }
+            100% { transform: translate3d(-100%, 0, 0); }
+        }
+        .animate-marquee {
+            display: inline-flex;
+            white-space: nowrap;
+            animation: marquee 22s linear infinite;
+            will-change: transform;
+        }
+        .marquee-container:hover .animate-marquee {
+            animation-play-state: paused;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen flex flex-col text-slate-800 antialiased selection:bg-indigo-500 selection:text-white">
+
+    <!-- Header Utama Ceria & Energetik -->
+    <header class="bg-gradient-to-r from-slate-900 via-indigo-950 to-blue-900 text-white shadow-xl border-b border-indigo-500/20 relative overflow-hidden">
+        <!-- Background Decorative Orbs -->
+        <div class="absolute -top-24 -left-24 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -right-24 w-72 h-72 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 relative z-10">
+            
+            <!-- 1. Deretan Gambar Logo di Atas Judul -->
+            <div class="flex items-center justify-center flex-wrap gap-3 sm:gap-6 md:gap-8 mb-4 pb-3 border-b border-white/10 w-full">
+                <img src="tutwuri.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/1e293b/ffffff?text=TutWuri';" alt="Tut Wuri Handayani" class="h-8 sm:h-12 md:h-14 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform">
+                <img src="dispendik.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/1e293b/ffffff?text=Dispendik';" alt="Dinas Pendidikan" class="h-8 sm:h-12 md:h-14 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform">
+                <img src="adiwiyata.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/1e293b/ffffff?text=Adiwiyata';" alt="Adiwiyata" class="h-8 sm:h-12 md:h-14 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform">
+                <img src="sra.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/1e293b/ffffff?text=SRA';" alt="Sekolah Ramah Anak" class="h-8 sm:h-12 md:h-14 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform">
+            </div>
+
+            <!-- 2. Section Judul dengan Gambar Dumen & Tombol Admin -->
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 w-full">
+                <div class="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 text-center sm:text-left w-full md:w-auto">
+                    <div class="w-14 h-14 sm:w-16 sm:h-16 bg-white/10 rounded-2xl flex items-center justify-center backdrop-blur-md border border-white/20 shadow-lg shrink-0 p-1.5 animate-float">
+                        <img src="dumen.png" onerror="this.onerror=null; this.src='https://placehold.co/120x120/4f46e5/ffffff?text=DUMEN';" alt="Logo SDN Dukuh Menanggal" class="w-full h-full object-contain drop-shadow">
+                    </div>
+                    <div class="flex-1 min-w-0 w-full">
+                        <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+                            <span class="bg-indigo-500/30 text-indigo-200 text-[10px] sm:text-xs font-bold px-2.5 py-0.5 rounded-full border border-indigo-400/30">
+                                <i class="fa-solid fa-graduation-cap text-amber-400 mr-1"></i> Portal Resmi Sekolah
+                            </span>
+                        </div>
+                        <!-- Judul Utama -->
+                        <h1 class="text-lg sm:text-2xl md:text-3xl font-black tracking-tight leading-tight uppercase shine-text mt-1">
+                            LIGA NUMERASI DIGITAL (LND)
+                        </h1>
+                        <p class="text-xs sm:text-sm font-semibold text-blue-200">
+                            SDN DUKUH MENANGGAL I/424 SURABAYA
+                        </p>
+                        <p class="text-[11px] sm:text-xs text-slate-300 mt-1 flex items-center justify-center sm:justify-start gap-1">
+                            <i class="fa-solid fa-location-dot text-amber-400 animate-bounce"></i>
+                            <span>Jl. Dukuh Menanggal No. 3 – 7, Surabaya</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Admin Action Area -->
+                <div class="flex items-center justify-center sm:justify-end gap-2.5 w-full md:w-auto pt-2 md:pt-0 border-t border-white/10 md:border-t-0">
+                    <div id="adminBadge" class="hidden bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 text-xs px-3 py-1.5 rounded-full font-bold items-center gap-2 shadow-inner">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> Admin Mode
+                    </div>
+                    <button id="authBtn" onclick="toggleAuthModal()" class="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 active:scale-95 text-white border border-indigo-300/30 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 flex items-center gap-2 shadow-lg hover:shadow-indigo-500/25">
+                        <i class="fa-solid fa-user-gear text-amber-300"></i> <span id="authBtnText">Login Admin</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 3. Running Text Announcement Bar -->
+            <div class="mt-4 marquee-container relative overflow-hidden rounded-2xl bg-gradient-to-r from-amber-400 via-rose-500 to-indigo-500 p-[2px] shadow-xl">
+                <div class="bg-slate-950/90 backdrop-blur-md rounded-[14px] px-3 py-2 flex items-center gap-3">
+                    <span class="shrink-0 bg-gradient-to-r from-amber-500 to-rose-600 text-white text-[10px] sm:text-xs font-black px-3 py-1 rounded-lg uppercase tracking-wider flex items-center gap-1.5 shadow-md">
+                        <i class="fa-solid fa-bullhorn text-amber-200 animate-bounce"></i>
+                        <span>INFO LIGA</span>
+                    </span>
+                    <div class="relative overflow-hidden w-full flex items-center min-w-0">
+                        <div id="runningTextDisplay" class="animate-marquee text-xs sm:text-sm font-bold text-amber-200 tracking-wide flex items-center whitespace-nowrap">
+                            <!-- Injected via JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- Floating Control Bar (Season & Month Filter) -->
+    <div class="bg-white/90 backdrop-blur-md border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+            
+            <!-- Season Selector -->
+            <div class="flex items-center justify-between sm:justify-start gap-2.5">
+                <span class="text-xs font-black text-slate-500 uppercase tracking-wider shrink-0 flex items-center gap-1">
+                    <i class="fa-solid fa-trophy text-amber-500"></i> Season:
+                </span>
+                <select id="publicSeasonSelect" onchange="changePublicSeason(this.value)" class="w-full sm:w-auto bg-indigo-50/80 hover:bg-indigo-50 border border-indigo-200 text-indigo-900 font-bold text-xs sm:text-sm rounded-xl px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition shadow-sm cursor-pointer">
+                    <option value="">Memuat Season...</option>
+                </select>
+            </div>
+
+            <!-- Month & Year Filter + Refresh Button -->
+            <div class="flex items-center justify-between sm:justify-end gap-2">
+                <span class="text-xs font-black text-slate-500 uppercase tracking-wider shrink-0 flex items-center gap-1">
+                    <i class="fa-regular fa-calendar-days text-indigo-500"></i> Filter:
+                </span>
+                <select id="monthFilterSelect" onchange="applyMonthFilter(this.value)" class="bg-slate-100 hover:bg-slate-200/80 border border-slate-300 text-slate-700 font-semibold text-xs sm:text-sm rounded-xl px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition cursor-pointer">
+                    <option value="ALL">Semua Bulan (Total Season)</option>
+                </select>
+                <button onclick="loadCentralData(true)" title="Muat Ulang Data Terbaru dari GitHub" class="bg-indigo-50 hover:bg-indigo-100 active:scale-95 text-indigo-700 border border-indigo-200 px-3 py-1.5 rounded-xl text-xs font-bold transition shrink-0 flex items-center gap-1.5 shadow-sm">
+                    <i class="fa-solid fa-rotate text-indigo-600"></i> <span class="hidden sm:inline">Refresh Data</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-grow w-full">
+
+        <!-- Navigation Tabs Bar -->
+        <div class="grid grid-cols-3 gap-2 bg-slate-200/80 p-1.5 rounded-2xl mb-6 shadow-inner">
+            <button id="tabFaseB" onclick="switchTab('faseB')" class="py-2.5 px-2 sm:px-4 rounded-xl font-extrabold text-xs sm:text-sm bg-white text-indigo-700 shadow-md flex items-center justify-center gap-2 transition-all">
+                <i class="fa-solid fa-shapes text-indigo-500 text-sm sm:text-base"></i>
+                <span class="leading-tight">Fase B <span class="hidden sm:inline">(Kls 3 & 4)</span></span>
+            </button>
+            <button id="tabFaseC" onclick="switchTab('faseC')" class="py-2.5 px-2 sm:px-4 rounded-xl font-extrabold text-xs sm:text-sm text-slate-600 hover:text-slate-900 flex items-center justify-center gap-2 transition-all">
+                <i class="fa-solid fa-cubes text-slate-400 text-sm sm:text-base"></i>
+                <span class="leading-tight">Fase C <span class="hidden sm:inline">(Kls 5 & 6)</span></span>
+            </button>
+            <button id="tabJuara" onclick="switchTab('juara')" class="py-2.5 px-2 sm:px-4 rounded-xl font-extrabold text-xs sm:text-sm text-slate-600 hover:text-slate-900 flex items-center justify-center gap-2 transition-all">
+                <i class="fa-solid fa-crown text-amber-500 text-sm sm:text-base"></i>
+                <span class="leading-tight">Hall of Fame</span>
+            </button>
+        </div>
+
+        <!-- VIEW 1: Klasemen (Fase B / Fase C) -->
+        <div id="viewKlasemen" class="space-y-6 w-full">
+            
+            <!-- Podium Top 3 Section (Gamified) -->
+            <div id="podiumContainer" class="grid grid-cols-3 gap-2 sm:gap-4 items-end pt-4 pb-2">
+                <!-- Injected JS Podium Widgets -->
+            </div>
+
+            <!-- Klasemen Table Card -->
+            <div class="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-slate-200/80 w-full">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4 pb-3 border-b border-slate-100">
+                    <div>
+                        <h2 id="klasemenTitle" class="text-base sm:text-xl font-black text-slate-800 flex items-center gap-2">
+                            <!-- Injected JS Title -->
+                        </h2>
+                        <p class="text-xs text-slate-500 mt-0.5">
+                            Klasemen diperbarui secara otomatis setiap pertandingan (2 Minggu Sekali)
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Table Container (Mobile Fit) -->
+                <div class="w-full rounded-xl border border-slate-200 overflow-hidden shadow-sm">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-100/80 text-slate-600 text-[11px] sm:text-xs font-black uppercase tracking-wider border-b border-slate-200">
+                                <th class="py-3 px-2 sm:p-4 text-center w-12 sm:w-20">Peringkat</th>
+                                <th class="py-3 px-2 sm:p-4">Nama Kelas</th>
+                                <th class="py-3 px-1 sm:p-4 text-center w-16 sm:w-28">Main</th>
+                                <th class="py-3 px-2 sm:p-4 text-right">Skor Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="klasemenTableBody" class="divide-y divide-slate-200 text-xs sm:text-sm font-semibold">
+                            <tr>
+                                <td colspan="4" class="text-center p-8 text-slate-400">
+                                    <i class="fa-solid fa-spinner fa-spin text-2xl text-indigo-500 mb-2"></i>
+                                    <p class="text-xs font-bold">Memuat data klasemen...</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW 2: Riwayat Juara (Hall of Fame) -->
+        <div id="viewJuara" class="hidden space-y-6 w-full">
+            <div class="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-slate-200 w-full">
+                <div class="mb-6 flex items-center justify-between flex-wrap gap-2 border-b border-slate-100 pb-4">
+                    <div>
+                        <h2 class="text-lg sm:text-xl font-black text-slate-800 flex items-center gap-2">
+                            <i class="fa-solid fa-award text-amber-500 text-2xl"></i>
+                            Hall of Fame - Riwayat Juara Liga
+                        </h2>
+                        <p class="text-xs text-slate-500 mt-0.5">Daftar Pemenang Juara 1, 2, dan 3 di Setiap Season Pertandingan</p>
+                    </div>
+                </div>
+
+                <div id="juaraContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                    <div class="col-span-full text-center p-12 text-slate-400">
+                        <i class="fa-solid fa-trophy text-4xl mb-3 text-slate-300"></i>
+                        <p class="text-xs font-bold">Memuat riwayat juara...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW 3: Dashboard Admin -->
+        <div id="viewAdmin" class="hidden space-y-6 w-full">
+            
+            <!-- Admin Banner Header -->
+            <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white rounded-2xl p-5 sm:p-6 shadow-xl border border-indigo-500/30 relative overflow-hidden">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 relative z-10">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="bg-amber-400 text-slate-950 text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase">Super Admin</span>
+                            <span id="storageModeBadge" class="text-[11px] bg-slate-800/80 border border-slate-700 text-slate-300 px-2.5 py-0.5 rounded-full font-medium">
+                                <i class="fa-solid fa-database text-emerald-400 mr-1"></i> Storage
+                            </span>
+                        </div>
+                        <h2 class="text-lg sm:text-2xl font-black mt-1 flex items-center gap-2">
+                            <i class="fa-solid fa-user-shield text-amber-400"></i> Panel Kontrol Administrasi LND
+                        </h2>
+                        <p class="text-xs text-slate-300 mt-1">Kelola Season, Data Kelas, Input Skor Real, dan Pengumuman Running Text</p>
+                    </div>
+                    
+                    <div class="flex items-center gap-2 flex-wrap w-full sm:w-auto">
+                        <button onclick="syncToGitHub()" class="flex-1 sm:flex-none bg-emerald-600 hover:bg-emerald-700 text-white border border-emerald-400/40 px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-lg">
+                            <i class="fa-brands fa-github text-sm"></i> Sync ke GitHub
+                        </button>
+                        <button onclick="logoutAdmin()" class="bg-rose-500/20 hover:bg-rose-500/40 text-rose-200 border border-rose-400/30 px-3.5 py-2 rounded-xl text-xs font-bold transition">
+                            Keluar Mode Admin
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Control Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 w-full">
+                
+                <!-- Section 1: Kelola Season -->
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 space-y-4">
+                    <h3 class="font-black text-slate-800 border-b pb-2 flex items-center justify-between text-sm sm:text-base">
+                        <span><i class="fa-solid fa-calendar-plus text-indigo-600 mr-2"></i>1. Kelola Season</span>
+                    </h3>
+                    
+                    <form id="formAddSeason" onsubmit="handleAddSeason(event)" class="space-y-3">
+                        <div>
+                            <label class="text-xs font-bold text-slate-700">Nama Season Baru</label>
+                            <input type="text" id="seasonNameInput" placeholder="Contoh: Season 1 (Jan-Mar 2026)" required class="w-full text-xs sm:text-sm border border-slate-300 rounded-xl p-2.5 focus:ring-2 focus:ring-indigo-500 outline-none mt-1">
+                        </div>
+                        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs py-2.5 rounded-xl transition shadow-md">
+                            <i class="fa-solid fa-plus mr-1"></i> Tambah Season Baru
+                        </button>
+                    </form>
+
+                    <div class="pt-3 border-t">
+                        <h4 class="text-xs font-extrabold text-slate-500 uppercase mb-2">Daftar Season & Kontrol</h4>
+                        <div id="adminSeasonList" class="space-y-2 max-h-48 overflow-y-auto text-xs">
+                            <!-- Injected JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: Kelola Kelas -->
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 space-y-4">
+                    <h3 class="font-black text-slate-800 border-b pb-2 flex items-center justify-between text-sm sm:text-base">
+                        <span><i class="fa-solid fa-school text-emerald-600 mr-2"></i>2. Tambah Kelas</span>
+                    </h3>
+
+                    <form id="formAddClass" onsubmit="handleAddClass(event)" class="space-y-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <div>
+                                <label class="text-xs font-bold text-slate-700">Nama Kelas</label>
+                                <input type="text" id="classNameInput" placeholder="Contoh: Kelas 4A" required class="w-full text-xs sm:text-sm border border-slate-300 rounded-xl p-2.5 focus:ring-2 focus:ring-emerald-500 outline-none mt-1">
+                            </div>
+                            <div>
+                                <label class="text-xs font-bold text-slate-700">Fase Kelas</label>
+                                <select id="classPhaseInput" required class="w-full text-xs sm:text-sm border border-slate-300 rounded-xl p-2.5 focus:ring-2 focus:ring-emerald-500 outline-none bg-white mt-1 font-semibold">
+                                    <option value="B">Fase B (Kls 3 & 4)</option>
+                                    <option value="C">Fase C (Kls 5 & 6)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-2.5 rounded-xl transition shadow-md">
+                            <i class="fa-solid fa-save mr-1"></i> Simpan Data Kelas
+                        </button>
+                    </form>
+
+                    <div class="pt-3 border-t">
+                        <h4 class="text-xs font-extrabold text-slate-500 uppercase mb-2">Daftar Kelas Terdaftar</h4>
+                        <div id="adminClassList" class="space-y-2 max-h-40 overflow-y-auto text-xs">
+                            <!-- Injected JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Input Riwayat Juara -->
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 space-y-4">
+                    <h3 class="font-black text-slate-800 border-b pb-2 flex items-center justify-between text-sm sm:text-base">
+                        <span><i class="fa-solid fa-trophy text-amber-500 mr-2"></i>3. Input Hall of Fame</span>
+                    </h3>
+
+                    <form id="formAddJuara" onsubmit="handleAddJuara(event)" class="space-y-3">
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="text-xs font-bold text-slate-700">Target Season</label>
+                                <select id="juaraSeasonSelect" required class="w-full text-xs border border-slate-300 rounded-xl p-2 focus:ring-2 focus:ring-amber-500 outline-none bg-white mt-1 font-semibold">
+                                    <!-- Injected JS -->
+                                </select>
+                            </div>
+                            <div>
+                                <label class="text-xs font-bold text-slate-700">Fase</label>
+                                <select id="juaraPhaseSelect" required class="w-full text-xs border border-slate-300 rounded-xl p-2 focus:ring-2 focus:ring-amber-500 outline-none bg-white mt-1 font-semibold">
+                                    <option value="B">Fase B</option>
+                                    <option value="C">Fase C</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2">
+                            <div>
+                                <label class="text-[11px] font-extrabold text-amber-600">Juara 1</label>
+                                <input type="text" id="juara1Input" placeholder="Kls 4A" required class="w-full text-xs border border-amber-300 rounded-lg p-2 focus:ring-2 focus:ring-amber-500 outline-none">
+                            </div>
+                            <div>
+                                <label class="text-[11px] font-extrabold text-slate-500">Juara 2</label>
+                                <input type="text" id="juara2Input" placeholder="Kls 3B" required class="w-full text-xs border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-slate-500 outline-none">
+                            </div>
+                            <div>
+                                <label class="text-[11px] font-extrabold text-amber-800">Juara 3</label>
+                                <input type="text" id="juara3Input" placeholder="Kls 4C" required class="w-full text-xs border border-amber-700/40 rounded-lg p-2 focus:ring-2 focus:ring-amber-700 outline-none">
+                            </div>
+                        </div>
+                        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs py-2.5 rounded-xl transition shadow-md">
+                            <i class="fa-solid fa-trophy mr-1"></i> Simpan Hall of Fame
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Section 4: Sinkronisasi Langsung ke GitHub REST API -->
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 space-y-4">
+                    <h3 class="font-black text-slate-800 border-b pb-2 flex items-center justify-between text-sm sm:text-base">
+                        <span><i class="fa-brands fa-github text-slate-900 mr-2"></i>4. Sync ke GitHub</span>
+                    </h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Perbarui berkas <code class="bg-slate-100 text-slate-800 px-1 py-0.5 rounded font-mono">lnd_data.json</code> di GitHub Repository agar publik langsung melihat data terbaru.
+                    </p>
+                    <div class="space-y-3">
+                        <div>
+                            <label class="text-xs font-bold text-slate-700">Nama Repo (User/Repo)</label>
+                            <input type="text" id="githubRepoInput" placeholder="contoh: username/liga-numerasi" class="w-full text-xs border border-slate-300 rounded-xl p-2.5 focus:ring-2 focus:ring-slate-500 outline-none mt-1">
+                        </div>
+                        <div>
+                            <label class="text-xs font-bold text-slate-700">GitHub Access Token (PAT)</label>
+                            <input type="password" id="githubTokenInput" placeholder="ghp_xxxxxxxxxxxx" class="w-full text-xs border border-slate-300 rounded-xl p-2.5 focus:ring-2 focus:ring-slate-500 outline-none mt-1">
+                        </div>
+                        <button type="button" onclick="syncToGitHub()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 rounded-xl transition flex items-center justify-center gap-2 shadow-md">
+                            <i class="fa-brands fa-github"></i> Sinkronkan Data Sekarang
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Section 5: Kelola Running Text Header -->
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 space-y-4">
+                    <h3 class="font-black text-slate-800 border-b pb-2 flex items-center justify-between text-sm sm:text-base">
+                        <span><i class="fa-solid fa-bullhorn text-rose-600 mr-2"></i>5. Edit Running Text</span>
+                    </h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Ubah pesan pengumuman berjalan yang tampil di ticker bagian atas website.
+                    </p>
+
+                    <form id="formUpdateRunningText" onsubmit="handleUpdateRunningText(event)" class="space-y-3">
+                        <div>
+                            <label class="text-xs font-bold text-slate-700">Pesan Pengumuman</label>
+                            <textarea id="runningTextInput" rows="3" placeholder="Masukkan pengumuman..." required class="w-full text-xs border border-slate-300 rounded-xl p-2.5 focus:ring-2 focus:ring-rose-500 outline-none mt-1"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs py-2.5 rounded-xl transition shadow-md">
+                            <i class="fa-solid fa-floppy-disk mr-1"></i> Simpan Running Text
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+
+            <!-- Section Input Skor Pertandingan Real -->
+            <div class="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-200 w-full">
+                <h3 class="font-black text-slate-800 text-base sm:text-lg mb-4 flex items-center gap-2 border-b pb-3">
+                    <i class="fa-solid fa-gamepad text-indigo-600"></i>
+                    Input & Kelola Skor Pertandingan Real
+                </h3>
+
+                <form id="formAddScore" onsubmit="handleAddScore(event)" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5 mb-6 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <div>
+                        <label class="text-xs font-bold text-slate-700">Pilih Kelas</label>
+                        <select id="scoreClassSelect" required class="w-full text-xs sm:text-sm border border-slate-300 rounded-xl p-2.5 bg-white focus:ring-2 focus:ring-indigo-500 outline-none mt-1 font-semibold">
+                            <option value="">Pilih Kelas...</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="text-xs font-bold text-slate-700">Tanggal Pertandingan</label>
+                        <input type="date" id="scoreDateInput" required class="w-full text-xs sm:text-sm border border-slate-300 rounded-xl p-2.5 bg-white focus:ring-2 focus:ring-indigo-500 outline-none mt-1 font-semibold">
+                    </div>
+
+                    <div>
+                        <label class="text-xs font-bold text-slate-700">Pekan ke-</label>
+                        <select id="scoreWeekSelect" required class="w-full text-xs sm:text-sm border border-slate-300 rounded-xl p-2.5 bg-white focus:ring-2 focus:ring-indigo-500 outline-none mt-1 font-semibold">
+                            <option value="1">Pekan 1 (Minggu Ke-1)</option>
+                            <option value="2">Pekan 2 (Minggu Ke-3)</option>
+                            <option value="3">Pekan 3</option>
+                            <option value="4">Pekan 4</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="text-xs font-bold text-slate-700">Skor Diperoleh</label>
+                        <input type="number" id="scoreValueInput" placeholder="Contoh: 85" min="0" required class="w-full text-xs sm:text-sm border border-slate-300 rounded-xl p-2.5 bg-white focus:ring-2 focus:ring-indigo-500 outline-none mt-1 font-semibold">
+                    </div>
+
+                    <div class="flex items-end">
+                        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs sm:text-sm p-2.5 rounded-xl transition shadow-md">
+                            <i class="fa-solid fa-plus-circle mr-1"></i> Submit Skor
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Riwayat Input Skor Pertandingan -->
+                <h4 class="text-xs font-extrabold text-slate-500 uppercase mb-3">Riwayat Log Input Skor Pertandingan</h4>
+                
+                <!-- Desktop Table View -->
+                <div class="hidden md:block overflow-x-auto rounded-xl border border-slate-200 shadow-sm">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-700 font-black border-b border-slate-200 uppercase">
+                                <th class="p-3">Tanggal Pertandingan</th>
+                                <th class="p-3">Kelas</th>
+                                <th class="p-3">Fase</th>
+                                <th class="p-3">Bulan & Tahun</th>
+                                <th class="p-3">Pekan</th>
+                                <th class="p-3 text-right">Skor</th>
+                                <th class="p-3 text-center">Aksi (Edit / Hapus)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminScoresTableBody" class="divide-y divide-slate-200 font-medium">
+                            <!-- Injected JS -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Mobile Cards View -->
+                <div id="adminScoresMobileContainer" class="block md:hidden space-y-2.5">
+                    <!-- Injected JS Mobile Cards -->
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- MODAL: Login Admin -->
+    <div id="modalLogin" class="hidden fixed inset-0 bg-slate-900/70 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-100 relative transform transition-all">
+            <button onclick="toggleAuthModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 w-9 h-9 rounded-full flex items-center justify-center bg-slate-100 hover:bg-slate-200 transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="text-center mb-6">
+                <div class="w-14 h-14 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-inner">
+                    <i class="fa-solid fa-user-lock text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-black text-slate-800">Login Administrator</h3>
+                <p class="text-xs text-slate-500 mt-1">Masukkan kata sandi admin untuk mengelola liga</p>
+            </div>
+
+            <form onsubmit="handleLoginSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Kata Sandi (Password)</label>
+                    <input type="password" id="adminPasswordInput" placeholder="Masukkan password admin..." required class="w-full text-sm border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-indigo-500 outline-none">
+                    <p id="loginErrorMsg" class="hidden text-xs text-rose-500 mt-1.5 font-bold flex items-center gap-1">
+                        <i class="fa-solid fa-circle-exclamation"></i> Password salah! Silakan coba lagi.
+                    </p>
+                </div>
+
+                <div class="flex items-center justify-between text-xs">
+                    <button type="button" onclick="openForgotPasswordModal()" class="text-indigo-600 hover:text-indigo-800 font-bold underline">
+                        Lupa Password?
+                    </button>
+                </div>
+
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl shadow-lg transition-all text-xs sm:text-sm">
+                    Masuk Mode Admin
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: Lupa Password -->
+    <div id="modalForgotPassword" class="hidden fixed inset-0 bg-slate-900/70 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-100 relative">
+            <button onclick="closeForgotPasswordModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 w-9 h-9 rounded-full flex items-center justify-center bg-slate-100 hover:bg-slate-200 transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="text-center mb-6">
+                <div class="w-14 h-14 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center mx-auto mb-3">
+                    <i class="fa-solid fa-key text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-black text-slate-800">Pemulihan Kata Sandi</h3>
+                <p class="text-xs text-slate-500 mt-1">Masukkan email akun GitHub Anda untuk pengiriman petunjuk reset</p>
+            </div>
+
+            <form onsubmit="handleForgotPasswordSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Email GitHub / Admin</label>
+                    <input type="email" id="forgotEmailInput" placeholder="contoh: admin@github.com" required class="w-full text-sm border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-amber-500 outline-none">
+                </div>
+
+                <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 rounded-xl shadow-lg transition text-xs sm:text-sm">
+                    Kirim Petunjuk Reset
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: Edit Skor -->
+    <div id="modalEditScore" class="hidden fixed inset-0 bg-slate-900/70 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-slate-100 relative">
+            <button onclick="closeEditScoreModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 w-8 h-8 rounded-full flex items-center justify-center bg-slate-100 hover:bg-slate-200 transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h3 class="text-base sm:text-lg font-black text-slate-800 mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-pen-to-square text-indigo-600"></i> Edit Skor Pertandingan
+            </h3>
+
+            <form onsubmit="handleEditScoreSubmit(event)" class="space-y-4">
+                <input type="hidden" id="editScoreId">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Skor Perolehan Baru</label>
+                    <input type="number" id="editScoreValueInput" min="0" required class="w-full text-base font-bold border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-indigo-500 outline-none">
+                </div>
+
+                <div class="flex justify-end gap-2 pt-2">
+                    <button type="button" onclick="closeEditScoreModal()" class="px-4 py-2.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                        Batal
+                    </button>
+                    <button type="submit" class="px-4 py-2.5 rounded-xl text-xs font-black bg-indigo-600 text-white hover:bg-indigo-700 transition shadow-md">
+                        Simpan Perubahan
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: Konfirmasi Hapus -->
+    <div id="modalConfirm" class="hidden fixed inset-0 bg-slate-900/70 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-slate-100 text-center relative">
+            <div class="w-14 h-14 bg-rose-100 text-rose-600 rounded-2xl flex items-center justify-center mx-auto mb-3">
+                <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
+            </div>
+            <h3 class="text-lg font-black text-slate-800 mb-1">Konfirmasi Hapus Data</h3>
+            <p class="text-xs text-slate-500 mb-6">Apakah Anda yakin ingin menghapus data ini? Aksi ini tidak dapat dibatalkan.</p>
+
+            <div class="flex items-center justify-center gap-3">
+                <button onclick="closeConfirmModal(false)" class="w-1/2 py-2.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                    Batal
+                </button>
+                <button onclick="closeConfirmModal(true)" class="w-1/2 py-2.5 rounded-xl text-xs font-black bg-rose-600 text-white hover:bg-rose-700 transition shadow-md">
+                    Ya, Hapus
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Widget -->
+    <div id="toast" class="fixed bottom-5 right-5 left-5 sm:left-auto z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="bg-slate-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl border border-slate-700 flex items-center gap-3 max-w-md mx-auto">
+            <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400 text-lg shrink-0"></i>
+            <span id="toastMsg" class="text-xs font-bold">Notifikasi</span>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, updateDoc, deleteDoc, onSnapshot, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Constants
+        const INDO_MONTHS = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+
+        function formatMonthYear(dateStr) {
+            if (!dateStr) return '';
+            const parts = dateStr.split('-');
+            if (parts.length === 3) {
+                const year = parts[0];
+                const monthIdx = parseInt(parts[1], 10) - 1;
+                if (monthIdx >= 0 && monthIdx < 12) {
+                    return `${INDO_MONTHS[monthIdx]} ${year}`;
+                }
+            }
+            const d = new Date(dateStr);
+            if (!isNaN(d.getTime())) {
+                return `${INDO_MONTHS[d.getMonth()]} ${d.getFullYear()}`;
+            }
+            return dateStr;
+        }
+
+        // Global Variables
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'lnd-dukuh-menanggal';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
+            apiKey: "dummy-api-key",
+            authDomain: "dummy.firebaseapp.com",
+            projectId: "dummy-project",
+            storageBucket: "dummy.appspot.com",
+            messagingSenderId: "123456789",
+            appId: "1:123456789:web:123456"
+        };
+
+        let app, auth, db;
+        let isFirebaseActive = false;
+
+        // Broadcast channel for multi-tab realtime sync
+        const broadcastChannel = typeof BroadcastChannel !== 'undefined' ? new BroadcastChannel('lnd_sync_channel') : null;
+
+        // State Variables
+        let currentUser = null;
+        let isAdminLoggedIn = false;
+        let activeTab = 'faseB';
+        let currentSelectedMonth = 'ALL';
+        let activePublicSeasonId = null;
+        let adminPassHash = "adminlnd123";
+        let runningText = "Saksikan pertandingan pertama untuk FASE B pada tanggal 23 September ✦ Dukung kelas kalian & raih Skor tertinggi";
+
+        // Data Store
+        let seasonsList = [];
+        let classesList = [];
+        let scoresList = [];
+        let juaraList = [];
+
+        // Default initial data
+        const DEFAULT_SEASONS = [
+            { id: 'season-1', name: 'Season 1 (Jan - Mar 2026)', isPublic: true, createdAt: Date.now() }
+        ];
+
+        const DEFAULT_CLASSES = [
+            { id: 'cls-3a', className: 'Kelas 3A', phase: 'B', createdAt: Date.now() },
+            { id: 'cls-4a', className: 'Kelas 4A', phase: 'B', createdAt: Date.now() },
+            { id: 'cls-5a', className: 'Kelas 5A', phase: 'C', createdAt: Date.now() },
+            { id: 'cls-6a', className: 'Kelas 6A', phase: 'C', createdAt: Date.now() }
+        ];
+
+        // Confirmation Callback Holder
+        let onConfirmAction = null;
+
+        // Firestore Helpers
+        const getPublicCollection = (colName) => collection(db, 'artifacts', appId, 'public', 'data', colName);
+        const getPublicDoc = (colName, docId) => doc(db, 'artifacts', appId, 'public', 'data', colName, docId);
+
+        // Load central lnd_data.json if stored on GitHub repository
+        window.loadCentralData = async function(showNotification = false) {
+            try {
+                const res = await fetch('./lnd_data.json?t=' + Date.now());
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data && Array.isArray(data.seasonsList)) {
+                        seasonsList = data.seasonsList || [];
+                        classesList = data.classesList || [];
+                        scoresList = data.scoresList || [];
+                        juaraList = data.juaraList || [];
+                        if (data.runningText) {
+                            runningText = data.runningText;
+                        }
+                        if (data.activePublicSeasonId) {
+                            activePublicSeasonId = data.activePublicSeasonId;
+                        }
+                        saveAndSyncLocalStorage();
+                        refreshAllViews();
+                        if (showNotification) showToast("Data terbaru berhasil dimuat dari GitHub!");
+                        return true;
+                    }
+                }
+            } catch (err) {
+                console.log("File lnd_data.json belum dibuat di GitHub.", err);
+            }
+            if (showNotification) showToast("Menggunakan data lokal browser saat ini.");
+            return false;
+        };
+
+        // Direct GitHub REST API Sync Function
+        window.syncToGitHub = async function() {
+            if (!isAdminLoggedIn) {
+                showToast("Silakan login sebagai Admin terlebih dahulu!", true);
+                return;
+            }
+
+            const repoInput = document.getElementById('githubRepoInput');
+            const tokenInput = document.getElementById('githubTokenInput');
+
+            const repoInfo = repoInput ? repoInput.value.trim() : '';
+            const token = tokenInput ? tokenInput.value.trim() : '';
+
+            if (!repoInfo || !token) {
+                showToast("Mohon isi Nama Repo (username/repo) dan Token GitHub Admin!", true);
+                return;
+            }
+
+            localStorage.setItem('lnd_github_repo', repoInfo);
+            localStorage.setItem('lnd_github_token', token);
+
+            showToast("Sedang menyinkronkan data langsung ke GitHub...");
+
+            const payloadData = {
+                updatedAt: new Date().toISOString(),
+                activePublicSeasonId,
+                runningText,
+                seasonsList,
+                classesList,
+                scoresList,
+                juaraList
+            };
+
+            const jsonString = JSON.stringify(payloadData, null, 2);
+            const utf8Bytes = new TextEncoder().encode(jsonString);
+            let binary = '';
+            for (let i = 0; i < utf8Bytes.length; i++) {
+                binary += String.fromCharCode(utf8Bytes[i]);
+            }
+            const contentEncoded = btoa(binary);
+
+            const apiUrl = `https://api.github.com/repos/${repoInfo}/contents/lnd_data.json`;
+
+            try {
+                let sha = null;
+                const getRes = await fetch(apiUrl, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Accept': 'application/vnd.github.v3+json'
+                    }
+                });
+
+                if (getRes.ok) {
+                    const fileInfo = await getRes.json();
+                    sha = fileInfo.sha;
+                }
+
+                const putBody = {
+                    message: "Update data Liga Numerasi Digital via Dashboard Admin",
+                    content: contentEncoded
+                };
+                if (sha) putBody.sha = sha;
+
+                const putRes = await fetch(apiUrl, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/vnd.github.v3+json'
+                    },
+                    body: JSON.stringify(putBody)
+                });
+
+                if (putRes.ok) {
+                    showToast("Berhasil disinkronkan langsung ke GitHub Repository!");
+                    saveAndSyncLocalStorage();
+                } else {
+                    const errData = await putRes.json();
+                    showToast("Gagal Sync: " + (errData.message || "Periksa token & nama repo"), true);
+                }
+            } catch (err) {
+                console.error("GitHub Sync error:", err);
+                showToast("Terjadi kesalahan koneksi saat sync ke GitHub", true);
+            }
+        };
+
+        async function initAuth() {
+            const savedRepo = localStorage.getItem('lnd_github_repo');
+            const savedToken = localStorage.getItem('lnd_github_token');
+            if (savedRepo && document.getElementById('githubRepoInput')) {
+                document.getElementById('githubRepoInput').value = savedRepo;
+            }
+            if (savedToken && document.getElementById('githubTokenInput')) {
+                document.getElementById('githubTokenInput').value = savedToken;
+            }
+
+            await loadCentralData();
+
+            if (!firebaseConfig.apiKey || firebaseConfig.apiKey.includes('dummy')) {
+                console.log("Standalone Mode. Using LocalStorage Storage Engine.");
+                isFirebaseActive = false;
+                loadFromLocalStorage();
+                updateStorageBadge();
+                return;
+            }
+
+            try {
+                app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app);
+
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+                isFirebaseActive = true;
+                updateStorageBadge();
+                initRealtimeListeners();
+            } catch (err) {
+                console.warn("Firebase Auth Error, activating LocalStorage fallback:", err);
+                isFirebaseActive = false;
+                loadFromLocalStorage();
+                updateStorageBadge();
+            }
+        }
+
+        function updateStorageBadge() {
+            const badge = document.getElementById('storageModeBadge');
+            if (badge) {
+                badge.innerHTML = isFirebaseActive 
+                    ? `<i class="fa-solid fa-cloud text-emerald-400 mr-1"></i> Cloud Firebase Active`
+                    : `<i class="fa-solid fa-hard-drive text-amber-400 mr-1"></i> Local Storage`;
+            }
+        }
+
+        function loadFromLocalStorage() {
+            try {
+                const storedSeasons = localStorage.getItem('lnd_seasons');
+                const storedClasses = localStorage.getItem('lnd_classes');
+                const storedScores = localStorage.getItem('lnd_scores');
+                const storedJuara = localStorage.getItem('lnd_juara');
+                const storedRunningText = localStorage.getItem('lnd_running_text');
+
+                if (storedRunningText) runningText = storedRunningText;
+                seasonsList = storedSeasons ? JSON.parse(storedSeasons) : DEFAULT_SEASONS;
+                classesList = storedClasses ? JSON.parse(storedClasses) : DEFAULT_CLASSES;
+                scoresList = storedScores ? JSON.parse(storedScores) : [];
+                juaraList = storedJuara ? JSON.parse(storedJuara) : [];
+
+                if (!storedSeasons) localStorage.setItem('lnd_seasons', JSON.stringify(seasonsList));
+                if (!storedClasses) localStorage.setItem('lnd_classes', JSON.stringify(classesList));
+                if (!storedScores) localStorage.setItem('lnd_scores', JSON.stringify(scoresList));
+                if (!storedJuara) localStorage.setItem('lnd_juara', JSON.stringify(juaraList));
+                if (!storedRunningText) localStorage.setItem('lnd_running_text', runningText);
+
+                const activeSeason = seasonsList.find(s => s.isPublic === true);
+                if (activeSeason) {
+                    activePublicSeasonId = activeSeason.id;
+                } else if (seasonsList.length > 0) {
+                    activePublicSeasonId = seasonsList[0].id;
+                }
+
+                refreshAllViews();
+            } catch (e) {
+                console.error("LocalStorage load error:", e);
+            }
+        }
+
+        function saveAndSyncLocalStorage() {
+            try {
+                localStorage.setItem('lnd_seasons', JSON.stringify(seasonsList));
+                localStorage.setItem('lnd_classes', JSON.stringify(classesList));
+                localStorage.setItem('lnd_scores', JSON.stringify(scoresList));
+                localStorage.setItem('lnd_juara', JSON.stringify(juaraList));
+                localStorage.setItem('lnd_running_text', runningText);
+
+                if (broadcastChannel) {
+                    broadcastChannel.postMessage('sync_data');
+                }
+            } catch (e) {
+                console.error("LocalStorage save error:", e);
+            }
+        }
+
+        if (broadcastChannel) {
+            broadcastChannel.onmessage = (event) => {
+                if (event.data === 'sync_data') {
+                    loadFromLocalStorage();
+                }
+            };
+        }
+
+        window.addEventListener('storage', (e) => {
+            if (e.key && e.key.startsWith('lnd_')) {
+                loadFromLocalStorage();
+            }
+        });
+
+        function initRealtimeListeners() {
+            if (!currentUser || !isFirebaseActive) return;
+
+            onSnapshot(getPublicDoc('settings', 'admin_auth'), (docSnap) => {
+                if (docSnap.exists() && docSnap.data()?.pass) {
+                    adminPassHash = docSnap.data().pass;
+                }
+            }, (err) => console.error("Error fetching admin auth:", err));
+
+            onSnapshot(getPublicDoc('settings', 'running_text'), (docSnap) => {
+                if (docSnap.exists() && docSnap.data()?.text) {
+                    runningText = docSnap.data().text;
+                    renderRunningText();
+                }
+            }, (err) => console.error("Error fetching running text:", err));
+
+            onSnapshot(getPublicCollection('seasons'), (snapshot) => {
+                seasonsList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                const activeSeason = seasonsList.find(s => s.isPublic === true);
+                if (activeSeason) {
+                    activePublicSeasonId = activeSeason.id;
+                } else if (seasonsList.length > 0 && !activePublicSeasonId) {
+                    activePublicSeasonId = seasonsList[0].id;
+                }
+                refreshAllViews();
+            }, (err) => console.error("Error fetching seasons:", err));
+
+            onSnapshot(getPublicCollection('classes'), (snapshot) => {
+                classesList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                refreshAllViews();
+            }, (err) => console.error("Error fetching classes:", err));
+
+            onSnapshot(getPublicCollection('scores'), (snapshot) => {
+                scoresList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                refreshAllViews();
+            }, (err) => console.error("Error fetching scores:", err));
+
+            onSnapshot(getPublicCollection('juara'), (snapshot) => {
+                juaraList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                renderJuaraView();
+            }, (err) => console.error("Error fetching juara:", err));
+        }
+
+        function refreshAllViews() {
+            renderRunningText();
+            renderPublicSeasonSelect();
+            renderMonthFilterSelect();
+            renderAdminSeasonList();
+            renderAdminClassList();
+            renderScoreClassSelect();
+            renderJuaraSeasonSelect();
+            renderAdminScoresTable();
+            renderJuaraView();
+            updateUI();
+        }
+
+        function renderRunningText() {
+            const el = document.getElementById('runningTextDisplay');
+            const input = document.getElementById('runningTextInput');
+            if (input && (!input.value || input.value !== runningText)) {
+                input.value = runningText;
+            }
+            if (!el) return;
+            el.innerHTML = `
+                <span class="inline-flex items-center gap-2">
+                    <i class="fa-solid fa-star text-amber-400 text-xs animate-spin"></i>
+                    <span>${escapeHtml(runningText)}</span>
+                </span>
+            `;
+        }
+
+        window.handleUpdateRunningText = async function(e) {
+            e.preventDefault();
+            if (!isAdminLoggedIn) return;
+
+            const txt = document.getElementById('runningTextInput').value.trim();
+            if (!txt) return;
+
+            runningText = txt;
+
+            if (isFirebaseActive) {
+                try {
+                    await setDoc(getPublicDoc('settings', 'running_text'), { text: runningText });
+                } catch (err) {
+                    console.error("Firebase update running text error:", err);
+                }
+            }
+
+            saveAndSyncLocalStorage();
+            renderRunningText();
+            showToast("Running text pengumuman berhasil diperbarui!");
+        };
+
+        function renderMonthFilterSelect() {
+            const select = document.getElementById('monthFilterSelect');
+            if (!select) return;
+            const currentVal = currentSelectedMonth || 'ALL';
+
+            const uniqueMonths = Array.from(new Set(scoresList.map(s => s.month).filter(Boolean)));
+            
+            if (uniqueMonths.length === 0) {
+                const now = new Date();
+                const curMonthYear = `${INDO_MONTHS[now.getMonth()]} ${now.getFullYear()}`;
+                uniqueMonths.push(curMonthYear);
+            }
+
+            let optionsHtml = `<option value="ALL" ${currentVal === 'ALL' ? 'selected' : ''}>Semua Bulan (Total Season)</option>`;
+            uniqueMonths.forEach(m => {
+                optionsHtml += `<option value="${escapeHtml(m)}" ${m === currentVal ? 'selected' : ''}>${escapeHtml(m)}</option>`;
+            });
+
+            select.innerHTML = optionsHtml;
+        }
+
+        function updateUI() {
+            if (activeTab === 'faseB' || activeTab === 'faseC') {
+                renderKlasemen();
+            }
+        }
+
+        function renderKlasemen() {
+            const phase = activeTab === 'faseB' ? 'B' : 'C';
+            const titleEl = document.getElementById('klasemenTitle');
+            const tbody = document.getElementById('klasemenTableBody');
+            const podiumContainer = document.getElementById('podiumContainer');
+
+            titleEl.innerHTML = phase === 'B' 
+                ? `<i class="fa-solid fa-shapes text-indigo-600"></i> Klasemen Liga - Fase B (Kelas 3 & 4)`
+                : `<i class="fa-solid fa-cubes text-emerald-600"></i> Klasemen Liga - Fase C (Kelas 5 & 6)`;
+
+            if (!activePublicSeasonId) {
+                tbody.innerHTML = `<tr><td colspan="4" class="text-center p-8 text-slate-400 text-xs">Belum ada Season aktif. Admin dapat membuat atau mengaktifkan season di Panel Admin.</td></tr>`;
+                podiumContainer.innerHTML = '';
+                return;
+            }
+
+            const filteredClasses = classesList.filter(c => c.phase === phase);
+
+            if (filteredClasses.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" class="text-center p-8 text-slate-400 text-xs font-semibold">Belum ada data kelas untuk Fase ${phase} di season ini.</td></tr>`;
+                podiumContainer.innerHTML = '';
+                return;
+            }
+
+            const leaderboard = filteredClasses.map(cls => {
+                let relevantScores = scoresList.filter(s => s.classId === cls.id && s.seasonId === activePublicSeasonId);
+                
+                if (currentSelectedMonth !== 'ALL') {
+                    relevantScores = relevantScores.filter(s => s.month === currentSelectedMonth);
+                }
+
+                const totalScore = relevantScores.reduce((sum, item) => sum + (Number(item.score) || 0), 0);
+                const matchCount = relevantScores.length;
+
+                return {
+                    ...cls,
+                    totalScore,
+                    matchCount
+                };
+            });
+
+            leaderboard.sort((a, b) => b.totalScore - a.totalScore);
+
+            // Render Gamified Top 3 Podium Cards
+            if (podiumContainer) {
+                let podiumHtml = '';
+                const top1 = leaderboard[0];
+                const top2 = leaderboard[1];
+                const top3 = leaderboard[2];
+
+                // 2nd Place Card (Left)
+                if (top2) {
+                    podiumHtml += `
+                        <div class="silver-podium text-slate-900 rounded-2xl p-3 sm:p-4 text-center transform hover:-translate-y-1 transition duration-300 relative border border-slate-300/60">
+                            <div class="w-8 h-8 sm:w-10 sm:h-10 bg-slate-700 text-white rounded-full flex items-center justify-center font-black mx-auto mb-1 text-xs sm:text-sm shadow-md">2</div>
+                            <h4 class="font-black text-xs sm:text-base text-slate-800 truncate">${escapeHtml(top2.className)}</h4>
+                            <div class="text-[10px] sm:text-xs font-bold text-slate-700 mt-0.5">${top2.totalScore.toLocaleString('id-ID')} <span class="font-normal text-[9px] text-slate-600">pts</span></div>
+                            <div class="text-[9px] bg-slate-800/10 rounded-full py-0.5 px-2 font-bold text-slate-700 mt-1 inline-block">${top2.matchCount} Main</div>
+                        </div>
+                    `;
+                } else {
+                    podiumHtml += `<div></div>`;
+                }
+
+                // 1st Place Card (Center - Tallest)
+                if (top1) {
+                    podiumHtml += `
+                        <div class="gold-podium text-amber-950 rounded-2xl p-3 sm:p-5 text-center transform -translate-y-2 hover:-translate-y-3 transition duration-300 relative border border-amber-300 animate-pulse-glow z-10">
+                            <div class="absolute -top-4 left-1/2 -translate-x-1/2 text-amber-500 text-xl sm:text-2xl animate-bounce"><i class="fa-solid fa-crown drop-shadow"></i></div>
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-amber-950 text-amber-300 rounded-full flex items-center justify-center font-black mx-auto mb-1 text-sm sm:text-lg shadow-lg border-2 border-amber-400">1</div>
+                            <h4 class="font-black text-sm sm:text-lg text-amber-950 truncate">${escapeHtml(top1.className)}</h4>
+                            <div class="text-xs sm:text-sm font-black text-amber-900 mt-0.5">${top1.totalScore.toLocaleString('id-ID')} <span class="font-medium text-[10px] text-amber-800">pts</span></div>
+                            <div class="text-[10px] bg-amber-950/15 rounded-full py-0.5 px-2.5 font-black text-amber-950 mt-1 inline-block"><i class="fa-solid fa-star text-amber-600 mr-1"></i>${top1.matchCount} Main</div>
+                        </div>
+                    `;
+                } else {
+                    podiumHtml += `<div></div>`;
+                }
+
+                // 3rd Place Card (Right)
+                if (top3) {
+                    podiumHtml += `
+                        <div class="bronze-podium text-orange-950 rounded-2xl p-3 sm:p-4 text-center transform hover:-translate-y-1 transition duration-300 relative border border-orange-300/60">
+                            <div class="w-8 h-8 sm:w-10 sm:h-10 bg-amber-800 text-amber-100 rounded-full flex items-center justify-center font-black mx-auto mb-1 text-xs sm:text-sm shadow-md">3</div>
+                            <h4 class="font-black text-xs sm:text-base text-orange-950 truncate">${escapeHtml(top3.className)}</h4>
+                            <div class="text-[10px] sm:text-xs font-bold text-orange-900 mt-0.5">${top3.totalScore.toLocaleString('id-ID')} <span class="font-normal text-[9px] text-orange-800">pts</span></div>
+                            <div class="text-[9px] bg-amber-950/10 rounded-full py-0.5 px-2 font-bold text-orange-900 mt-1 inline-block">${top3.matchCount} Main</div>
+                        </div>
+                    `;
+                } else {
+                    podiumHtml += `<div></div>`;
+                }
+
+                podiumContainer.innerHTML = podiumHtml;
+            }
+
+            let html = '';
+            leaderboard.forEach((item, index) => {
+                const rank = index + 1;
+                let rankBadge = `<span class="font-bold text-slate-600">${rank}</span>`;
+                let rowBg = "hover:bg-slate-50";
+
+                if (rank === 1) {
+                    rankBadge = `<span class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-amber-400 text-amber-950 font-black flex items-center justify-center mx-auto shadow-md text-xs sm:text-sm"><i class="fa-solid fa-crown text-[10px] sm:text-xs mr-0.5"></i>1</span>`;
+                    rowBg = "bg-amber-50/50 hover:bg-amber-50";
+                } else if (rank === 2) {
+                    rankBadge = `<span class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-300 text-slate-800 font-black flex items-center justify-center mx-auto shadow-sm text-xs sm:text-sm">2</span>`;
+                    rowBg = "bg-slate-50/80 hover:bg-slate-100";
+                } else if (rank === 3) {
+                    rankBadge = `<span class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-amber-700 text-amber-100 font-black flex items-center justify-center mx-auto shadow-sm text-xs sm:text-sm">3</span>`;
+                    rowBg = "bg-orange-50/40 hover:bg-orange-50";
+                }
+
+                html += `
+                    <tr class="${rowBg} transition-colors border-b border-slate-100">
+                        <td class="py-3 px-2 sm:p-4 text-center">${rankBadge}</td>
+                        <td class="py-3 px-2 sm:p-4 font-black text-slate-800 text-xs sm:text-base">
+                            ${escapeHtml(item.className)}
+                        </td>
+                        <td class="py-3 px-1 sm:p-4 text-center">
+                            <span class="bg-indigo-50 text-indigo-700 border border-indigo-100 px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-bold whitespace-nowrap">${item.matchCount} Main</span>
+                        </td>
+                        <td class="py-3 px-2 sm:p-4 text-right font-black text-indigo-700 text-sm sm:text-lg">
+                            ${item.totalScore.toLocaleString('id-ID')} <span class="text-[10px] sm:text-xs font-semibold text-slate-400">pts</span>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            tbody.innerHTML = html;
+        }
+
+        function renderJuaraView() {
+            const container = document.getElementById('juaraContainer');
+            if (!container) return;
+
+            if (juaraList.length === 0) {
+                container.innerHTML = `<div class="col-span-full text-center p-12 text-slate-400 text-xs font-bold">Belum ada riwayat juara yang diinput oleh Admin.</div>`;
+                return;
+            }
+
+            let html = '';
+            juaraList.forEach(item => {
+                const seasonObj = seasonsList.find(s => s.id === item.seasonId);
+                const seasonName = seasonObj ? seasonObj.name : 'Season N/A';
+
+                html += `
+                    <div class="bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white rounded-2xl p-5 shadow-xl relative overflow-hidden border border-indigo-500/30">
+                        <div class="flex justify-between items-start mb-4 border-b border-white/10 pb-3">
+                            <div>
+                                <span class="text-[10px] font-black uppercase tracking-widest text-amber-300 bg-amber-400/20 px-3 py-1 rounded-full border border-amber-400/30">
+                                    Fase ${item.phase}
+                                </span>
+                                <h3 class="text-base sm:text-lg font-black mt-2 text-white">${escapeHtml(seasonName)}</h3>
+                            </div>
+                            ${isAdminLoggedIn ? `
+                                <button onclick="confirmDelete('juara', '${item.id}')" class="text-rose-400 hover:text-rose-300 text-xs bg-rose-500/20 p-2 rounded-xl border border-rose-500/30 transition">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            ` : ''}
+                        </div>
+
+                        <div class="space-y-2.5 text-xs sm:text-sm">
+                            <div class="flex items-center justify-between bg-amber-500/20 border border-amber-400/40 p-3 rounded-xl shadow-inner">
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-trophy text-amber-400 text-lg"></i>
+                                    <span class="font-bold text-amber-200">Juara 1</span>
+                                </div>
+                                <span class="font-black text-sm sm:text-base text-amber-300">${escapeHtml(item.juara1)}</span>
+                            </div>
+
+                            <div class="flex items-center justify-between bg-slate-800/80 border border-slate-700/80 p-3 rounded-xl">
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-medal text-slate-300 text-lg"></i>
+                                    <span class="font-bold text-slate-200">Juara 2</span>
+                                </div>
+                                <span class="font-black text-sm sm:text-base text-slate-300">${escapeHtml(item.juara2)}</span>
+                            </div>
+
+                            <div class="flex items-center justify-between bg-amber-900/30 border border-amber-700/30 p-3 rounded-xl">
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-award text-amber-500 text-lg"></i>
+                                    <span class="font-bold text-amber-300">Juara 3</span>
+                                </div>
+                                <span class="font-black text-sm sm:text-base text-amber-400">${escapeHtml(item.juara3)}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function renderPublicSeasonSelect() {
+            const select = document.getElementById('publicSeasonSelect');
+            if (!select) return;
+            if (seasonsList.length === 0) {
+                select.innerHTML = `<option value="">Belum Ada Season</option>`;
+                return;
+            }
+
+            select.innerHTML = seasonsList.map(s => `
+                <option value="${s.id}" ${s.id === activePublicSeasonId ? 'selected' : ''}>
+                    ${escapeHtml(s.name)} ${s.isPublic ? '(Aktif)' : ''}
+                </option>
+            `).join('');
+        }
+
+        function renderAdminSeasonList() {
+            const container = document.getElementById('adminSeasonList');
+            if (!container) return;
+            if (seasonsList.length === 0) {
+                container.innerHTML = `<p class="text-slate-400 italic text-xs">Belum ada season.</p>`;
+                return;
+            }
+
+            container.innerHTML = seasonsList.map(s => `
+                <div class="flex items-center justify-between bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                    <span class="font-bold text-slate-700 truncate max-w-[150px] ${s.isPublic ? 'text-indigo-600' : ''}">${escapeHtml(s.name)}</span>
+                    <div class="flex items-center gap-1.5 shrink-0">
+                        ${!s.isPublic ? `
+                            <button onclick="setPublicSeason('${s.id}')" class="bg-indigo-100 hover:bg-indigo-200 text-indigo-700 px-2.5 py-1 rounded-lg text-[10px] font-bold">
+                                Tampilkan
+                            </button>
+                        ` : '<span class="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-lg font-black">Aktif</span>'}
+                        <button onclick="confirmDelete('seasons', '${s.id}')" class="text-rose-600 hover:text-rose-800 p-1">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderAdminClassList() {
+            const container = document.getElementById('adminClassList');
+            if (!container) return;
+            if (classesList.length === 0) {
+                container.innerHTML = `<p class="text-slate-400 italic text-xs">Belum ada kelas.</p>`;
+                return;
+            }
+
+            container.innerHTML = classesList.map(c => `
+                <div class="flex items-center justify-between bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                    <div>
+                        <span class="font-black text-slate-800">${escapeHtml(c.className)}</span>
+                        <span class="text-[10px] bg-slate-200 text-slate-700 px-2 py-0.5 rounded-md ml-1.5 font-bold">Fase ${c.phase}</span>
+                    </div>
+                    <button onclick="confirmDelete('classes', '${c.id}')" class="text-rose-600 hover:text-rose-800 p-1">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function renderScoreClassSelect() {
+            const select = document.getElementById('scoreClassSelect');
+            if (!select) return;
+            select.innerHTML = `<option value="">Pilih Kelas...</option>` + classesList.map(c => `
+                <option value="${c.id}">${escapeHtml(c.className)} (Fase ${c.phase})</option>
+            `).join('');
+        }
+
+        function renderJuaraSeasonSelect() {
+            const select = document.getElementById('juaraSeasonSelect');
+            if (!select) return;
+            select.innerHTML = seasonsList.map(s => `
+                <option value="${s.id}">${escapeHtml(s.name)}</option>
+            `).join('');
+        }
+
+        function renderAdminScoresTable() {
+            const tbody = document.getElementById('adminScoresTableBody');
+            const mobileContainer = document.getElementById('adminScoresMobileContainer');
+            
+            if (!tbody && !mobileContainer) return;
+            
+            if (scoresList.length === 0) {
+                if (tbody) tbody.innerHTML = `<tr><td colspan="7" class="text-center p-6 text-slate-400 font-bold">Belum ada data skor pertandingan.</td></tr>`;
+                if (mobileContainer) mobileContainer.innerHTML = `<p class="text-center p-6 text-slate-400 text-xs font-bold">Belum ada data skor pertandingan.</p>`;
+                return;
+            }
+
+            const sortedScores = [...scoresList].sort((a,b) => (b.timestamp || 0) - (a.timestamp || 0));
+
+            // Render Table View (Desktop)
+            if (tbody) {
+                tbody.innerHTML = sortedScores.map(s => {
+                    const cls = classesList.find(c => c.id === s.classId);
+                    const className = cls ? cls.className : 'Kelas Terhapus';
+                    const classPhase = cls ? cls.phase : '-';
+                    const dateStr = s.matchDate ? new Date(s.matchDate).toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }) : (s.timestamp ? new Date(s.timestamp).toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }) : '-');
+
+                    return `
+                        <tr class="hover:bg-slate-50 border-b border-slate-100">
+                            <td class="p-3 font-mono text-slate-600 font-bold">${dateStr}</td>
+                            <td class="p-3 font-black text-slate-800">${escapeHtml(className)}</td>
+                            <td class="p-3"><span class="bg-slate-200 text-slate-700 px-2 py-0.5 rounded text-[10px] font-bold">Fase ${classPhase}</span></td>
+                            <td class="p-3 font-bold text-slate-700">${escapeHtml(s.month || '-')}</td>
+                            <td class="p-3 font-semibold">Pekan ${s.matchWeek}</td>
+                            <td class="p-3 text-right font-black text-indigo-700 text-sm">${s.score}</td>
+                            <td class="p-3 text-center space-x-1.5">
+                                <button onclick="openEditScoreModal('${s.id}', ${s.score})" class="text-indigo-600 hover:text-indigo-800 font-bold text-[11px] bg-indigo-50 px-2.5 py-1 rounded-lg border border-indigo-200">
+                                    <i class="fa-solid fa-pen"></i> Edit
+                                </button>
+                                <button onclick="confirmDelete('scores', '${s.id}')" class="text-rose-600 hover:text-rose-800 font-bold text-[11px] bg-rose-50 px-2.5 py-1 rounded-lg border border-rose-200">
+                                    <i class="fa-solid fa-trash"></i> Hapus
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+
+            // Render Mobile Cards View (Smartphones)
+            if (mobileContainer) {
+                mobileContainer.innerHTML = sortedScores.map(s => {
+                    const cls = classesList.find(c => c.id === s.classId);
+                    const className = cls ? cls.className : 'Kelas Terhapus';
+                    const classPhase = cls ? cls.phase : '-';
+                    const dateStr = s.matchDate ? new Date(s.matchDate).toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }) : '-';
+
+                    return `
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 flex items-center justify-between gap-2 text-xs shadow-sm">
+                            <div class="space-y-1">
+                                <div class="flex items-center gap-2">
+                                    <span class="font-black text-slate-800 text-sm">${escapeHtml(className)}</span>
+                                    <span class="bg-slate-200 px-2 py-0.5 rounded text-[9px] font-bold">Fase ${classPhase}</span>
+                                </div>
+                                <div class="text-[11px] text-slate-500 font-medium flex items-center gap-2">
+                                    <span><i class="fa-regular fa-calendar text-slate-400 mr-1"></i>${dateStr}</span>
+                                    <span>• Pekan ${s.matchWeek}</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-end gap-1.5 shrink-0">
+                                <span class="font-black text-indigo-700 text-base">${s.score} <span class="text-[10px] font-normal text-slate-500">pts</span></span>
+                                <div class="flex items-center gap-1">
+                                    <button onclick="openEditScoreModal('${s.id}', ${s.score})" class="text-indigo-600 bg-indigo-100 px-2 py-1 rounded text-[10px] font-bold">
+                                        Edit
+                                    </button>
+                                    <button onclick="confirmDelete('scores', '${s.id}')" class="text-rose-600 bg-rose-100 px-2 py-1 rounded text-[10px] font-bold">
+                                        Hapus
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+        }
+
+        window.handleAddSeason = async function(e) {
+            e.preventDefault();
+            if (!isAdminLoggedIn) return;
+
+            const nameInput = document.getElementById('seasonNameInput');
+            const name = nameInput.value.trim();
+            if (!name) return;
+
+            const isFirst = seasonsList.length === 0;
+            const seasonId = 'season_' + Date.now();
+            const newSeason = { id: seasonId, name, isPublic: isFirst, createdAt: Date.now() };
+
+            if (isFirebaseActive) {
+                try {
+                    await addDoc(getPublicCollection('seasons'), { name, isPublic: isFirst, createdAt: Date.now() });
+                } catch (err) {
+                    console.error("Firebase addSeason error, using local:", err);
+                    seasonsList.push(newSeason);
+                    if (isFirst) activePublicSeasonId = seasonId;
+                    saveAndSyncLocalStorage();
+                    refreshAllViews();
+                }
+            } else {
+                seasonsList.push(newSeason);
+                if (isFirst) activePublicSeasonId = seasonId;
+                saveAndSyncLocalStorage();
+                refreshAllViews();
+            }
+
+            nameInput.value = '';
+            showToast("Season baru berhasil ditambahkan!");
+        };
+
+        window.handleAddClass = async function(e) {
+            e.preventDefault();
+            if (!isAdminLoggedIn) return;
+
+            const className = document.getElementById('classNameInput').value.trim();
+            const phase = document.getElementById('classPhaseInput').value;
+            if (!className) return;
+
+            const classId = 'cls_' + Date.now();
+            const newClass = { id: classId, className, phase, createdAt: Date.now() };
+
+            if (isFirebaseActive) {
+                try {
+                    await addDoc(getPublicCollection('classes'), { className, phase, createdAt: Date.now() });
+                } catch (err) {
+                    console.error("Firebase addClass error, using local:", err);
+                    classesList.push(newClass);
+                    saveAndSyncLocalStorage();
+                    refreshAllViews();
+                }
+            } else {
+                classesList.push(newClass);
+                saveAndSyncLocalStorage();
+                refreshAllViews();
+            }
+
+            document.getElementById('classNameInput').value = '';
+            showToast("Data kelas berhasil disimpan!");
+        };
+
+        window.handleAddJuara = async function(e) {
+            e.preventDefault();
+            if (!isAdminLoggedIn) return;
+
+            const seasonId = document.getElementById('juaraSeasonSelect').value;
+            const phase = document.getElementById('juaraPhaseSelect').value;
+            const juara1 = document.getElementById('juara1Input').value.trim();
+            const juara2 = document.getElementById('juara2Input').value.trim();
+            const juara3 = document.getElementById('juara3Input').value.trim();
+
+            if (!seasonId || !juara1 || !juara2 || !juara3) return;
+
+            const juaraId = 'juara_' + Date.now();
+            const newJuara = { id: juaraId, seasonId, phase, juara1, juara2, juara3, createdAt: Date.now() };
+
+            if (isFirebaseActive) {
+                try {
+                    await addDoc(getPublicCollection('juara'), { seasonId, phase, juara1, juara2, juara3, createdAt: Date.now() });
+                } catch (err) {
+                    console.error("Firebase addJuara error, using local:", err);
+                    juaraList.push(newJuara);
+                    saveAndSyncLocalStorage();
+                    refreshAllViews();
+                }
+            } else {
+                juaraList.push(newJuara);
+                saveAndSyncLocalStorage();
+                refreshAllViews();
+            }
+
+            document.getElementById('juara1Input').value = '';
+            document.getElementById('juara2Input').value = '';
+            document.getElementById('juara3Input').value = '';
+            showToast("Riwayat Hall of Fame berhasil ditambahkan!");
+        };
+
+        window.handleAddScore = async function(e) {
+            e.preventDefault();
+            if (!isAdminLoggedIn) return;
+
+            const classId = document.getElementById('scoreClassSelect').value;
+            const matchDate = document.getElementById('scoreDateInput').value;
+            const matchWeek = document.getElementById('scoreWeekSelect').value;
+            const scoreVal = document.getElementById('scoreValueInput').value;
+
+            if (!classId || !activePublicSeasonId || !matchDate || scoreVal === '') {
+                showToast("Pilih kelas, tanggal, dan pastikan season aktif tersedia!", true);
+                return;
+            }
+
+            const month = formatMonthYear(matchDate);
+            const scoreId = 'score_' + Date.now();
+            const newScore = {
+                id: scoreId,
+                classId,
+                seasonId: activePublicSeasonId,
+                matchDate,
+                month,
+                matchWeek: Number(matchWeek),
+                score: Number(scoreVal),
+                timestamp: new Date(matchDate).getTime() || Date.now()
+            };
+
+            if (isFirebaseActive) {
+                try {
+                    await addDoc(getPublicCollection('scores'), {
+                        classId,
+                        seasonId: activePublicSeasonId,
+                        matchDate,
+                        month,
+                        matchWeek: Number(matchWeek),
+                        score: Number(scoreVal),
+                        timestamp: new Date(matchDate).getTime() || Date.now()
+                    });
+                } catch (err) {
+                    console.error("Firebase addScore error, using local:", err);
+                    scoresList.push(newScore);
+                    saveAndSyncLocalStorage();
+                    refreshAllViews();
+                }
+            } else {
+                scoresList.push(newScore);
+                saveAndSyncLocalStorage();
+                refreshAllViews();
+            }
+
+            document.getElementById('scoreValueInput').value = '';
+            document.getElementById('scoreDateInput').value = '';
+            showToast("Skor pertandingan berhasil dimasukkan!");
+        };
+
+        window.setPublicSeason = async function(seasonId) {
+            if (!isAdminLoggedIn) return;
+
+            if (isFirebaseActive) {
+                try {
+                    const updatePromises = seasonsList.map(s => 
+                        updateDoc(getPublicDoc('seasons', s.id), { isPublic: s.id === seasonId })
+                    );
+                    await Promise.all(updatePromises);
+                } catch (err) {
+                    console.error("Firebase setPublicSeason error, using local:", err);
+                    seasonsList.forEach(s => s.isPublic = (s.id === seasonId));
+                    saveAndSyncLocalStorage();
+                    refreshAllViews();
+                }
+            } else {
+                seasonsList.forEach(s => s.isPublic = (s.id === seasonId));
+                saveAndSyncLocalStorage();
+                refreshAllViews();
+            }
+
+            activePublicSeasonId = seasonId;
+            showToast("Season aktif publik berhasil diperbarui!");
+        };
+
+        // Tab Navigation Logic
+        window.switchTab = function(tabName) {
+            if (tabName === 'admin' && !isAdminLoggedIn) {
+                toggleAuthModal();
+                return;
+            }
+
+            activeTab = tabName;
+            
+            const btnB = document.getElementById('tabFaseB');
+            const btnC = document.getElementById('tabFaseC');
+            const btnJuara = document.getElementById('tabJuara');
+
+            const activeClass = "py-2.5 px-2 sm:px-4 rounded-xl font-extrabold text-xs sm:text-sm bg-white text-indigo-700 shadow-md flex items-center justify-center gap-2 transition-all";
+            const inactiveClass = "py-2.5 px-2 sm:px-4 rounded-xl font-extrabold text-xs sm:text-sm text-slate-600 hover:text-slate-900 flex items-center justify-center gap-2 transition-all";
+
+            if (btnB) btnB.className = tabName === 'faseB' ? activeClass : inactiveClass;
+            if (btnC) btnC.className = tabName === 'faseC' ? activeClass : inactiveClass;
+            if (btnJuara) btnJuara.className = tabName === 'juara' ? activeClass : inactiveClass;
+
+            const viewKlasemen = document.getElementById('viewKlasemen');
+            const viewJuara = document.getElementById('viewJuara');
+            const viewAdmin = document.getElementById('viewAdmin');
+
+            if (viewKlasemen) viewKlasemen.classList.toggle('hidden', tabName !== 'faseB' && tabName !== 'faseC');
+            if (viewJuara) viewJuara.classList.toggle('hidden', tabName !== 'juara');
+            if (viewAdmin) viewAdmin.classList.toggle('hidden', tabName !== 'admin');
+
+            updateUI();
+        };
+
+        window.changePublicSeason = function(val) {
+            activePublicSeasonId = val;
+            updateUI();
+        };
+
+        window.applyMonthFilter = function(val) {
+            currentSelectedMonth = val;
+            updateUI();
+        };
+
+        // Admin Auth Modal & Handlers
+        window.toggleAuthModal = function() {
+            if (isAdminLoggedIn) {
+                if (activeTab === 'admin') {
+                    switchTab('faseB');
+                } else {
+                    switchTab('admin');
+                }
+            } else {
+                const modal = document.getElementById('modalLogin');
+                if (modal) modal.classList.toggle('hidden');
+            }
+        };
+
+        window.openForgotPasswordModal = function() {
+            document.getElementById('modalLogin').classList.add('hidden');
+            document.getElementById('modalForgotPassword').classList.remove('hidden');
+        };
+
+        window.closeForgotPasswordModal = function() {
+            document.getElementById('modalForgotPassword').classList.add('hidden');
+        };
+
+        window.handleForgotPasswordSubmit = async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('forgotEmailInput').value.trim();
+            if (!email) return;
+
+            if (isFirebaseActive) {
+                try {
+                    await setDoc(getPublicDoc('settings', 'recovery_logs'), {
+                        requestedEmail: email,
+                        timestamp: Date.now()
+                    }, { merge: true });
+                } catch (err) {
+                    console.error("Error submitting forgot password:", err);
+                }
+            }
+
+            closeForgotPasswordModal();
+            showToast(`Petunjuk reset password telah dikirim ke ${email}. Silakan cek inbox/spam email Anda.`);
+            document.getElementById('forgotEmailInput').value = '';
+        };
+
+        window.handleLoginSubmit = function(e) {
+            e.preventDefault();
+            const pass = document.getElementById('adminPasswordInput').value;
+
+            if (pass === adminPassHash) {
+                isAdminLoggedIn = true;
+                document.getElementById('adminPasswordInput').value = '';
+                document.getElementById('loginErrorMsg').classList.add('hidden');
+                document.getElementById('modalLogin').classList.add('hidden');
+                
+                document.getElementById('authBtnText').innerText = "Dashboard Admin";
+                document.getElementById('adminBadge').classList.remove('hidden');
+                document.getElementById('adminBadge').classList.add('flex');
+                
+                showToast("Login Admin Berhasil!");
+                switchTab('admin');
+            } else {
+                document.getElementById('adminPasswordInput').value = '';
+                document.getElementById('loginErrorMsg').classList.remove('hidden');
+            }
+        };
+
+        window.logoutAdmin = function() {
+            isAdminLoggedIn = false;
+            document.getElementById('authBtnText').innerText = "Login Admin";
+            document.getElementById('adminBadge').classList.add('hidden');
+            document.getElementById('adminBadge').classList.remove('flex');
+            switchTab('faseB');
+            showToast("Anda telah keluar dari mode Admin");
+        };
+
+        // Edit Score Modal Handlers
+        window.openEditScoreModal = function(id, currentScore) {
+            const idInput = document.getElementById('editScoreId');
+            const scoreInput = document.getElementById('editScoreValueInput');
+            const modal = document.getElementById('modalEditScore');
+            if (idInput) idInput.value = id;
+            if (scoreInput) scoreInput.value = currentScore;
+            if (modal) modal.classList.remove('hidden');
+        };
+
+        window.closeEditScoreModal = function() {
+            const modal = document.getElementById('modalEditScore');
+            if (modal) modal.classList.add('hidden');
+        };
+
+        window.handleEditScoreSubmit = async function(e) {
+            e.preventDefault();
+            if (!isAdminLoggedIn) return;
+
+            const id = document.getElementById('editScoreId').value;
+            const newScore = Number(document.getElementById('editScoreValueInput').value);
+
+            if (isFirebaseActive) {
+                try {
+                    await updateDoc(getPublicDoc('scores', id), { score: newScore });
+                } catch (err) {
+                    console.error("Firebase editScore error, using local:", err);
+                    const item = scoresList.find(s => s.id === id);
+                    if (item) item.score = newScore;
+                    saveAndSyncLocalStorage();
+                    refreshAllViews();
+                }
+            } else {
+                const item = scoresList.find(s => s.id === id);
+                if (item) item.score = newScore;
+                saveAndSyncLocalStorage();
+                refreshAllViews();
+            }
+
+            closeEditScoreModal();
+            showToast("Skor pertandingan berhasil diperbarui!");
+        };
+
+        window.confirmDelete = function(collectionName, docId) {
+            onConfirmAction = async () => {
+                if (isFirebaseActive) {
+                    try {
+                        await deleteDoc(getPublicDoc(collectionName, docId));
+                    } catch (err) {
+                        console.error("Firebase delete error, using local:", err);
+                        deleteLocalItem(collectionName, docId);
+                    }
+                } else {
+                    deleteLocalItem(collectionName, docId);
+                }
+                showToast("Data berhasil dihapus!");
+            };
+            const modal = document.getElementById('modalConfirm');
+            if (modal) modal.classList.remove('hidden');
+        };
+
+        function deleteLocalItem(colName, id) {
+            if (colName === 'seasons') seasonsList = seasonsList.filter(item => item.id !== id);
+            if (colName === 'classes') classesList = classesList.filter(item => item.id !== id);
+            if (colName === 'scores') scoresList = scoresList.filter(item => item.id !== id);
+            if (colName === 'juara') juaraList = juaraList.filter(item => item.id !== id);
+            saveAndSyncLocalStorage();
+            refreshAllViews();
+        }
+
+        window.closeConfirmModal = function(isConfirmed) {
+            const modal = document.getElementById('modalConfirm');
+            if (modal) modal.classList.add('hidden');
+            if (isConfirmed && typeof onConfirmAction === 'function') {
+                onConfirmAction();
+            }
+            onConfirmAction = null;
+        };
+
+        // Toast & Helper Utilities
+        function showToast(msg, isError = false) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMsg');
+            const toastIcon = document.getElementById('toastIcon');
+
+            if (!toast) return;
+            toastMsg.innerText = msg;
+            if (isError) {
+                toastIcon.className = "fa-solid fa-circle-xmark text-rose-400 text-lg shrink-0";
+            } else {
+                toastIcon.className = "fa-solid fa-circle-check text-emerald-400 text-lg shrink-0";
+            }
+
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3200);
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            return String(text)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        window.onload = function() {
+            initAuth();
+        };
+    </script>
+</body>
+</html>
