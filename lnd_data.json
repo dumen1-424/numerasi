@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-10-07T01:07:20.843Z",
+  "updatedAt": "2026-10-07T01:09:19.973Z",
   "activePublicSeasonId": "season_1789366557827",
-  "runningText": "Saksikan pertandingan untuk FASE B pada tanggal  7 Oktober 2026 ✦ Dukung kelas kalian & raih Skor tertinggi ✦",
+  "runningText": "Saksikan pertandingan untuk FASE C pada tanggal  14 Oktober 2026 ✦ Dukung kelas kalian & raih Skor tertinggi ✦",
   "seasonsList": [
     {
       "id": "season_1789366557827",
@@ -248,6 +248,56 @@
       "matchWeek": 2,
       "score": 255,
       "timestamp": 1790726400000
+    },
+    {
+      "id": "score_1791335295098",
+      "classId": "cls-3a",
+      "seasonId": "season_1789366557827",
+      "matchDate": "2026-10-07",
+      "month": "Oktober 2026",
+      "matchWeek": 1,
+      "score": 55,
+      "timestamp": 1791331200000
+    },
+    {
+      "id": "score_1791335305357",
+      "classId": "cls_1789387792202",
+      "seasonId": "season_1789366557827",
+      "matchDate": "2026-10-07",
+      "month": "Oktober 2026",
+      "matchWeek": 1,
+      "score": 200,
+      "timestamp": 1791331200000
+    },
+    {
+      "id": "score_1791335316814",
+      "classId": "cls_1789387797976",
+      "seasonId": "season_1789366557827",
+      "matchDate": "2026-10-07",
+      "month": "Oktober 2026",
+      "matchWeek": 1,
+      "score": 40,
+      "timestamp": 1791331200000
+    },
+    {
+      "id": "score_1791335333246",
+      "classId": "cls_1789387810176",
+      "seasonId": "season_1789366557827",
+      "matchDate": "2026-10-07",
+      "month": "Oktober 2026",
+      "matchWeek": 1,
+      "score": 185,
+      "timestamp": 1791331200000
+    },
+    {
+      "id": "score_1791335344103",
+      "classId": "cls_1789387816092",
+      "seasonId": "season_1789366557827",
+      "matchDate": "2026-10-07",
+      "month": "Oktober 2026",
+      "matchWeek": 1,
+      "score": 180,
+      "timestamp": 1791331200000
     }
   ],
   "juaraList": []
