@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-07T01:09:19.973Z",
+  "updatedAt": "2026-10-14T01:37:28.812Z",
   "activePublicSeasonId": "season_1789366557827",
   "runningText": "Saksikan pertandingan untuk FASE C pada tanggal  14 Oktober 2026 ✦ Dukung kelas kalian & raih Skor tertinggi ✦",
   "seasonsList": [
@@ -298,6 +298,66 @@
       "matchWeek": 1,
       "score": 180,
       "timestamp": 1791331200000
+    },
+    {
+      "id": "score_1791941684168",
+      "classId": "cls_1789387875090",
+      "seasonId": "season_1789366557827",
+      "matchDate": "2026-10-14",
+      "month": "Oktober 2026",
+      "matchWeek": 2,
+      "score": 225,
+      "timestamp": 1791936000000
+    },
+    {
+      "id": "score_1791941705499",
+      "classId": "cls_1789387879392",
+      "seasonId": "season_1789366557827",
+      "matchDate": "2026-10-14",
+      "month": "Oktober 2026",
+      "matchWeek": 2,
+      "score": 150,
+      "timestamp": 1791936000000
+    },
+    {
+      "id": "score_1791941728607",
+      "classId": "cls_1789387849728",
+      "seasonId": "season_1789366557827",
+      "matchDate": "2026-10-14",
+      "month": "Oktober 2026",
+      "matchWeek": 2,
+      "score": 60,
+      "timestamp": 1791936000000
+    },
+    {
+      "id": "score_1791941761212",
+      "classId": "cls_1789387870409",
+      "seasonId": "season_1789366557827",
+      "matchDate": "2026-10-14",
+      "month": "Oktober 2026",
+      "matchWeek": 2,
+      "score": 40,
+      "timestamp": 1791936000000
+    },
+    {
+      "id": "score_1791941792661",
+      "classId": "cls_1789387854426",
+      "seasonId": "season_1789366557827",
+      "matchDate": "2026-10-14",
+      "month": "Oktober 2026",
+      "matchWeek": 2,
+      "score": 15,
+      "timestamp": 1791936000000
+    },
+    {
+      "id": "score_1791941827406",
+      "classId": "cls_1789387859503",
+      "seasonId": "season_1789366557827",
+      "matchDate": "2026-10-14",
+      "month": "Oktober 2026",
+      "matchWeek": 2,
+      "score": 10,
+      "timestamp": 1791936000000
     }
   ],
   "juaraList": []
