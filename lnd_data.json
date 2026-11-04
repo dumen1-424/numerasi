@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-10-26T23:39:15.668Z",
+  "updatedAt": "2026-11-04T00:39:43.169Z",
   "activePublicSeasonId": "season_1789366557827",
-  "runningText": "Saksikan pertandingan untuk FASE C pada tanggal  4 November 2026 ✦ Dukung kelas kalian & raih Skor tertinggi ✦",
+  "runningText": "Saksikan pertandingan untuk FASE B pada tanggal  11 November 2026 ✦ Dukung kelas kalian & raih Skor tertinggi ✦",
   "seasonsList": [
     {
       "id": "season_1789366557827",
@@ -408,6 +408,66 @@
       "matchWeek": 3,
       "score": 30,
       "timestamp": 1792540800000
+    },
+    {
+      "id": "score_1793752667335",
+      "classId": "cls_1789387849728",
+      "seasonId": "season_1789366557827",
+      "matchDate": "2026-11-04",
+      "month": "November 2026",
+      "matchWeek": 2,
+      "score": 190,
+      "timestamp": 1793750400000
+    },
+    {
+      "id": "score_1793752682935",
+      "classId": "cls_1789387854426",
+      "seasonId": "season_1789366557827",
+      "matchDate": "2026-11-04",
+      "month": "November 2026",
+      "matchWeek": 2,
+      "score": -75,
+      "timestamp": 1793750400000
+    },
+    {
+      "id": "score_1793752695642",
+      "classId": "cls_1789387859503",
+      "seasonId": "season_1789366557827",
+      "matchDate": "2026-11-04",
+      "month": "November 2026",
+      "matchWeek": 2,
+      "score": -90,
+      "timestamp": 1793750400000
+    },
+    {
+      "id": "score_1793752708097",
+      "classId": "cls_1789387870409",
+      "seasonId": "season_1789366557827",
+      "matchDate": "2026-11-04",
+      "month": "November 2026",
+      "matchWeek": 2,
+      "score": 80,
+      "timestamp": 1793750400000
+    },
+    {
+      "id": "score_1793752723541",
+      "classId": "cls_1789387875090",
+      "seasonId": "season_1789366557827",
+      "matchDate": "2026-11-04",
+      "month": "November 2026",
+      "matchWeek": 2,
+      "score": 120,
+      "timestamp": 1793750400000
+    },
+    {
+      "id": "score_1793752735683",
+      "classId": "cls_1789387879392",
+      "seasonId": "season_1789366557827",
+      "matchDate": "2026-11-04",
+      "month": "November 2026",
+      "matchWeek": 2,
+      "score": 220,
+      "timestamp": 1793750400000
     }
   ],
   "juaraList": []
