@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-12T23:47:21.142Z",
+  "updatedAt": "2026-11-12T23:53:19.773Z",
   "activePublicSeasonId": "season_1789366557827",
   "runningText": "Saksikan pertandingan untuk FASE B pada tanggal  11 November 2026 ✦ Dukung kelas kalian & raih Skor tertinggi ✦",
   "seasonsList": [
@@ -470,14 +470,54 @@
       "timestamp": 1793750400000
     },
     {
-      "id": "score_1794527215865",
+      "id": "score_1794527493101",
       "classId": "cls-3a",
       "seasonId": "season_1789366557827",
-      "matchDate": "2026-10-11",
-      "month": "Oktober 2026",
+      "matchDate": "2026-11-11",
+      "month": "November 2026",
       "matchWeek": 2,
       "score": 160,
-      "timestamp": 1791676800000
+      "timestamp": 1794355200000
+    },
+    {
+      "id": "score_1794527515975",
+      "classId": "cls_1789387792202",
+      "seasonId": "season_1789366557827",
+      "matchDate": "2026-11-11",
+      "month": "November 2026",
+      "matchWeek": 2,
+      "score": 145,
+      "timestamp": 1794355200000
+    },
+    {
+      "id": "score_1794527545684",
+      "classId": "cls_1789387797976",
+      "seasonId": "season_1789366557827",
+      "matchDate": "2026-11-11",
+      "month": "November 2026",
+      "matchWeek": 2,
+      "score": 205,
+      "timestamp": 1794355200000
+    },
+    {
+      "id": "score_1794527580535",
+      "classId": "cls_1789387810176",
+      "seasonId": "season_1789366557827",
+      "matchDate": "2026-11-11",
+      "month": "November 2026",
+      "matchWeek": 2,
+      "score": 220,
+      "timestamp": 1794355200000
+    },
+    {
+      "id": "score_1794527596179",
+      "classId": "cls_1789387816092",
+      "seasonId": "season_1789366557827",
+      "matchDate": "2026-11-11",
+      "month": "November 2026",
+      "matchWeek": 2,
+      "score": 85,
+      "timestamp": 1794355200000
     }
   ],
   "juaraList": []
